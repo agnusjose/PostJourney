@@ -13,7 +13,7 @@ const { userEmail, isAdmin } = route.params || {};
 
   return (
     <ImageBackground
-      source={require("C:\\Users\\alene\\postJourneyOk\\postJourneyMobile\\assets\\pjlogo_bg.png")}
+      source={require("../assets/pjlogo_bg.png")}   
       style={styles.bg}
       resizeMode="cover"
     >
@@ -21,7 +21,7 @@ const { userEmail, isAdmin } = route.params || {};
         
         {/* Logo */}
         <Image
-          source={require("C:\\Users\\alene\\postJourneyOk\\postJourneyMobile\\assets\\postjourney_logo.png")}
+          source={require("../assets/postjourney_logo.png")}
           style={styles.logo}
           resizeMode="contain"
         />

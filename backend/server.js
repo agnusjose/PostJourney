@@ -106,6 +106,11 @@ app.post('/login', async (req, res) => {
     return res.json({ success: false, message: 'Server error occurred.' });
   }
 });
+
+import videoRoutes from "./routes/videoRoutes.js";
+app.use("/videos", videoRoutes);
+
+
 // Admin Login
 app.post("/admin/login", async (req, res) => {
   const { secretKey, email, password } = req.body;

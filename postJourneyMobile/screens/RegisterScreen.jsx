@@ -23,7 +23,7 @@ export default function RegisterScreen({ navigation }) {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post("http://172.16.229.212:5000/register", {
+      const response = await axios.post("http://192.168.112.170:5000/register", {
         name,
         email,
         password,
@@ -43,7 +43,7 @@ export default function RegisterScreen({ navigation }) {
 
   return (
     <ImageBackground
-      source={require("C:\\Users\\alene\\postJourneyOk\\postJourneyMobile\\assets\\pjlogo_bg.png")}
+      source={require("../assets/pjlogo_bg.png")}   
       style={styles.bg}
       resizeMode="cover"
     >
@@ -57,7 +57,7 @@ export default function RegisterScreen({ navigation }) {
         >
           {/* Logo */}
           <Image
-            source={require("C:\\Users\\alene\\postJourneyOk\\postJourneyMobile\\assets\\postjourney_logo.png")}
+            source={require("../assets/postjourney_logo.png")}
             style={styles.logo}
             resizeMode="contain"
           />

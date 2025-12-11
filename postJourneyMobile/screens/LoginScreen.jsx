@@ -28,26 +28,40 @@ export default function LoginScreen({ navigation }) {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://172.16.229.212:5000/login', {
+      const response = await axios.post('http://192.168.112.170:5000/login', {
         email,
         password,
       });
 
       if (response.data.success) {
-        navigation.navigate('HomeScreen', { userEmail: email });
+        const type = response.data.userType;  // ⭐ Get user type returned from backend
+
+        // ⭐ Route based on user type
+        if (type === "patient") {
+          navigation.navigate("PatientDashboard", { userEmail: email });
+        } 
+        else if (type === "service provider") {
+          navigation.navigate("ServiceProviderDashboard", { userEmail: email });
+        } 
+        else {
+          Alert.alert("Error", "Unknown user type.");
+        }
+
       } else {
         Alert.alert('Login Failed', response.data.message || 'Invalid login');
       }
+
     } catch (error) {
       Alert.alert('Error', 'Something went wrong. Try again.');
-    } finally {
+    } 
+    finally {
       setLoading(false);
     }
   };
 
   return (
     <ImageBackground
-      source={require('C:\\Users\\alene\\postJourneyOk\\postJourneyMobile\\assets\\pjlogo_bg.png')}
+      source={require("../assets/pjlogo_bg.png")}
       style={styles.bg}
       resizeMode="cover"
     >
@@ -56,17 +70,15 @@ export default function LoginScreen({ navigation }) {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
         <ScrollView contentContainerStyle={styles.container}>
-          
-          {/* Logo */}
+
           <Image
-            source={require('C:\\Users\\alene\\postJourneyOk\\postJourneyMobile\\assets\\postjourney_logo.png')}
+            source={require("../assets/postjourney_logo.png")}
             style={styles.logo}
             resizeMode="contain"
           />
 
           <Text style={styles.title}>Login</Text>
 
-          {/* Email */}
           <TextInput
             placeholder="Email"
             value={email}
@@ -77,7 +89,6 @@ export default function LoginScreen({ navigation }) {
             style={styles.input}
           />
 
-          {/* Password */}
           <TextInput
             placeholder="Password"
             value={password}
@@ -87,14 +98,12 @@ export default function LoginScreen({ navigation }) {
             style={styles.input}
           />
 
-          {/* Login Button */}
           <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
             <Text style={styles.buttonText}>
               {loading ? 'Logging in…' : 'LOGIN'}
             </Text>
           </TouchableOpacity>
 
-          {/* Link to Register */}
           <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
             <Text style={styles.registerText}>
               Don't have an account? Register
