@@ -1,68 +1,22 @@
-import React from "react";
-import { View, StyleSheet, Alert, Linking, Platform } from "react-native";
-import { WebView } from "react-native-webview";
+import React, { useEffect } from "react";
+import { Linking, Alert } from "react-native";
 
-export default function VideoPlayer({ route }) {
+export default function VideoPlayer({ route, navigation }) {
   const { url } = route.params;
 
-  if (!url) {
-    Alert.alert("Error", "No video URL provided.");
-    return <View style={styles.container} />;
-  }
-
-  // Extract YouTube video ID robustly (handles &params)
-  const extractYouTubeId = (u) => {
-    try {
-      // common youtube patterns
-      const regex =
-        /(?:youtube\.com\/.*v=|youtu\.be\/|youtube\.com\/embed\/)([A-Za-z0-9_-]{6,})/;
-      const match = u.match(regex);
-      if (match && match[1]) {
-        // strip any trailing params
-        return match[1].split("&")[0];
-      }
-      // fallback: attempt last path segment
-      const last = u.split("/").pop();
-      return last.split("?")[0].split("&")[0];
-    } catch (e) {
-      return "";
+  useEffect(() => {
+    if (!url) {
+      Alert.alert("Error", "Invalid video URL");
+      navigation.goBack();
+      return;
     }
-  };
 
-  const id = extractYouTubeId(url);
-
-  if (!id) {
-    // if we couldn't parse a youtube id, try opening the raw url in browser
-    // Useful for non-youtube urls.
-    Alert.alert(
-      "Cannot play inside the app",
-      "Video URL could not be embedded. Opening in external browser.",
-      [
-        {
-          text: "Open",
-          onPress: () => Linking.openURL(url),
-        },
-        { text: "Cancel", style: "cancel" },
-      ]
+    Linking.openURL(url).catch(() =>
+      Alert.alert("Error", "Unable to open video")
     );
-    return <View style={styles.container} />;
-  }
 
-  const embed = `https://www.youtube.com/embed/${id}`;
+    navigation.goBack();
+  }, []);
 
-  return (
-    <View style={styles.container}>
-      <WebView
-        source={{ uri: embed }}
-        style={{ flex: 1 }}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-        startInLoadingState={true}
-      />
-    </View>
-  );
+  return null;
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#000" },
-});

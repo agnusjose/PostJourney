@@ -11,10 +11,8 @@ import AdminUsersScreen from "./screens/AdminUsersScreen";
 import PatientDashboard from "./screens/PatientDashboard";
 import ServiceProviderDashboard from "./screens/ServiceProviderDashboard";
 import ExercisesDashboard from './screens/ExercisesDashboard';
-import VideoCategories from "./screens/VideoCategories";
-import VideoList from "./screens/VideoList";
 import VideoPlayer from "./screens/VideoPlayer";
-
+import MedicalVideos from "./screens/MedicalVideos";
 
 const Stack = createNativeStackNavigator();
 
@@ -33,10 +31,9 @@ export default function App() {
         <Stack.Screen name="AdminUsersScreen" component={AdminUsersScreen} />
         <Stack.Screen name="PatientDashboard" component={PatientDashboard} />
         <Stack.Screen name="ServiceProviderDashboard" component={ServiceProviderDashboard} />
-        <Stack.Screen name="VideoCategories" component={VideoCategories} />
-        <Stack.Screen name="VideoList" component={VideoList} />
         <Stack.Screen name="VideoPlayer" component={VideoPlayer} />
         <Stack.Screen name='ExercisesDashboard' component={ExercisesDashboard} />
+        <Stack.Screen name="MedicalVideos" component={MedicalVideos} />
       </Stack.Navigator>
     </NavigationContainer>
   );

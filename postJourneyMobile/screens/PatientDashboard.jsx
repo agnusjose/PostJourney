@@ -21,7 +21,7 @@ export default function PatientDashboard({ navigation }) {
         {/* Medical Demonstrations */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("VideoCategories")}
+          onPress={() => navigation.navigate("MedicalVideos")}
         >
           <Text style={styles.buttonText}>Medical Demonstrations</Text>
         </TouchableOpacity>
@@ -33,6 +33,7 @@ export default function PatientDashboard({ navigation }) {
         >
           <Text style={styles.buttonText}>Exercise Monitoring</Text>
         </TouchableOpacity>
+
       </ScrollView>
     </ImageBackground>
   );
