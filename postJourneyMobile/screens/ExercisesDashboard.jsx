@@ -19,6 +19,18 @@ export default function ExercisesDashboard({ navigation }) {
     { label: "Posture Correction Exercise", value: "posture" },
   ];
 
+  const handleNavigation = (exercise) => {
+    if (exercise === "bed-mobility") {
+      navigation.navigate("BedMobilityDemo");
+    }
+    if (exercise === "leg-strength") {
+      navigation.navigate("LegRaiseDemo");
+    } else {
+      // Placeholder for future exercises
+      alert("This exercise will be added soon.");
+    }
+  };
+
   return (
     <ImageBackground
       source={require("../assets/pjlogo_bg.png")}
@@ -32,9 +44,7 @@ export default function ExercisesDashboard({ navigation }) {
           <TouchableOpacity
             key={index}
             style={styles.button}
-            onPress={() =>
-              navigation.navigate("ExerciseMonitor", { exercise: ex.value })
-            }
+            onPress={() => handleNavigation(ex.value)}
           >
             <Text style={styles.buttonText}>{ex.label}</Text>
           </TouchableOpacity>

@@ -18,4 +18,24 @@ build
 
 # Expo / React Native
 .expo/
+.expo-shared/
 .ex
+
+# Python (FastAPI / MediaPipe backend)
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IDEs / Editors
+.vscode/
+.idea/
+
+# Environment variables
+.env
+.env.*
