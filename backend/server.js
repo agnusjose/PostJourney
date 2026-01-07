@@ -6,10 +6,13 @@ import dotenv from "dotenv";
 import crypto from "crypto";
 import { sendOtpMail } from "./utils/sendOtpMail.js";
 import User from "./models/User.js";
+import equipmentRoutes from "./routes/equipmentRoutes.js"; 
 
 // ✅ LOAD ENV F
 // IRST — THIS IS THE FIX
 dotenv.config();
+
+
 console.log("ENV FILE CHECK");
 console.log("YouTube API Key:", process.env.YOUTUBE_API_KEY);
 
@@ -129,7 +132,6 @@ app.post("/register", async (req, res) => {
     res.json({ success: false, message: "Server error occurred." });
   }
 });
-
 
 
 app.post("/verify-otp", async (req, res) => {
@@ -419,11 +421,10 @@ app.delete("/admin/delete/:id", async (req, res) => {
     res.json({ success: false, message: "Failed to delete user" });
   }
 });
-import equipmentRoutes from "./routes/equipmentRoutes.js";
-import caregiverRoutes from "./routes/caregiverRoutes.js";
-app.use("/equipment", equipmentRoutes);
-app.use("/caregiver-agencies", caregiverRoutes);
 // Server start
 app.listen(5000, "0.0.0.0", () => {
   console.log("Server running on port 5000 (LAN enabled)");
 });
+
+// ✅ Register Equipment Routes
+app.use("/api/equipments", equipmentRoutes);

@@ -16,7 +16,7 @@ export default function OtpVerifyScreen({ route, navigation }) {
   const [timer, setTimer] = useState(40);
   const [canResend, setCanResend] = useState(false);
 
-  const BASE_URL = "http://172.16.237.198:5000"; // change if needed
+  const BASE_URL = "http://192.168.245.72:5000"; // change if needed
 
   // ⏱️ 40-second countdown
   useEffect(() => {

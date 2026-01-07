@@ -54,7 +54,7 @@ export const EXERCISES = {
 
   SEATED_ELBOW_FLEXION_EXTENSION: {
     title: "Seated Elbow Flexion-Extension",
-    video: require("../assets/exercise_demos/neck_mobility_demo.mp4"),
+    video: require("../assets/exercise_demos/Seated Elbow Flexion and Extension.mp4"),
     instructions: [
       "Sit with arms relaxed at your sides",
       "Bend your elbow bringing hand toward shoulder",
@@ -197,7 +197,7 @@ export const EXERCISES = {
 
   QUADRICEPS_SET: {
     title: "Quadriceps Set",
-    video: require("../assets/exercise_demos/neck_mobility_demo.mp4"),
+    video: require("../assets/exercise_demos/Quadriceps Sets.mp4"),
     instructions: [
       "Lie with leg straight",
       "Tighten thigh muscles",
@@ -249,7 +249,7 @@ export const EXERCISES = {
 
   PENDULUM_EXERCISE: {
     title: "Pendulum Exercise",
-    video: require("../assets/exercise_demos/neck_mobility_demo.mp4"),
+    video: require("../assets/exercise_demos/Shoulder Pendulum Exercise.mp4"),
     instructions: [
       "Lean forward supporting body with one hand",
       "Let affected arm hang freely",

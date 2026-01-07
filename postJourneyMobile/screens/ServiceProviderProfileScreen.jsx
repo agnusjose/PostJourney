@@ -8,7 +8,7 @@ export default function ServiceProviderProfileScreen({ route, navigation }) {
   const [serviceName, setServiceName] = useState("");
   const [phone, setPhone] = useState("");
 
-  const BASE_URL = "http://172.16.237.198:5000";
+  const BASE_URL = "http://192.168.245.72:5000";
 
   const handleSubmit = async () => {
     if (!serviceName || !phone) {

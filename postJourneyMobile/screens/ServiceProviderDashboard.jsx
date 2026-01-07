@@ -1,212 +1,208 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import {
   View,
   Text,
-  ScrollView,
-  ActivityIndicator,
-  StyleSheet,
-  Image,
   TextInput,
   TouchableOpacity,
-  Modal,
+  ScrollView,
+  StyleSheet,
+  Alert,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
-function ServiceProviderDashboard() {
-  const [stores, setStores] = useState([]);
+const API_BASE = "http://192.168.1.7:5000/api/provider/services"; // CHANGE IP ONLY
+
+const ServiceProviderDashboard = () => {
+  const [token, setToken] = useState(null);
+  const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  /* ADD PRODUCT STATE */
-  const [newProduct, setNewProduct] = useState({ name: "", price: "", stock: "", imageUrl: "" });
+  const [form, setForm] = useState({
+    serviceName: "",
+    category: "Physiotherapy",
+    description: "",
+    pricePerSession: "",
+  });
 
-  /* EDIT PRODUCT STATE */
-  const [editing, setEditing] = useState(null);
-  const [editProduct, setEditProduct] = useState({ name: "", price: "", stock: "", imageUrl: "" });
+  /* LOAD TOKEN FIRST */
+  useEffect(() => {
+    const init = async () => {
+      try {
+        const storedToken = await AsyncStorage.getItem("token");
+        if (!storedToken) {
+          Alert.alert("Auth Error", "Login again");
+          return;
+        }
+        setToken(storedToken);
+      } catch (err) {
+        console.log("Token load error:", err);
+      }
+    };
+    init();
+  }, []);
 
+  /* FETCH SERVICES AFTER TOKEN */
+  useEffect(() => {
+    if (token) fetchServices();
+  }, [token]);
 
-  const fetchStores = async () => {
+  const fetchServices = async () => {
     try {
-      console.log("📡 Fetching equipment stores...");
-      const res = await axios.get("http://172.16.237.198:5000/equipment");
-      console.log("✅ Equipment stores fetched:", res.data.data);
-      setStores(res.data.data || []);
-    } catch (error) {
-      console.warn("❌ Failed to load equipment stores", error);
+      setLoading(true);
+      const res = await axios.get(`${API_BASE}/my-services`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setServices(res.data || []);
+    } catch (err) {
+      console.log("Fetch services error:", err.response?.data || err.message);
+      Alert.alert("Error", "Failed to load services");
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchStores();
-  }, []);
-
-  /* ADD PRODUCT */
-  const handleChange = (name, value) => {
-    setNewProduct({ ...newProduct, [name]: value });
-  };
-
-  const handleAddProduct = async (storeId) => {
-    if (!newProduct.name || !newProduct.price || !newProduct.stock) {
-      alert("Please fill all required fields");
+  const addService = async () => {
+    if (!form.serviceName || !form.pricePerSession) {
+      Alert.alert("Validation", "Service name and price required");
       return;
     }
 
     try {
-      await axios.post(`http://172.16.237.198:5000/equipment/${storeId}/add-equipment`, {
-        name: newProduct.name,
-        price: Number(newProduct.price),
-        stock: Number(newProduct.stock),
-        imageUrl: newProduct.imageUrl,
+      await axios.post(`${API_BASE}/add`, form, {
+        headers: { Authorization: `Bearer ${token}` },
       });
 
-      alert("Product added successfully");
-      setNewProduct({ name: "", price: "", stock: "", imageUrl: "" });
-      fetchStores();
+      setForm({
+        serviceName: "",
+        category: "Physiotherapy",
+        description: "",
+        pricePerSession: "",
+      });
+
+      fetchServices();
     } catch (err) {
-      console.warn(err);
-      alert("Failed to add product");
+      console.log("Add service error:", err.response?.data || err.message);
+      Alert.alert("Error", "Unable to add service");
     }
   };
 
-  /* EDIT PRODUCT */
-  const startEdit = (storeId, index, item) => {
-    setEditing({ storeId, index });
-    setEditProduct({ name: item.name, price: `${item.price}`, stock: `${item.stock}`, imageUrl: item.imageUrl || "" });
-  };
-
-  const handleEditChange = (name, value) => {
-    setEditProduct({ ...editProduct, [name]: value });
-  };
-
-  const saveEdit = async () => {
+  const deleteService = async (id) => {
     try {
-      await axios.put(
-        `http://172.16.237.198:5000/equipment/${editing.storeId}/update-equipment/${editing.index}`,
-        {
-          name: editProduct.name,
-          price: Number(editProduct.price),
-          stock: Number(editProduct.stock),
-          imageUrl: editProduct.imageUrl,
-        }
-      );
-
-      alert("Product updated successfully");
-      setEditing(null);
-      fetchStores();
+      await axios.delete(`${API_BASE}/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      fetchServices();
     } catch (err) {
-      console.warn(err);
-      alert("Failed to update product");
+      console.log("Delete service error:", err.response?.data || err.message);
+      Alert.alert("Error", "Unable to delete service");
     }
   };
-
-  if (loading) {
-    return (
-      <View style={styles.center}>
-        <ActivityIndicator size="large" />
-        <Text>Loading...</Text>
-      </View>
-    );
-  }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.title}>Service Provider Dashboard</Text>
 
-      {stores.map((store) => (
-        <View key={store._id} style={styles.storeCard}>
-          <Text style={styles.storeTitle}>{store.storeName} ({store.location})</Text>
+      {/* ADD SERVICE */}
+      <View style={styles.card}>
+        <Text style={styles.subtitle}>Add Service</Text>
 
-          {/* PRODUCTS */}
-          <View style={styles.productsList}>
-            {store.equipments.map((item, index) => (
-              <View key={index} style={styles.productRow}>
-                <Image source={{ uri: item.imageUrl || "https://via.placeholder.com/80" }} style={styles.productImage} />
+        <TextInput
+          style={styles.input}
+          placeholder="Service Name"
+          value={form.serviceName}
+          onChangeText={(v) => setForm({ ...form, serviceName: v })}
+        />
 
-                <View style={styles.productInfo}>
-                  <Text style={styles.productName}>{item.name}</Text>
-                  <Text style={styles.productMeta}>₹{item.price} • Stock: {item.stock}</Text>
-                </View>
+        <TextInput
+          style={styles.input}
+          placeholder="Category"
+          value={form.category}
+          onChangeText={(v) => setForm({ ...form, category: v })}
+        />
 
-                <TouchableOpacity onPress={() => startEdit(store._id, index, item)} style={styles.editButton}>
-                  <Text style={styles.editButtonText}>Edit</Text>
-                </TouchableOpacity>
-              </View>
-            ))}
-          </View>
+        <TextInput
+          style={styles.input}
+          placeholder="Description"
+          value={form.description}
+          onChangeText={(v) => setForm({ ...form, description: v })}
+        />
 
-          {/* ADD PRODUCT */}
-          <View style={styles.addSection}>
-            <Text style={styles.sectionTitle}>Add New Product</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Price per session"
+          keyboardType="numeric"
+          value={form.pricePerSession}
+          onChangeText={(v) =>
+            setForm({ ...form, pricePerSession: v })
+          }
+        />
 
-            <View style={styles.inputsGrid}>
-              <TextInput placeholder="Product name" value={newProduct.name} onChangeText={(t) => handleChange("name", t)} style={styles.input} />
-              <TextInput placeholder="Price" value={newProduct.price} onChangeText={(t) => handleChange("price", t)} style={styles.input} keyboardType="numeric" />
-              <TextInput placeholder="Stock" value={newProduct.stock} onChangeText={(t) => handleChange("stock", t)} style={styles.input} keyboardType="numeric" />
-              <TextInput placeholder="Image URL" value={newProduct.imageUrl} onChangeText={(t) => handleChange("imageUrl", t)} style={styles.input} />
+        <TouchableOpacity style={styles.button} onPress={addService}>
+          <Text style={styles.buttonText}>Add Service</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* SERVICE LIST */}
+      <View style={styles.card}>
+        <Text style={styles.subtitle}>My Services</Text>
+
+        {loading && <Text>Loading...</Text>}
+
+        {!loading && services.length === 0 && (
+          <Text>No services added yet</Text>
+        )}
+
+        {services.map((s) => (
+          <View key={s._id} style={styles.row}>
+            <View>
+              <Text style={styles.serviceName}>{s.serviceName}</Text>
+              <Text>₹ {s.pricePerSession}</Text>
             </View>
 
-            <TouchableOpacity onPress={() => handleAddProduct(store._id)} style={styles.addButton}>
-              <Text style={styles.addButtonText}>Add Product</Text>
+            <TouchableOpacity onPress={() => deleteService(s._id)}>
+              <Text style={styles.delete}>Delete</Text>
             </TouchableOpacity>
           </View>
-        </View>
-      ))}
-
-      {/* EDIT MODAL */}
-      <Modal visible={!!editing} transparent animationType="fade">
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Edit Product</Text>
-
-            <TextInput value={editProduct.name} onChangeText={(t) => handleEditChange("name", t)} style={styles.input} />
-            <TextInput value={editProduct.price} onChangeText={(t) => handleEditChange("price", t)} style={styles.input} keyboardType="numeric" />
-            <TextInput value={editProduct.stock} onChangeText={(t) => handleEditChange("stock", t)} style={styles.input} keyboardType="numeric" />
-            <TextInput value={editProduct.imageUrl} onChangeText={(t) => handleEditChange("imageUrl", t)} style={styles.input} />
-
-            <View style={styles.modalActions}>
-              <TouchableOpacity onPress={() => setEditing(null)} style={[styles.modalButton, styles.cancelButton]}>
-                <Text style={styles.modalButtonText}>Cancel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={saveEdit} style={[styles.modalButton, styles.saveButton]}>
-                <Text style={styles.modalButtonText}>Save</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
+        ))}
+      </View>
     </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: { padding: 16, paddingBottom: 40 },
-  center: { flex: 1, justifyContent: "center", alignItems: "center" },
-  title: { fontSize: 22, fontWeight: "700", textAlign: "center", marginBottom: 12 },
-  storeCard: { marginBottom: 16, backgroundColor: "#fff", padding: 12, borderRadius: 8 },
-  storeTitle: { fontSize: 18, fontWeight: "600", marginBottom: 8 },
-  productsList: { marginBottom: 8 },
-  productRow: { flexDirection: "row", alignItems: "center", marginBottom: 8 },
-  productImage: { width: 64, height: 64, borderRadius: 8, marginRight: 8 },
-  productInfo: { flex: 1 },
-  productName: { fontWeight: "600" },
-  productMeta: { color: "#555" },
-  editButton: { paddingVertical: 6, paddingHorizontal: 10, backgroundColor: "#f59e0b", borderRadius: 6 },
-  editButtonText: { color: "#fff" },
-  addSection: { borderTopWidth: 1, borderTopColor: "#eee", paddingTop: 10 },
-  sectionTitle: { fontWeight: "600", marginBottom: 8 },
-  inputsGrid: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
-  input: { borderWidth: 1, borderColor: "#ddd", padding: 8, borderRadius: 6, minWidth: 140, marginBottom: 8, flex: 1 },
-  addButton: { marginTop: 6, backgroundColor: "#2563eb", padding: 10, borderRadius: 6, alignSelf: "flex-start" },
-  addButtonText: { color: "#fff" },
-  modalOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.4)", justifyContent: "center", alignItems: "center" },
-  modalContent: { width: "90%", backgroundColor: "#fff", padding: 16, borderRadius: 8 },
-  modalTitle: { fontSize: 18, fontWeight: "700", marginBottom: 8 },
-  modalActions: { flexDirection: "row", justifyContent: "space-between", marginTop: 8 },
-  modalButton: { padding: 10, borderRadius: 6, flex: 1, alignItems: "center", marginHorizontal: 4 },
-  cancelButton: { backgroundColor: "#9ca3af" },
-  saveButton: { backgroundColor: "#16a34a" },
-  modalButtonText: { color: "#fff", fontWeight: "600" },
+  container: { padding: 20 },
+  title: { fontSize: 22, fontWeight: "700", marginBottom: 20 },
+  subtitle: { fontSize: 18, fontWeight: "600", marginBottom: 10 },
+  card: {
+    backgroundColor: "#fff",
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 20,
+    elevation: 3,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 10,
+  },
+  button: {
+    backgroundColor: "#2563eb",
+    padding: 12,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  buttonText: { color: "#fff", fontWeight: "600" },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderBottomWidth: 1,
+    paddingVertical: 10,
+  },
+  serviceName: { fontWeight: "600" },
+  delete: { color: "red" },
 });
 
 export default ServiceProviderDashboard;
