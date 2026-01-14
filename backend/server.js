@@ -6,13 +6,10 @@ import dotenv from "dotenv";
 import crypto from "crypto";
 import { sendOtpMail } from "./utils/sendOtpMail.js";
 import User from "./models/User.js";
-import equipmentRoutes from "./routes/equipmentRoutes.js"; 
 
 // ✅ LOAD ENV F
-// IRST — THIS IS THE FIX
+import equipmentRoutes from "./routes/equipmentRoutes.js";
 dotenv.config();
-
-
 console.log("ENV FILE CHECK");
 console.log("YouTube API Key:", process.env.YOUTUBE_API_KEY);
 
@@ -134,39 +131,85 @@ app.post("/register", async (req, res) => {
 });
 
 
+
 app.post("/verify-otp", async (req, res) => {
+  console.log("=== OTP VERIFICATION REQUEST ===");
+  console.log("Request body:", req.body);
+  console.log("Request time:", new Date().toISOString());
+  
   try {
     const { email, otp } = req.body;
 
     if (!email || !otp) {
+      console.log("Missing email or OTP");
       return res.json({
         success: false,
         message: "Email and OTP are required",
       });
     }
 
-    const user = await User.findOne({ email });
-    console.log("OTP Entered:", otp);
-console.log("OTP Stored:", user.otp);
-console.log("OTP Expiry in DB:", user.otpExpiry);
-console.log("Current Server Time:", new Date());
+    console.log("Looking for user with email:", email);
+    
+    // Check database connection first
+    const dbStatus = mongoose.connection.readyState;
+    console.log("Database connection status:", dbStatus);
+    // 0 = disconnected, 1 = connected, 2 = connecting, 3 = disconnecting
 
+    const user = await User.findOne({ email });
+    
     if (!user) {
+      console.log("User not found in database");
       return res.json({
         success: false,
-        message: "User not found",
+        message: "User not found. Please check your email.",
       });
     }
 
+    console.log("User found:", {
+      email: user.email,
+      isVerified: user.isVerified,
+      otp: user.otp,
+      otpExpiry: user.otpExpiry,
+      otpExpiryType: typeof user.otpExpiry,
+      currentTime: new Date()
+    });
+
     if (user.isVerified) {
+      console.log("User already verified");
       return res.json({
         success: true,
         message: "Email already verified",
       });
     }
 
-    // ⏳ OTP expiry check (10 minutes)
-    if (!user.otpExpiry || user.otpExpiry < new Date()) {
+    // Check if OTP exists
+    if (!user.otp) {
+      console.log("No OTP found for user");
+      return res.json({
+        success: false,
+        message: "No OTP found. Please request a new OTP.",
+      });
+    }
+
+    // ⏳ OTP expiry check
+    if (!user.otpExpiry) {
+      console.log("No OTP expiry time set");
+      return res.json({
+        success: false,
+        message: "OTP expired. Please resend OTP",
+      });
+    }
+
+    const currentTime = new Date();
+    const expiryTime = new Date(user.otpExpiry);
+    
+    console.log("OTP Expiry Check:");
+    console.log("Current time:", currentTime);
+    console.log("OTP expiry:", expiryTime);
+    console.log("Is OTP expired?", currentTime > expiryTime);
+
+    if (currentTime > expiryTime) {
+      console.log("OTP has expired");
       return res.json({
         success: false,
         message: "OTP expired. Please resend OTP",
@@ -174,7 +217,13 @@ console.log("Current Server Time:", new Date());
     }
 
     // 🔢 OTP match check
+    console.log("OTP Comparison:");
+    console.log("Entered OTP:", otp);
+    console.log("Stored OTP:", user.otp);
+    console.log("OTP match?", user.otp === otp);
+
     if (user.otp !== otp) {
+      console.log("OTP doesn't match");
       return res.json({
         success: false,
         message: "Invalid OTP",
@@ -182,20 +231,35 @@ console.log("Current Server Time:", new Date());
     }
 
     // ✅ SUCCESS
+    console.log("OTP verification successful!");
+    
     user.isVerified = true;
     user.otp = null;
     user.otpExpiry = null;
+    
     await user.save();
+    
+    console.log("User updated successfully");
 
     return res.json({
       success: true,
       message: "Email verified successfully",
     });
+    
   } catch (err) {
-    console.error(err);
+    console.error("=== SERVER ERROR IN VERIFY-OTP ===");
+    console.error("Error name:", err.name);
+    console.error("Error message:", err.message);
+    console.error("Error stack:", err.stack);
+    
+    // Check for specific MongoDB errors
+    if (err.name === 'MongoError' || err.name === 'MongooseError') {
+      console.error("MongoDB/Mongoose error:", err);
+    }
+    
     return res.json({
       success: false,
-      message: "Server error",
+      message: "Server error: " + err.message,
     });
   }
 });
@@ -275,9 +339,10 @@ app.post("/resend-otp", async (req, res) => {
 
 
 
-// Login
+// ========== FIXED LOGIN ROUTE - MATCHES REACT NATIVE EXPECTATIONS ==========
 app.post("/login", async (req, res) => {
-  console.log("🔥 NEW LOGIN ROUTE HIT 🔥");
+  console.log("🔥 LOGIN ROUTE HIT");
+  console.log("Login attempt for:", req.body.email);
 
   try {
     const { email, password } = req.body;
@@ -290,17 +355,24 @@ app.post("/login", async (req, res) => {
       });
     }
 
+    // Normalize email
+    const normalizedEmail = email.toLowerCase().trim();
+
     // 2️⃣ Check user exists
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: normalizedEmail });
     if (!user) {
+      console.log("❌ User not found:", normalizedEmail);
       return res.json({
         success: false,
         message: "User does not exist",
       });
     }
 
+    console.log("✅ User found:", user.email, "Type:", user.userType);
+
     // 3️⃣ Check if blocked by admin
     if (user.isBlocked) {
+      console.log("❌ User is blocked");
       return res.json({
         success: false,
         message: "Your account has been blocked by admin",
@@ -309,33 +381,69 @@ app.post("/login", async (req, res) => {
 
     // 4️⃣ Check email verification
     if (!user.isVerified) {
+      console.log("❌ Email not verified");
       return res.json({
         success: false,
         message: "Please verify your email before logging in",
       });
     }
 
-    // 5️⃣ Check password
+    // 5️⃣ Check provider verification status (ONLY for service providers)
+    if (user.userType === "service provider") {
+      const verificationStatus = user.providerVerification?.status;
+      console.log("Provider verification status:", verificationStatus);
+      
+      // If status is "rejected" - user cannot login
+      if (verificationStatus === "rejected") {
+        return res.json({
+          success: false,
+          message: "Your provider application has been rejected. Please contact admin.",
+        });
+      }
+      
+      // If status is "pending" or doesn't exist - user cannot login
+      if (!verificationStatus || verificationStatus === "pending") {
+        return res.json({
+          success: false,
+          message: "Your provider account is pending admin approval. You will be notified once approved.",
+        });
+      }
+      
+      // Only allow login if status is EXACTLY "approved"
+      if (verificationStatus !== "approved") {
+        return res.json({
+          success: false,
+          message: "Account verification required. Please contact admin.",
+        });
+      }
+    }
+
+    // 6️⃣ Check password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
+      console.log("❌ Password mismatch");
       return res.json({
         success: false,
         message: "Invalid credentials",
       });
     }
 
-    // ✅ SUCCESS
-    return res.json({
+    console.log("✅ Login successful for:", user.email);
+
+    // ✅ SUCCESS - Return EXACTLY what your React Native app expects
+   // In server.js login endpoint
+return res.json({
   success: true,
   message: "Login successful",
   userType: user.userType,
   name: user.name,
   email: user.email,
-  profileCompleted: user.profileCompleted,
+ userId: user._id.toString(), // ADD THIS LINE - convert ObjectId to string 
+   profileCompleted: user.profileCompleted || false,
 });
 
   } catch (err) {
-    console.error(err);
+    console.error("❌ Login error:", err);
     return res.json({
       success: false,
       message: "Server error occurred",
@@ -343,20 +451,96 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.put("/service-provider/complete-profile", async (req, res) => {
-  const { email, serviceName, phone } = req.body;
 
-  const user = await User.findOne({ email });
+// Simple profile completion endpoints - add to your server.js
 
-  if (!user)
-    return res.json({ success: false, message: "User not found" });
+// Service Provider Profile Completion
+app.post("/api/service-provider/complete-profile", async (req, res) => {
+  try {
+    const { email, agencyName, serviceType, phoneNumber, city } = req.body;
 
-  user.profileCompleted = true;
+    if (!email || !agencyName || !phoneNumber || !city) {
+      return res.json({
+        success: false,
+        message: "All fields are required",
+      });
+    }
 
-  // optional: save provider-specific data later in another collection
-  await user.save();
+    // Update user profile completion status
+    const user = await User.findOneAndUpdate(
+      { email },
+      { 
+        profileCompleted: true,
+        userType: "service-provider"
+      },
+      { new: true }
+    );
 
-  res.json({ success: true });
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // You can save additional details in a separate collection if needed
+    // For now, just mark profile as completed
+
+    return res.json({
+      success: true,
+      message: "Profile completed successfully",
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.json({
+      success: false,
+      message: "Server error",
+    });
+  }
+});
+
+// Patient Profile Completion
+app.post("/api/patient/complete-profile", async (req, res) => {
+  try {
+    const { email, fullName, age, gender, phoneNumber, city, primaryCondition } = req.body;
+
+    if (!email || !fullName || !age || !phoneNumber || !city || !primaryCondition) {
+      return res.json({
+        success: false,
+        message: "All fields are required",
+      });
+    }
+
+    // Update user profile completion status
+    const user = await User.findOneAndUpdate(
+      { email },
+      { 
+        profileCompleted: true,
+        userType: "patient"
+      },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    return res.json({
+      success: true,
+      message: "Profile completed successfully",
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.json({
+      success: false,
+      message: "Server error",
+    });
+  }
 });
 
 
@@ -367,8 +551,14 @@ import youtubeRoutes from "./routes/youtubeRoutes.js";
 
 app.use("/api", videoRoutes);
 app.use("/api/youtube", youtubeRoutes);
+app.use("/equipment", equipmentRoutes);
 
-// Admin login
+
+// ==========================================
+// SECTION 4: ADMIN ROUTES (FROM SECOND WORKING CODE)
+// ==========================================
+import adminRoutes from "./routes/admin.routes.js";
+// Admin login - FROM SECOND CODE
 app.post("/admin/login", async (req, res) => {
   const { secretKey, email, password } = req.body;
 
@@ -386,8 +576,8 @@ app.post("/admin/login", async (req, res) => {
   res.json({ success: true, message: "Admin Login Successful" });
 });
 
-// Admin utilities
-app.get("/admin/test", (req, res) => res.send("Admin route OK"));
+// Admin utilities - FROM FIRST CODE (for backward compatibility)
+app.get("/admin/test", (req, res) => res.json({ message: "Admin route OK" }));
 
 app.get("/admin/users", async (req, res) => {
   try {
@@ -421,10 +611,39 @@ app.delete("/admin/delete/:id", async (req, res) => {
     res.json({ success: false, message: "Failed to delete user" });
   }
 });
-// Server start
+
+// ==========================================
+// SECTION 5: ADMIN ROUTES MODULE
+// ==========================================
+
+console.log("📌 Mounting admin routes module...");
+app.use("/admin", adminRoutes);
+
+// ==========================================
+// SECTION 6: FALLBACK ROUTE
+// ==========================================
+
+app.use((req, res) => {
+  console.log(`❌ Route not found: ${req.method} ${req.url}`);
+  res.status(404).json({ 
+    error: "Route not found",
+    requested: `${req.method} ${req.url}`,
+    availableRoutes: [
+      "GET /", 
+      "GET /test", 
+      "POST /register", 
+      "POST /verify-otp", 
+      "POST /resend-otp", 
+      "POST /login",
+      "POST /admin/login",
+      "GET /admin/test",
+      "GET /admin/users"
+    ]
+  });
+});
+
+// Start server
 app.listen(5000, "0.0.0.0", () => {
   console.log("Server running on port 5000 (LAN enabled)");
 });
 
-// ✅ Register Equipment Routes
-app.use("/api/equipments", equipmentRoutes);

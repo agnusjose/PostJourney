@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { 
   View, 
   Text, 
@@ -19,6 +19,7 @@ export default function ExerciseDemoScreen({ route, navigation }) {
   
   // State to handle dynamic video height based on aspect ratio
   const [videoHeight, setVideoHeight] = useState(250); // Default fallback
+  const videoRef = useRef(null); // ref to enforce muted state
 
   return (
     <View style={styles.container}>
@@ -35,13 +36,22 @@ export default function ExerciseDemoScreen({ route, navigation }) {
         {/* Dynamic Video Player Frame */}
         <View style={[styles.videoWrapper, { height: videoHeight }]}>
           <Video
+            ref={videoRef}
             source={exercise.video}
             style={styles.video}
             /* 'contain' with dynamic height ensures no black bars */
-            resizeMode="contain" 
+            resizeMode="contain"
             shouldPlay
             isLooping
-            useNativeControls
+            isMuted={true}         // always muted
+            volume={0}             // ensure volume is zero
+            onPlaybackStatusUpdate={(status) => {
+              // Reinforce muted state in case controls or status change
+              if (!status.isLoaded) return;
+              if (!status.isMuted) {
+                videoRef.current?.setIsMutedAsync(true).catch(() => {});
+              }
+            }}
             onReadyForDisplay={(event) => {
               // Calculate height based on video aspect ratio
               const { width: vidWidth, height: vidHeight } = event.naturalSize;

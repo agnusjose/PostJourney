@@ -16,30 +16,36 @@ const userSchema = new mongoose.Schema(
 
     isBlocked: {
       type: Boolean,
-      default: false,   // ✅ NEW
+      default: false,
     },
-  isVerified: {
-    type: Boolean,
-    default: false,
-  },
 
-  otp: {
-    type: String,
-  },
+    // Email / OTP verification
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
 
-  otpExpiry: {
-    type: Date,
-  },
-  otpLastSentAt: {
-    type: Date,
-  },
+    otp: String,
+    otpExpiry: Date,
+    otpLastSentAt: Date,
 
-  profileCompleted: {
-    type: Boolean,
-    default: false,
+    profileCompleted: {
+      type: Boolean,
+      default: false,
+    },
+
+    // ✅ NEW (ADMIN-CONTROLLED – SERVICE PROVIDERS ONLY)
+    providerVerification: {
+      status: {
+        type: String,
+        enum: ["pending", "approved", "rejected"],
+        default: "pending",
+      },
+      documentUrl: String, // Aadhaar / License / ID (later)
+      reviewedByAdminAt: Date,
+    },
   },
-},
-{ timestamps: true } // ✅ createdAt & updatedAt
+  { timestamps: true }
 );
 
 export default mongoose.model("User", userSchema);

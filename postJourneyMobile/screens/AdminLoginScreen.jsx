@@ -40,7 +40,10 @@ const BASE_URL = "http://192.168.245.72:5000";
     }
 
     // SUCCESS — navigate to admin panel
-    navigation.replace("AdminUsersScreen");
+navigation.reset({
+  index: 0,
+  routes: [{ name: "AdminStackNavigator" }],
+});
 
   } catch (err) {
     console.log("ADMIN LOGIN ERROR:", err);

@@ -54,7 +54,7 @@ export default function NeckMobilityMonitor() {
 
         const currentStep = SEQUENCE[stepRef.current];
 
-        const res = await fetch("http://192.168.245.72.1:8000/pose/analyze", {
+        const res = await fetch("http://192.168.245.72.72.1:8000/pose/analyze", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

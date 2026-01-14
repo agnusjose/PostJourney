@@ -2,19 +2,18 @@ import 'whatwg-fetch';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SplashScreen from './screens/SplashScreen';       // Splash first
+import SplashScreen from './screens/SplashScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import AdminLoginScreen from "./screens/AdminLoginScreen";
-import AdminUsersScreen from "./screens/AdminUsersScreen";
+import AdminUsersScreen from "./screens/admin/AdminUsersScreen";
 import PatientDashboard from "./screens/PatientDashboard";
 import ServiceProviderDashboard from "./screens/ServiceProviderDashboard";
 import ExercisesDashboard from './screens/ExercisesDashboard';
 import VideoPlayer from "./screens/VideoPlayer";
 import MedicalVideos from "./screens/MedicalVideos";
 import OtpVerifyScreen from "./screens/OtpVerifyScreen";
-import ServiceProviderProfileScreen from "./screens/ServiceProviderProfileScreen";
 import TFSanityTest from "./screens/TFSanityTest";
 import MiniSquatMonitor from './screens/exerciseMonitoring/MiniSquatMonitoring'
 import ExercisesDemo from './screens/exerciseMonitoring/ExercisesDemo';
@@ -50,68 +49,87 @@ import StraightLegRaiseMonitor from './screens/exerciseMonitoring/StraightLegRai
 import TandemStandingMonitor from './screens/exerciseMonitoring/TandemStandingMonitor';
 import TurnInPlaceMonitor from './screens/exerciseMonitoring/TurnInPlaceMonitor';
 import StaticStandingMonitor from './screens/exerciseMonitoring/StaticStandingMonitor';
+import AdminDashboard from './screens/admin/AdminDashboard';
+import AdminStackNavigator from './screens/admin/AdminStackNavigator';
+import ManageProviders from './screens/admin/ManageProviders';
+import ServiceBookingScreen from './screens/ServiceBookingScreen';
+import PatientEquipmentList from "./screens/PatientEquipmentList";
+import PatientCartScreen from "./screens/PatientCartScreen";
+import { CartProvider } from "./context/CartContext";
+import ServiceProviderProfileCompletion from "./screens/ServiceProviderProfileCompletion";
+import PatientProfileCompletion from "./screens/PatientProfileCompletion";
+import EquipmentDashboardScreen from './screens/EquipmentDashboardScreen';
+import AddEquipment from './screens/AddEquipment';
 
-
-// ServiceProviderScreen (simple placeholder) removed from stack to avoid conflicts
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Splash"            // Start with Splash
-        screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen name="Splash" component={SplashScreen} />
-        <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="AdminLoginScreen" component={AdminLoginScreen} />
-        <Stack.Screen name="AdminUsersScreen" component={AdminUsersScreen} />
-        <Stack.Screen name="PatientDashboard" component={PatientDashboard} />
-        <Stack.Screen name="ServiceProviderDashboard" component={ServiceProviderDashboard}/>
-        <Stack.Screen name="VideoPlayer" component={VideoPlayer} />
-        <Stack.Screen name='ExercisesDashboard' component={ExercisesDashboard} />
-        <Stack.Screen name="MedicalVideos" component={MedicalVideos} />
-        <Stack.Screen name="OtpVerifyScreen" component={OtpVerifyScreen}/>
-        <Stack.Screen name="ServiceProviderProfileScreen" component={ServiceProviderProfileScreen} />
-        <Stack.Screen name="TFSanityTest" component={TFSanityTest} />
-        <Stack.Screen name="MiniSquatMonitor" component={MiniSquatMonitor}/>
-        <Stack.Screen name="ExercisesDemo" component={ExercisesDemo}/>
-        <Stack.Screen name="NeckMobilityMonitor" component={NeckMobilityMonitor}/>
-        <Stack.Screen name="ExerciseCompleted" component={ExerciseCompleted}/>
-        <Stack.Screen name="CardiacRehab" component={CardiacRehab}/>
-        <Stack.Screen name="Icu_General" component={Icu_General}/>
-        <Stack.Screen name="ElderlyCare" component={Elderlycare}/>
-        <Stack.Screen name="CommonExercises" component={CommonExercises}/>
-        <Stack.Screen name="Post_SurgicalRehab" component={Post_SurgicalRehab}/>
-        <Stack.Screen name="Orthopedic" component={Orthopedic}/>
-        <Stack.Screen name="PulmonaryRehab" component={PulmonaryRehab}/>
-        <Stack.Screen name="StrokeRehab" component={StrokeRehab}/>
-        <Stack.Screen name="MarchingInPlaceMonitor" component={MarchingInPlaceMonitor}/>
-        <Stack.Screen name="ShoulderRollsMonitor" component={ShoulderRollsMonitor}/>
-        <Stack.Screen name="ThoracicExpansionArmLiftMonitor" component={ThoracicExpansionArmLiftMonitor}/>
-        <Stack.Screen name="WeightShiftMonitor" component={WeightShiftMonitor}/>
-        <Stack.Screen name="SitToStandMonitor" component={SitToStandMonitor}/>
-        <Stack.Screen name="SeatedShoulderFlexionMonitor" component={SeatedShoulderFlexionMonitor}/>
-        <Stack.Screen name="SeatedElbowFlexExtMonitor" component={SeatedElbowFlexExtMonitor}/>
-        <Stack.Screen name="SeatedKneeExtensionMonitor" component={SeatedKneeExtensionMonitor}/>
-        <Stack.Screen name="AnklePumpsMonitor" component={AnklePumpsMonitor}/>
-        <Stack.Screen name="HeelSlidesMonitor" component={HeelSlidesMonitor}/>
-        <Stack.Screen name="QuadricepsSetMonitor" component={QuadricepsSetMonitor}/>
-        <Stack.Screen name="BedMobilityMonitor" component={BedMobilityMonitor}/>
-        <Stack.Screen name="DiaphragmaticBreathingMonitor" component={DiaphragmaticBreathingMonitor}/>
-        <Stack.Screen name="HipExtensionMonitor" component={HipExtensionMonitor}/>
-        <Stack.Screen name="PassiveShoulderROMMonitor" component={PassiveShoulderROMMonitor}/>
-        <Stack.Screen name="PendulumExerciseMonitor" component={PendulumExerciseMonitor}/>
-        <Stack.Screen name="SeatedTrunkFlexExtMonitor" component={SeatedTrunkFlexExtMonitor}/>
-        <Stack.Screen name="StandingHipAbductionMonitor" component={StandingHipAbductionMonitor}/>
-        <Stack.Screen name="StraightLegRaiseMonitor" component={StraightLegRaiseMonitor}/>
-        <Stack.Screen name="TandemStandingMonitor" component={TandemStandingMonitor}/>
-        <Stack.Screen name="TurnInPlaceMonitor" component={TurnInPlaceMonitor}/>
-        <Stack.Screen name="StaticStandingMonitor" component={StaticStandingMonitor}/>
-        {/* Removed simple ServiceProviderScreen to avoid routing collisions */}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <CartProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Splash"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name="Splash" component={SplashScreen} />
+          <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+          <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <Stack.Screen name="AdminLoginScreen" component={AdminLoginScreen} />
+          <Stack.Screen name="AdminUsersScreen" component={AdminUsersScreen} />
+          <Stack.Screen name="PatientDashboard" component={PatientDashboard} />
+          <Stack.Screen name="ServiceProviderDashboard" component={ServiceProviderDashboard}/>
+          <Stack.Screen name="VideoPlayer" component={VideoPlayer} />
+          <Stack.Screen name='ExercisesDashboard' component={ExercisesDashboard} />
+          <Stack.Screen name="MedicalVideos" component={MedicalVideos} />
+          <Stack.Screen name="OtpVerifyScreen" component={OtpVerifyScreen}/>
+          <Stack.Screen name="TFSanityTest" component={TFSanityTest} />
+          <Stack.Screen name="MiniSquatMonitor" component={MiniSquatMonitor}/>
+          <Stack.Screen name="ExercisesDemo" component={ExercisesDemo}/>
+          <Stack.Screen name="NeckMobilityMonitor" component={NeckMobilityMonitor}/>
+          <Stack.Screen name="ExerciseCompleted" component={ExerciseCompleted}/>
+          <Stack.Screen name="CardiacRehab" component={CardiacRehab}/>
+          <Stack.Screen name="Icu_General" component={Icu_General}/>
+          <Stack.Screen name="ElderlyCare" component={Elderlycare}/>
+          <Stack.Screen name="CommonExercises" component={CommonExercises}/>
+          <Stack.Screen name="Post_SurgicalRehab" component={Post_SurgicalRehab}/>
+          <Stack.Screen name="Orthopedic" component={Orthopedic}/>
+          <Stack.Screen name="PulmonaryRehab" component={PulmonaryRehab}/>
+          <Stack.Screen name="StrokeRehab" component={StrokeRehab}/>
+          <Stack.Screen name="MarchingInPlaceMonitor" component={MarchingInPlaceMonitor}/>
+          <Stack.Screen name="ShoulderRollsMonitor" component={ShoulderRollsMonitor}/>
+          <Stack.Screen name="ThoracicExpansionArmLiftMonitor" component={ThoracicExpansionArmLiftMonitor}/>
+          <Stack.Screen name="WeightShiftMonitor" component={WeightShiftMonitor}/>
+          <Stack.Screen name="SitToStandMonitor" component={SitToStandMonitor}/>
+          <Stack.Screen name="SeatedShoulderFlexionMonitor" component={SeatedShoulderFlexionMonitor}/>
+          <Stack.Screen name="SeatedElbowFlexExtMonitor" component={SeatedElbowFlexExtMonitor}/>
+          <Stack.Screen name="SeatedKneeExtensionMonitor" component={SeatedKneeExtensionMonitor}/>
+          <Stack.Screen name="AnklePumpsMonitor" component={AnklePumpsMonitor}/>
+          <Stack.Screen name="HeelSlidesMonitor" component={HeelSlidesMonitor}/>
+          <Stack.Screen name="QuadricepsSetMonitor" component={QuadricepsSetMonitor}/>
+          <Stack.Screen name="BedMobilityMonitor" component={BedMobilityMonitor}/>
+          <Stack.Screen name="DiaphragmaticBreathingMonitor" component={DiaphragmaticBreathingMonitor}/>
+          <Stack.Screen name="HipExtensionMonitor" component={HipExtensionMonitor}/>
+          <Stack.Screen name="PassiveShoulderROMMonitor" component={PassiveShoulderROMMonitor}/>
+          <Stack.Screen name="PendulumExerciseMonitor" component={PendulumExerciseMonitor}/>
+          <Stack.Screen name="SeatedTrunkFlexExtMonitor" component={SeatedTrunkFlexExtMonitor}/>
+          <Stack.Screen name="StandingHipAbductionMonitor" component={StandingHipAbductionMonitor}/>
+          <Stack.Screen name="StraightLegRaiseMonitor" component={StraightLegRaiseMonitor}/>
+          <Stack.Screen name="TandemStandingMonitor" component={TandemStandingMonitor}/>
+          <Stack.Screen name="TurnInPlaceMonitor" component={TurnInPlaceMonitor}/>
+          <Stack.Screen name="StaticStandingMonitor" component={StaticStandingMonitor}/>
+          <Stack.Screen name="AdminDashboard" component={AdminDashboard} />
+          <Stack.Screen name="AdminStackNavigator" component={AdminStackNavigator} />
+          <Stack.Screen name="ManageProviders" component={ManageProviders} />
+          <Stack.Screen name="ServiceBookingScreen" component={ServiceBookingScreen} />
+          <Stack.Screen name="PatientEquipmentList" component={PatientEquipmentList} />
+          <Stack.Screen name="PatientCart" component={PatientCartScreen} />
+          <Stack.Screen name="ServiceProviderProfileCompletion" component={ServiceProviderProfileCompletion} />
+          <Stack.Screen name="PatientProfileCompletion" component={PatientProfileCompletion} />
+          <Stack.Screen name="EquipmentDashboardScreen" component={EquipmentDashboardScreen} />
+          <Stack.Screen name="AddEquipment" component={AddEquipment} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </CartProvider> 
   );
 }

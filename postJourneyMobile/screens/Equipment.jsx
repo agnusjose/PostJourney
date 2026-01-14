@@ -6,7 +6,7 @@ const Equipment = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://192.168.245.72:5000/equipment")
+    fetch("http://192.168.245.72.72:5000/equipment")
       .then((res) => res.json())
       .then((data) => {
         setStores(data.data || []); // IMPORTANT: ensure array

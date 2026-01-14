@@ -124,7 +124,7 @@ console.log("ROUTE PARAMS:", route.params);
 
               <TouchableOpacity
                 style={styles.card}
-                onPress={() => navigation.navigate("ExercisesDashboard")}
+                onPress={() => navigation.navigate("ServiceBookingScreen")}
                 activeOpacity={0.7}
               >
                 <View style={styles.iconCircle}>

@@ -21,25 +21,29 @@ export default function RegisterScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("patient");
 
-  const handleRegister = async () => {
-    try {
-      const response = await axios.post("http://192.168.245.72:5000/register", {
-        name,
-        email,
-        password,
-        userType,
-      });
+const handleRegister = async () => {
+  try {
+    const response = await axios.post("http://192.168.245.72:5000/register", {
+      name,
+      email,
+      password,
+      userType,
+    });
 
-      if (response.data.success) {
-        Alert.alert("Success", response.data.message);
-navigation.navigate("OtpVerifyScreen", { email });
-      } else {
-        Alert.alert("Error", response.data.message);
-      }
-    } catch (err) {
-      Alert.alert("Error", err.message);
+    if (response.data.success) {
+      Alert.alert("Success", response.data.message);
+      // Pass userType to OTP screen
+      navigation.navigate("OtpVerifyScreen", { 
+        email: email,
+        userType: userType // Add this line
+      });
+    } else {
+      Alert.alert("Error", response.data.message);
     }
-  };
+  } catch (err) {
+    Alert.alert("Error", err.message);
+  }
+};
 
   return (
     <ImageBackground

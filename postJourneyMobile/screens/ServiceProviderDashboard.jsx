@@ -2,207 +2,127 @@ import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
-  ScrollView,
   StyleSheet,
   Alert,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import axios from "axios";
 
-const API_BASE = "http://192.168.1.7:5000/api/provider/services"; // CHANGE IP ONLY
+export default function ServiceProviderDashboard({ route, navigation }) {
+  const { userId, userName, userEmail } = route.params || {};
 
-const ServiceProviderDashboard = () => {
-  const [token, setToken] = useState(null);
-  const [services, setServices] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const [form, setForm] = useState({
-    serviceName: "",
-    category: "Physiotherapy",
-    description: "",
-    pricePerSession: "",
-  });
-
-  /* LOAD TOKEN FIRST */
   useEffect(() => {
-    const init = async () => {
-      try {
-        const storedToken = await AsyncStorage.getItem("token");
-        if (!storedToken) {
-          Alert.alert("Auth Error", "Login again");
-          return;
-        }
-        setToken(storedToken);
-      } catch (err) {
-        console.log("Token load error:", err);
-      }
-    };
-    init();
-  }, []);
-
-  /* FETCH SERVICES AFTER TOKEN */
-  useEffect(() => {
-    if (token) fetchServices();
-  }, [token]);
-
-  const fetchServices = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.get(`${API_BASE}/my-services`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setServices(res.data || []);
-    } catch (err) {
-      console.log("Fetch services error:", err.response?.data || err.message);
-      Alert.alert("Error", "Failed to load services");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const addService = async () => {
-    if (!form.serviceName || !form.pricePerSession) {
-      Alert.alert("Validation", "Service name and price required");
+    if (!userId) {
+      Alert.alert("Error", "User ID not found. Please login again.");
+      navigation.replace("LoginScreen");
       return;
     }
-
-    try {
-      await axios.post(`${API_BASE}/add`, form, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      setForm({
-        serviceName: "",
-        category: "Physiotherapy",
-        description: "",
-        pricePerSession: "",
-      });
-
-      fetchServices();
-    } catch (err) {
-      console.log("Add service error:", err.response?.data || err.message);
-      Alert.alert("Error", "Unable to add service");
-    }
-  };
-
-  const deleteService = async (id) => {
-    try {
-      await axios.delete(`${API_BASE}/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      fetchServices();
-    } catch (err) {
-      console.log("Delete service error:", err.response?.data || err.message);
-      Alert.alert("Error", "Unable to delete service");
-    }
-  };
+    
+    console.log("Dashboard loaded with:", { userId, userName, userEmail });
+  }, []);
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Service Provider Dashboard</Text>
-
-      {/* ADD SERVICE */}
+    <View style={styles.container}>
+      <Text style={styles.header}>Service Provider Dashboard</Text>
+      
       <View style={styles.card}>
-        <Text style={styles.subtitle}>Add Service</Text>
-
-        <TextInput
-          style={styles.input}
-          placeholder="Service Name"
-          value={form.serviceName}
-          onChangeText={(v) => setForm({ ...form, serviceName: v })}
-        />
-
-        <TextInput
-          style={styles.input}
-          placeholder="Category"
-          value={form.category}
-          onChangeText={(v) => setForm({ ...form, category: v })}
-        />
-
-        <TextInput
-          style={styles.input}
-          placeholder="Description"
-          value={form.description}
-          onChangeText={(v) => setForm({ ...form, description: v })}
-        />
-
-        <TextInput
-          style={styles.input}
-          placeholder="Price per session"
-          keyboardType="numeric"
-          value={form.pricePerSession}
-          onChangeText={(v) =>
-            setForm({ ...form, pricePerSession: v })
-          }
-        />
-
-        <TouchableOpacity style={styles.button} onPress={addService}>
-          <Text style={styles.buttonText}>Add Service</Text>
-        </TouchableOpacity>
+        <Text style={styles.name}>Welcome, {userName || "User"}!</Text>
+        <Text>Email: {userEmail || "N/A"}</Text>
+        <Text>User ID: {userId?.substring(0, 8)}...</Text>
+        <Text style={styles.approved}>✔ Account Verified</Text>
       </View>
 
-      {/* SERVICE LIST */}
-      <View style={styles.card}>
-        <Text style={styles.subtitle}>My Services</Text>
+      <TouchableOpacity
+        style={styles.primaryBtn}
+        onPress={() =>
+          navigation.navigate("EquipmentDashboardScreen", {
+            providerId: userId,
+          })
+        }
+      >
+        <Text style={styles.btnText}>Go to Equipment Dashboard</Text>
+      </TouchableOpacity>
 
-        {loading && <Text>Loading...</Text>}
+      <TouchableOpacity
+        style={styles.secondaryBtn}
+        onPress={() => navigation.navigate("ServiceProviderProfileCompletion", {
+          email: userEmail,
+        })}
+      >
+        <Text style={styles.btnText}>View/Edit Profile</Text>
+      </TouchableOpacity>
 
-        {!loading && services.length === 0 && (
-          <Text>No services added yet</Text>
-        )}
-
-        {services.map((s) => (
-          <View key={s._id} style={styles.row}>
-            <View>
-              <Text style={styles.serviceName}>{s.serviceName}</Text>
-              <Text>₹ {s.pricePerSession}</Text>
-            </View>
-
-            <TouchableOpacity onPress={() => deleteService(s._id)}>
-              <Text style={styles.delete}>Delete</Text>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </View>
-    </ScrollView>
+      <TouchableOpacity
+        style={styles.logoutBtn}
+        onPress={() => navigation.replace("LoginScreen")}
+      >
+        <Text style={styles.btnText}>Logout</Text>
+      </TouchableOpacity>
+    </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: { padding: 20 },
-  title: { fontSize: 22, fontWeight: "700", marginBottom: 20 },
-  subtitle: { fontSize: 18, fontWeight: "600", marginBottom: 10 },
+  container: { 
+    flex: 1, 
+    padding: 16,
+    backgroundColor: "#f8fafc",
+  },
+  header: { 
+    fontSize: 24, 
+    fontWeight: "bold", 
+    textAlign: "center",
+    marginVertical: 20,
+    color: "#1e293b",
+  },
   card: {
     backgroundColor: "#fff",
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 20,
+    padding: 20,
+    borderRadius: 12,
+    marginVertical: 20,
     elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
-    padding: 10,
+  name: { 
+    fontSize: 20, 
+    fontWeight: "bold",
     marginBottom: 10,
+    color: "#1e293b",
   },
-  button: {
+  approved: { 
+    color: "green", 
+    marginTop: 8,
+    fontWeight: "600",
+  },
+  primaryBtn: {
     backgroundColor: "#2563eb",
-    padding: 12,
-    borderRadius: 8,
+    padding: 16,
+    borderRadius: 10,
     alignItems: "center",
+    marginBottom: 12,
+    elevation: 2,
   },
-  buttonText: { color: "#fff", fontWeight: "600" },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    borderBottomWidth: 1,
-    paddingVertical: 10,
+  secondaryBtn: {
+    backgroundColor: "#10b981",
+    padding: 16,
+    borderRadius: 10,
+    alignItems: "center",
+    marginBottom: 12,
+    elevation: 2,
   },
-  serviceName: { fontWeight: "600" },
-  delete: { color: "red" },
+  logoutBtn: {
+    backgroundColor: "#dc2626",
+    padding: 16,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 20,
+    elevation: 2,
+  },
+  btnText: { 
+    color: "#fff", 
+    fontWeight: "bold",
+    fontSize: 16,
+  },
 });
-
-export default ServiceProviderDashboard;
