@@ -21,7 +21,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route
-              path="/service-provider"
+              path="/service provider"
               element={<ServiceProviderDashboard />}
             />
           </Routes>

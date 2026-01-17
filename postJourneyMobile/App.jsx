@@ -53,18 +53,26 @@ import AdminDashboard from './screens/admin/AdminDashboard';
 import AdminStackNavigator from './screens/admin/AdminStackNavigator';
 import ManageProviders from './screens/admin/ManageProviders';
 import ServiceBookingScreen from './screens/ServiceBookingScreen';
-import PatientEquipmentList from "./screens/PatientEquipmentList";
-import PatientCartScreen from "./screens/PatientCartScreen";
+import PatientEquipmentList from "./screens/Bookings/PatientEquipmentList";
+import PatientCartScreen from "./screens/Bookings/PatientCartScreen";
 import { CartProvider } from "./context/CartContext";
+import { AuthProvider } from "./context/AuthContext";
 import ServiceProviderProfileCompletion from "./screens/ServiceProviderProfileCompletion";
 import PatientProfileCompletion from "./screens/PatientProfileCompletion";
-import EquipmentDashboardScreen from './screens/EquipmentDashboardScreen';
-import AddEquipment from './screens/AddEquipment';
+import EquipmentDashboardScreen from './screens/Bookings/EquipmentDashboardScreen';
+import AddEquipment from './screens/Bookings/AddEquipment';
+import CheckoutScreen from "./screens/Bookings/CheckoutScreen";
+import EditEquipment from './screens/Bookings/EditEquipment';
+import PatientBookingsScreen from "./screens/Bookings/PatientBookingsScreen";
+import ProviderBookingsScreen from "./screens/Bookings/ProviderBookingsScreen";
+import EquipmentDetailScreen from './screens/Bookings/EquipmentDetailScreen';
+import EquipmentReviewsScreen from "./screens/Bookings/EquipmentReviewsScreen";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
+    <AuthProvider>
     <CartProvider>
       <NavigationContainer>
         <Stack.Navigator
@@ -128,8 +136,15 @@ export default function App() {
           <Stack.Screen name="PatientProfileCompletion" component={PatientProfileCompletion} />
           <Stack.Screen name="EquipmentDashboardScreen" component={EquipmentDashboardScreen} />
           <Stack.Screen name="AddEquipment" component={AddEquipment} />
+          <Stack.Screen name="CheckoutScreen" component={CheckoutScreen}/>
+          <Stack.Screen name="EditEquipment" component={EditEquipment} />
+          <Stack.Screen name="PatientBookingsScreen" component={PatientBookingsScreen} />
+          <Stack.Screen name="ProviderBookingsScreen" component={ProviderBookingsScreen} />
+          <Stack.Screen name="EquipmentDetailScreen" component={EquipmentDetailScreen} />
+          <Stack.Screen name="EquipmentReviews" component={EquipmentReviewsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </CartProvider> 
+    </AuthProvider>
   );
 }

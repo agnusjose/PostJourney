@@ -57,6 +57,17 @@ export default function ServiceProviderDashboard({ route, navigation }) {
       >
         <Text style={styles.btnText}>Logout</Text>
       </TouchableOpacity>
+      // In ServiceProviderDashboard.js, add this button:
+<TouchableOpacity
+  style={styles.bookingBtn}
+  onPress={() =>
+    navigation.navigate("ProviderBookingsScreen", {
+      providerId: userId,
+    })
+  }
+>
+  <Text style={styles.btnText}>View Booking Requests</Text>
+</TouchableOpacity>
     </View>
   );
 }
@@ -125,4 +136,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
   },
+  // Add to styles:
+bookingBtn: {
+  backgroundColor: "#8b5cf6",
+  padding: 16,
+  borderRadius: 10,
+  alignItems: "center",
+  marginBottom: 12,
+  elevation: 2,
+},
 });

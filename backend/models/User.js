@@ -2,24 +2,80 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
+    name: { 
+      type: String, 
+      required: true,
+      trim: true 
+    },
 
-    email: { type: String, required: true, unique: true },
+    email: { 
+      type: String, 
+      required: true, 
+      unique: true,
+      lowercase: true,
+      trim: true 
+    },
 
-    password: { type: String, required: true },
+    password: { 
+      type: String, 
+      required: true 
+    },
 
     userType: {
       type: String,
-      enum: ["patient", "service provider", "admin"],
+      enum: ["patient", "service-provider", "admin","service provider"], // CHANGED: "service provider" to "service-provider"
       required: true,
     },
 
+    // ========== NEW FIELDS FOR MARKETPLACE ==========
+    // For Patients
+    age: {
+      type: Number,
+      default: null
+    },
+    gender: {
+      type: String,
+      enum: ["male", "female", "other", ""],
+      default: ""
+    },
+    phoneNumber: {
+      type: String,
+      default: ""
+    },
+    address: {
+      type: String,
+      default: ""
+    },
+    city: {
+      type: String,
+      default: ""
+    },
+    primaryCondition: {
+      type: String,
+      default: ""
+    },
+    
+    // For Service Providers
+    agencyName: {
+      type: String,
+      default: ""
+    },
+    serviceType: {
+      type: String,
+      default: ""
+    },
+    licenseNumber: {
+      type: String,
+      default: ""
+    },
+    // ========== END NEW FIELDS ==========
+
+    // ✅ KEEPING YOUR EXISTING FIELDS
     isBlocked: {
       type: Boolean,
       default: false,
     },
 
-    // Email / OTP verification
     isVerified: {
       type: Boolean,
       default: false,
@@ -34,18 +90,32 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
 
-    // ✅ NEW (ADMIN-CONTROLLED – SERVICE PROVIDERS ONLY)
+    // ✅ UPDATED providerVerification (keeping your structure, adding more fields)
     providerVerification: {
       status: {
         type: String,
-        enum: ["pending", "approved", "rejected"],
-        default: "pending",
+        enum: ["pending", "approved", "rejected", ""],
+        default: ""
       },
-      documentUrl: String, // Aadhaar / License / ID (later)
-      reviewedByAdminAt: Date,
+      documentUrl: String, // Aadhaar / License / ID (keeping your field)
+      // ✅ NEW: Adding more details for better tracking
+      verifiedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+      },
+      verifiedAt: {
+        type: Date
+      },
+      rejectionReason: {
+        type: String,
+        default: ""
+      },
+      reviewedByAdminAt: Date, // Keeping your field
     },
   },
-  { timestamps: true }
+  { 
+    timestamps: true 
+  }
 );
 
 export default mongoose.model("User", userSchema);

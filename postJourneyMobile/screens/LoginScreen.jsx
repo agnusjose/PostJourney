@@ -11,109 +11,127 @@ import {
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
+  ActivityIndicator,
 } from "react-native";
 import axios from "axios";
+import { useAuth } from "../../context/AuthContext"; // Import useAuth
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth(); // Get login function from AuthContext
 
-// In LoginScreen.js, update the handleLogin function:
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert("Error", "Please enter both email and password.");
+      return;
+    }
 
-const handleLogin = async () => {
-  if (!email || !password) {
-    Alert.alert("Error", "Please enter both email and password.");
-    return;
-  }
+    setLoading(true);
 
-  setLoading(true);
+    try {
+      const response = await axios.post(
+        "http://192.168.245.72:5000/login",
+        { email: email.toLowerCase().trim(), password }
+      );
+      
+      const data = response.data;
+      console.log("Full login response:", data);
+      
+      if (data.success) {
+        // ✅ Get ALL data from response
+        const { 
+          userType, 
+          name, 
+          email: userEmail, 
+          userId, 
+          profileCompleted 
+        } = data;
 
-  try {
-    const response = await axios.post(
-      "http://192.168.245.72:5000/login",
-      { email: email.toLowerCase().trim(), password }
-    );
-    
-    const data = response.data;
-    console.log("Full login response:", data);
-    
-    if (data.success) {
-      // ✅ Get ALL data from response
-      const { userType, name, email: userEmail, userId, profileCompleted } = data;
+        console.log("Received data:", { 
+          userType, 
+          name, 
+          userEmail, 
+          userId,
+          profileCompleted 
+        });
 
-      console.log("Received data:", { 
-        userType, 
-        name, 
-        userEmail, 
-        userId,
-        profileCompleted 
-      });
+        // ✅ SAVE USER DATA TO AUTHCONTEXT
+        login({
+          userId: userId,
+          name: name,
+          email: userEmail,
+          userType: userType,
+          profileCompleted: profileCompleted || false
+        });
 
-      // ✅ Check if profile is completed
-      if (!profileCompleted) {
-        Alert.alert(
-          "Profile Incomplete",
-          "Please complete your profile first.",
-          [
-            {
-              text: "Complete Profile",
-              onPress: () => {
-                if (userType === "patient") {
-                  navigation.navigate("PatientProfileCompletion", { 
-                    email: userEmail 
-                  });
-                } else {
-                  navigation.navigate("ServiceProviderProfileCompletion", { 
-                    email: userEmail 
-                  });
+        console.log("✅ User data saved to AuthContext");
+
+        // ✅ Check if profile is completed
+        if (!profileCompleted) {
+          Alert.alert(
+            "Profile Incomplete",
+            "Please complete your profile first.",
+            [
+              {
+                text: "Complete Profile",
+                onPress: () => {
+                  if (userType === "patient") {
+                    navigation.navigate("PatientProfileCompletion", { 
+                      email: userEmail 
+                    });
+                  } else {
+                    navigation.navigate("ServiceProviderProfileCompletion", { 
+                      email: userEmail 
+                    });
+                  }
                 }
               }
-            }
-          ]
-        );
-        setLoading(false);
-        return;
-      }
+            ]
+          );
+          setLoading(false);
+          return;
+        }
 
-      // ✅ NAVIGATION based on user type
-      console.log("Navigating to dashboard for:", userType);
-      
-      if (userType === "patient") {
-        navigation.navigate("PatientDashboard", {
-          userId: userId || userEmail, // Use email as fallback
-          userName: name,
-          userEmail: userEmail,
-        });
-
-      } else if (userType === "service-provider") {
-        navigation.navigate("ServiceProviderDashboard", {
-          userId: userId || userEmail, // Use email as fallback
-          userName: name,
-          userEmail: userEmail,
-        });
+        // ✅ NAVIGATION based on user type
+        console.log("Navigating to dashboard for:", userType);
         
+        if (userType === "patient") {
+          navigation.navigate("PatientDashboard", {
+            userId: userId || userEmail,
+            userName: name,
+            userEmail: userEmail,
+          });
+
+        } else if (userType === "service-provider" || userType === "service provider") {
+          navigation.navigate("ServiceProviderDashboard", {
+            userId: userId || userEmail,
+            userName: name,
+            userEmail: userEmail,
+          });
+          
+        } else {
+          Alert.alert("Error", "Unknown user type: " + userType);
+        }
       } else {
-        Alert.alert("Error", "Unknown user type: " + userType);
+        Alert.alert("Login Failed", data.message || "Invalid login");
       }
-    } else {
-      Alert.alert("Login Failed", data.message || "Invalid login");
+    } catch (err) {
+      console.error("Login error details:", {
+        message: err.message,
+        response: err.response?.data,
+        status: err.response?.status
+      });
+      
+      Alert.alert(
+        "Error", 
+        err.response?.data?.message || err.message || "Something went wrong. Try again."
+      );
+    } finally {
+      setLoading(false);
     }
-  } catch (err) {
-    console.error("Login error details:", {
-      message: err.message,
-      response: err.response?.data,
-      status: err.response?.status
-    });
-    
-    Alert.alert(
-      "Error", 
-      err.response?.data?.message || err.message || "Something went wrong. Try again."
-    );
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   return (
     <ImageBackground
@@ -154,21 +172,30 @@ const handleLogin = async () => {
           />
 
           <TouchableOpacity
-            style={styles.button}
+            style={[styles.button, loading && styles.buttonDisabled]}
             onPress={handleLogin}
             disabled={loading}
           >
-            <Text style={styles.buttonText}>
-              {loading ? "Logging in…" : "LOGIN"}
-            </Text>
+            {loading ? (
+              <ActivityIndicator color="#fff" />
+            ) : (
+              <Text style={styles.buttonText}>LOGIN</Text>
+            )}
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => navigation.navigate("RegisterScreen")}
           >
             <Text style={styles.registerText}>
-              Don&apos;t have an account? Register
+              Don't have an account? Register
             </Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity
+            onPress={() => navigation.navigate("AdminLoginScreen")}
+            style={styles.adminLink}
+          >
+            <Text style={styles.adminText}>Admin Login</Text>
           </TouchableOpacity>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -218,6 +245,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     elevation: 2,
   },
+  buttonDisabled: {
+    backgroundColor: "#94a3b8",
+  },
   buttonText: {
     color: "#fff",
     fontWeight: "bold",
@@ -228,5 +258,13 @@ const styles = StyleSheet.create({
     color: "#0038a8",
     textDecorationLine: "underline",
     fontSize: 15,
+  },
+  adminLink: {
+    marginTop: 10,
+  },
+  adminText: {
+    color: "#666",
+    fontSize: 14,
+    textDecorationLine: "underline",
   },
 });
