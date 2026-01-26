@@ -14,8 +14,8 @@ import axios from "axios";
 
 export default function AddEquipment({ route, navigation }) {
   const { providerId } = route.params;
-  const BASE_URL = "http://192.168.245.72:5000";
-  
+  const BASE_URL = "http://10.80.34.90:5000";
+
   // If you have auth context, get user info from there
   // const { user } = useContext(AuthContext);
 
@@ -26,7 +26,7 @@ export default function AddEquipment({ route, navigation }) {
     stock: "1",
     category: "other",
   });
-  
+
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -88,7 +88,7 @@ export default function AddEquipment({ route, navigation }) {
       formData.append("providerId", providerId);
       formData.append("providerName", "Agnus Jose"); // Hardcoded for now
       formData.append("category", form.category);
-      
+
       if (image) {
         formData.append("image", {
           uri: image.uri,
@@ -99,7 +99,7 @@ export default function AddEquipment({ route, navigation }) {
 
       console.log("📤 Sending equipment data...");
       console.log("Provider ID:", providerId);
-      
+
       const response = await axios.post(`${BASE_URL}/equipment/add`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",

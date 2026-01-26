@@ -77,7 +77,6 @@ const equipmentSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
-  // Add these fields for ratings
   reviews: [reviewSchema],
   averageRating: {
     type: Number,
@@ -98,7 +97,7 @@ const equipmentSchema = new mongoose.Schema({
 });
 
 // Calculate average rating before saving
-equipmentSchema.pre("save", function(next) {
+equipmentSchema.pre("save", function (next) {
   if (this.reviews.length > 0) {
     const sum = this.reviews.reduce((total, review) => total + review.rating, 0);
     this.averageRating = sum / this.reviews.length;
@@ -110,4 +109,18 @@ equipmentSchema.pre("save", function(next) {
   next();
 });
 
-export default mongoose.model("Equipment", equipmentSchema);
+// ✅ FIX: Add middleware to auto-update isAvailable based on stock
+// In Equipment.js - Update the middleware
+equipmentSchema.pre("save", function (next) {
+  // Always update isAvailable based on stock
+  if (this.stock > 0) {
+    this.isAvailable = true;
+  } else {
+    this.isAvailable = false;
+  }
+  next();
+});
+
+// ✅ FIX: Only ONE model export - remove any duplicate!
+const Equipment = mongoose.model("Equipment", equipmentSchema);
+export default Equipment;

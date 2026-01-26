@@ -2,28 +2,38 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    name: { 
-      type: String, 
+    name: {
+      type: String,
       required: true,
-      trim: true 
+      trim: true
     },
 
-    email: { 
-      type: String, 
-      required: true, 
+    email: {
+      type: String,
+      required: true,
       unique: true,
       lowercase: true,
-      trim: true 
+      trim: true
     },
 
-    password: { 
-      type: String, 
-      required: true 
+    password: {
+      type: String,
+      required: false  // Optional for Google auth users
+    },
+
+    // Google Authentication fields
+    googleId: {
+      type: String,
+      default: null
+    },
+    picture: {
+      type: String,
+      default: null
     },
 
     userType: {
       type: String,
-      enum: ["patient", "service-provider", "admin","service provider"], // CHANGED: "service provider" to "service-provider"
+      enum: ["patient", "service-provider", "admin", "service provider"], // CHANGED: "service provider" to "service-provider"
       required: true,
     },
 
@@ -54,7 +64,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: ""
     },
-    
+
     // For Service Providers
     agencyName: {
       type: String,
@@ -113,8 +123,8 @@ const userSchema = new mongoose.Schema(
       reviewedByAdminAt: Date, // Keeping your field
     },
   },
-  { 
-    timestamps: true 
+  {
+    timestamps: true
   }
 );
 

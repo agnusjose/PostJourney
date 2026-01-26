@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
+  StyleSheet,
   FlatList,
   TouchableOpacity,
-  StyleSheet,
-  Alert,
   Image,
+  ActivityIndicator,
   RefreshControl,
+  Alert,
 } from "react-native";
 import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
-import { useFocusEffect } from "@react-navigation/native";
 
 export default function PatientBookingsScreen({ navigation }) {
   const { user } = useAuth();
@@ -19,16 +19,21 @@ export default function PatientBookingsScreen({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  const BASE_URL = "http://192.168.245.72:5000";
+  const BASE_URL = "http://10.80.34.90:5000";
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/booking/patient/${user.userId}`);
-      if (res.data.success) {
-        setBookings(res.data.bookings || []);
+      console.log("📡 Fetching bookings for user:", user?.userId);
+      const response = await axios.get(`${BASE_URL}/booking/patient/${user?.userId}`);
+      console.log("📊 Bookings data:", response.data);
+
+      if (response.data.success) {
+        setBookings(response.data.bookings || []);
+      } else {
+        Alert.alert("Error", response.data.message || "Failed to fetch bookings");
       }
-    } catch (err) {
-      console.error("Error fetching bookings:", err);
+    } catch (error) {
+      console.error("❌ Fetch bookings error:", error);
       Alert.alert("Error", "Failed to load bookings");
     } finally {
       setLoading(false);
@@ -36,109 +41,125 @@ export default function PatientBookingsScreen({ navigation }) {
     }
   };
 
-  useFocusEffect(
-    React.useCallback(() => {
+  useEffect(() => {
+    if (user?.userId) {
       fetchBookings();
-    }, [user.userId])
-  );
+    }
+  }, [user?.userId]);
 
   const onRefresh = () => {
     setRefreshing(true);
     fetchBookings();
   };
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "confirmed": return "#16a34a";
-      case "pending": return "#f59e0b";
-      case "in-progress": return "#3b82f6";
-      case "completed": return "#10b981";
-      case "cancelled": return "#ef4444";
-      default: return "#6b7280";
-    }
-  };
-
-  const getStatusText = (status) => {
-    switch (status) {
-      case "confirmed": return "Confirmed";
-      case "pending": return "Pending";
-      case "in-progress": return "In Progress";
-      case "completed": return "Completed";
-      case "cancelled": return "Cancelled";
-      default: return status;
-    }
-  };
-
-  const renderItem = ({ item }) => (
-    <TouchableOpacity 
-      style={styles.card}
-      onPress={() => navigation.navigate("BookingDetails", { booking: item })}
+  const renderBookingItem = ({ item }) => (
+    <TouchableOpacity
+      style={styles.bookingCard}
+      onPress={() => navigation.navigate("EquipmentDetailScreen", {
+        equipmentId: item.equipmentId?._id || item.equipmentId
+      })}
     >
-      <View style={styles.cardHeader}>
-        <Text style={styles.equipmentName}>{item.equipmentName}</Text>
-        <View style={[styles.statusBadge, { backgroundColor: getStatusColor(item.status) }]}>
-          <Text style={styles.statusText}>{getStatusText(item.status)}</Text>
+      <View style={styles.bookingHeader}>
+        <Text style={styles.equipmentName}>
+          {item.equipmentName || item.equipmentId?.equipmentName || "Equipment"}
+        </Text>
+        <View style={[
+          styles.statusBadge,
+          { backgroundColor: getStatusColor(item.status) }
+        ]}>
+          <Text style={styles.statusText}>
+            {item.status?.toUpperCase() || "PENDING"}
+          </Text>
         </View>
       </View>
 
-      <Text style={styles.provider}>Provider: {item.providerName}</Text>
-      
+      <Text style={styles.providerText}>
+        Provider: {item.providerName || "N/A"}
+      </Text>
+
       <View style={styles.datesContainer}>
         <Text style={styles.dateText}>
-          From: {new Date(item.startDate).toLocaleDateString()}
+          📅 {new Date(item.startDate).toLocaleDateString()} - {new Date(item.endDate).toLocaleDateString()}
         </Text>
-        <Text style={styles.dateText}>
-          To: {new Date(item.endDate).toLocaleDateString()}
+        <Text style={styles.daysText}>({item.totalDays || 0} days)</Text>
+      </View>
+
+      <View style={styles.bookingFooter}>
+        <Text style={styles.amountText}>
+          ₹{item.totalAmount?.toFixed(2) || "0.00"}
+        </Text>
+        <Text style={styles.paymentStatus}>
+          Payment: {item.paymentStatus || "pending"}
         </Text>
       </View>
 
-      <View style={styles.priceContainer}>
-        <Text style={styles.daysText}>{item.totalDays} days</Text>
-        <Text style={styles.totalAmount}>₹ {item.totalAmount}</Text>
-      </View>
-
-      {item.imageUrl && (
-        <Image 
-          source={{ uri: `${BASE_URL}${item.imageUrl}` }} 
-          style={styles.thumbnail}
-          resizeMode="cover"
-        />
+      {item.status === "completed" && (
+        <TouchableOpacity
+          style={styles.reviewButton}
+          onPress={() => navigation.navigate("EquipmentReviews", {
+            equipmentId: item.equipmentId?._id || item.equipmentId,
+            equipmentName: item.equipmentName
+          })}
+        >
+          <Text style={styles.reviewButtonText}>Write Review</Text>
+        </TouchableOpacity>
       )}
     </TouchableOpacity>
   );
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "confirmed": return "#10b981";
+      case "in-progress": return "#3b82f6";
+      case "completed": return "#8b5cf6";
+      case "cancelled": return "#ef4444";
+      default: return "#f59e0b";
+    }
+  };
+
+  if (loading) {
+    return (
+      <View style={styles.centerContainer}>
+        <ActivityIndicator size="large" color="#10b981" />
+        <Text style={styles.loadingText}>Loading your bookings...</Text>
+      </View>
+    );
+  }
+
+  if (bookings.length === 0) {
+    return (
+      <View style={styles.centerContainer}>
+        <Text style={styles.emptyText}>No bookings found</Text>
+        <Text style={styles.emptySubtext}>
+          You haven't booked any equipment yet
+        </Text>
+        <TouchableOpacity
+          style={styles.browseButton}
+          onPress={() => navigation.navigate("PatientEquipmentList")}
+        >
+          <Text style={styles.browseButtonText}>Browse Equipment</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>My Bookings</Text>
 
-      {bookings.length === 0 && !loading ? (
-        <View style={styles.emptyContainer}>
-          <Text style={styles.emptyText}>No bookings yet</Text>
-          <Text style={styles.emptySubtext}>
-            Book equipment to see them here
-          </Text>
-          <TouchableOpacity 
-            style={styles.browseBtn}
-            onPress={() => navigation.navigate("PatientEquipmentList")}
-          >
-            <Text style={styles.browseText}>Browse Equipment</Text>
-          </TouchableOpacity>
-        </View>
-      ) : (
-        <FlatList
-          data={bookings}
-          keyExtractor={(item) => item._id}
-          renderItem={renderItem}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={onRefresh}
-              colors={["#2563eb"]}
-            />
-          }
-          contentContainerStyle={{ paddingBottom: 20 }}
-        />
-      )}
+      <FlatList
+        data={bookings}
+        renderItem={renderBookingItem}
+        keyExtractor={(item) => item._id}
+        contentContainerStyle={styles.listContainer}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={["#10b981"]}
+          />
+        }
+      />
     </View>
   );
 }
@@ -147,49 +168,56 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f8fafc",
-    padding: 16,
   },
   header: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: "800",
-    textAlign: "center",
-    marginBottom: 20,
+    padding: 20,
     color: "#1e293b",
+    backgroundColor: "#fff",
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
-  card: {
+  listContainer: {
+    padding: 16,
+  },
+  bookingCard: {
     backgroundColor: "#fff",
     borderRadius: 12,
     padding: 16,
-    marginBottom: 12,
+    marginBottom: 16,
     elevation: 3,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
   },
-  cardHeader: {
+  bookingHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 8,
+    marginBottom: 12,
   },
   equipmentName: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "700",
     color: "#1e293b",
     flex: 1,
   },
   statusBadge: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 12,
     paddingVertical: 4,
-    borderRadius: 12,
+    borderRadius: 20,
   },
   statusText: {
     color: "#fff",
     fontSize: 12,
     fontWeight: "600",
   },
-  provider: {
+  providerText: {
     fontSize: 14,
     color: "#64748b",
     marginBottom: 8,
@@ -197,59 +225,79 @@ const styles = StyleSheet.create({
   datesContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 8,
+    alignItems: "center",
+    marginBottom: 12,
+    paddingBottom: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: "#e2e8f0",
   },
   dateText: {
-    fontSize: 13,
+    fontSize: 14,
     color: "#475569",
   },
-  priceContainer: {
+  daysText: {
+    fontSize: 14,
+    color: "#3b82f6",
+    fontWeight: "600",
+  },
+  bookingFooter: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
-  daysText: {
-    fontSize: 14,
-    color: "#6b7280",
-  },
-  totalAmount: {
-    fontSize: 18,
+  amountText: {
+    fontSize: 20,
     fontWeight: "800",
-    color: "#16a34a",
+    color: "#10b981",
   },
-  thumbnail: {
-    width: "100%",
-    height: 120,
-    borderRadius: 8,
+  paymentStatus: {
+    fontSize: 14,
+    color: "#64748b",
+    fontStyle: "italic",
+  },
+  reviewButton: {
     marginTop: 12,
-    backgroundColor: "#e5e7eb",
+    backgroundColor: "#f1f5f9",
+    padding: 10,
+    borderRadius: 8,
+    alignItems: "center",
   },
-  emptyContainer: {
+  reviewButtonText: {
+    color: "#3b82f6",
+    fontWeight: "600",
+  },
+  centerContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 50,
+    padding: 20,
+  },
+  loadingText: {
+    marginTop: 12,
+    fontSize: 16,
+    color: "#64748b",
   },
   emptyText: {
-    fontSize: 18,
-    color: "#64748b",
+    fontSize: 24,
+    fontWeight: "700",
+    color: "#1e293b",
     marginBottom: 8,
   },
   emptySubtext: {
-    fontSize: 14,
-    color: "#94a3b8",
+    fontSize: 16,
+    color: "#64748b",
     textAlign: "center",
     marginBottom: 20,
   },
-  browseBtn: {
-    backgroundColor: "#2563eb",
-    paddingHorizontal: 24,
+  browseButton: {
+    backgroundColor: "#10b981",
+    paddingHorizontal: 32,
     paddingVertical: 12,
-    borderRadius: 8,
+    borderRadius: 10,
   },
-  browseText: {
+  browseButtonText: {
     color: "#fff",
-    fontWeight: "600",
     fontSize: 16,
+    fontWeight: "600",
   },
 });

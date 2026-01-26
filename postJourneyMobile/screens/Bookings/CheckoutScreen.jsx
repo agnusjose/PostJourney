@@ -10,28 +10,29 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { useCart } from "../../context/CartContext";
-import { useAuth } from "../../context/AuthContext"; // FIX: Import useAuth, not AuthContext
+import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-export default function CheckoutScreen({ navigation, route }) {
-  const { cart, clearCart, getCartTotal } = useCart();
-  const { user } = useAuth(); // FIX: Use useAuth hook
-  
+export default function CheckoutScreen({ navigation }) {
+  const { cart, clearCart, getCartTotal, validateCartStock } = useCart();
+  const { user } = useAuth();
+
   const [userDetails, setUserDetails] = useState({
     fullName: user?.name || "",
     phoneNumber: user?.phoneNumber || "",
     deliveryAddress: "",
     notes: "",
   });
-  
+
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date(Date.now() + 7 * 24 * 60 * 60 * 1000));
   const [showStartPicker, setShowStartPicker] = useState(false);
   const [showEndPicker, setShowEndPicker] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [validatingStock, setValidatingStock] = useState(false);
 
-  const BASE_URL = "http://192.168.245.72:5000";
+  const BASE_URL = "http://10.80.34.90:5000";
 
   // Calculate total amount
   const totalAmount = getCartTotal();
@@ -75,70 +76,184 @@ export default function CheckoutScreen({ navigation, route }) {
       Alert.alert("Error", "Your cart is empty");
       return false;
     }
+
+    // Check if user is logged in
+    if (!user?.userId) {
+      Alert.alert("Error", "Please login to book equipment");
+      console.error("❌ No user ID found in auth context");
+      return false;
+    }
+
+    console.log("✅ Input validation passed");
     return true;
+  };
+
+  const validateStockBeforeBooking = async () => {
+    setValidatingStock(true);
+    try {
+      const stockValidation = await validateCartStock();
+      const outOfStockItems = stockValidation.filter(item => !item.available);
+
+      if (outOfStockItems.length > 0) {
+        const itemNames = outOfStockItems.map(item =>
+          `• ${item.itemName}: Only ${item.currentStock} available, requested ${item.requested}`
+        ).join('\n');
+
+        Alert.alert(
+          "Stock Issue",
+          `Some items in your cart are no longer available:\n\n${itemNames}\n\nPlease update your cart.`,
+          [{ text: "OK" }]
+        );
+        return false;
+      }
+      return true;
+    } catch (error) {
+      Alert.alert("Error", "Failed to validate stock availability");
+      return false;
+    } finally {
+      setValidatingStock(false);
+    }
   };
 
   const handleBooking = async () => {
     if (!validateInputs()) return;
 
+    // Validate stock before proceeding
+    const isStockValid = await validateStockBeforeBooking();
+    if (!isStockValid) return;
+
     setLoading(true);
 
     try {
-      // Book each item separately
-      const bookingPromises = cart.map(async (item) => {
+      // Validate stock one more time before actual booking
+      const stockValidation = await validateCartStock();
+      const outOfStockItems = stockValidation.filter(item => !item.available);
+      if (outOfStockItems.length > 0) {
+        throw new Error("Some items are out of stock. Please update your cart.");
+      }
+
+      // Prepare cart items with fixed providerId
+      const fixedCart = cart.map(item => {
+        const fixedItem = { ...item };
+
+        // Fix providerId if it's an object
+        if (item.providerId && typeof item.providerId === 'object') {
+          console.log(`🔄 Fixing providerId for ${item.equipmentName}:`, item.providerId);
+          fixedItem.providerId = item.providerId._id;
+          if (!fixedItem.providerName && item.providerId.name) {
+            fixedItem.providerName = item.providerId.name;
+          }
+        }
+
+        return fixedItem;
+      });
+
+      console.log("📋 Fixed cart items:", fixedCart);
+
+      // Book each item with quantity
+      const bookingPromises = fixedCart.map(async (item) => {
         const bookingData = {
-          patientId: user?.userId || "guest_" + Date.now(), // Use actual patient ID or guest
-          patientName: userDetails.fullName,
+          patientId: user.userId,
+          patientName: userDetails.fullName || user?.name,
           equipmentId: item._id,
           equipmentName: item.equipmentName,
           providerId: item.providerId,
           providerName: item.providerName,
-          startDate: startDate.toISOString(),
-          endDate: endDate.toISOString(),
+          startDate: startDate.toISOString().split('T')[0],
+          endDate: endDate.toISOString().split('T')[0],
           pricePerDay: item.pricePerDay,
+          quantity: item.quantity || 1,
           deliveryAddress: userDetails.deliveryAddress,
           contactPhone: userDetails.phoneNumber,
-          notes: userDetails.notes,
+          notes: userDetails.notes || "",
         };
 
-        const response = await axios.post(`${BASE_URL}/booking/create`, bookingData);
-        return response.data;
+        console.log("📤 Booking data for", item.equipmentName, ":", bookingData);
+
+        try {
+          const response = await axios.post(`${BASE_URL}/booking/create`, bookingData);
+          console.log("✅ Booking response:", response.data);
+          return response.data;
+        } catch (error) {
+          console.error("❌ Booking failed for", item.equipmentName, ":", error.response?.data || error.message);
+          throw error;
+        }
       });
 
       const results = await Promise.all(bookingPromises);
-      
+
+      // Check for failures
+      const failedResults = results.filter(r => !r?.success);
+      if (failedResults.length > 0) {
+        throw new Error(failedResults[0].message || "Booking failed");
+      }
+
+      console.log("🎉 All bookings successful:", results);
+
       Alert.alert(
-        "Success",
+        "Success!",
         `Booking confirmed for ${cart.length} item(s)`,
         [
           {
-            text: "OK",
+            text: "View My Bookings",
             onPress: () => {
               clearCart();
-              navigation.navigate("PatientBookingsScreen"); // Navigate to bookings screen
+              navigation.navigate("PatientBookingsScreen", {
+                patientId: user.userId,
+                refresh: true
+              });
             },
           },
+          {
+            text: "OK",
+            style: "default",
+            onPress: () => {
+              clearCart();
+              navigation.navigate("Home");
+            }
+          }
         ]
       );
     } catch (error) {
-      console.error(error);
-      Alert.alert("Error", error.response?.data?.message || "Failed to create booking");
+      console.error("❌ Booking error:", error);
+      console.error("❌ Error details:", error.response?.data);
+
+      let errorMessage = "Failed to create booking. Please try again.";
+      if (error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      } else if (error.message.includes("Network Error")) {
+        errorMessage = "Network error. Please check your connection.";
+      } else if (error.message.includes("Patient not found")) {
+        errorMessage = "Your account was not found. Please log out and log in again.";
+      } else if (error.message.includes("Only") && error.message.includes("available")) {
+        errorMessage = error.message; // Show stock error message
+      }
+
+      Alert.alert("Booking Failed", errorMessage);
     } finally {
       setLoading(false);
     }
   };
 
+  const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
       <Text style={styles.header}>Checkout</Text>
-      
+
       {/* Order Summary */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Order Summary</Text>
+        <Text style={styles.sectionTitle}>Order Summary ({totalItems} items)</Text>
         {cart.map((item, index) => (
           <View key={index} style={styles.cartItem}>
-            <Text style={styles.itemName}>{item.equipmentName}</Text>
-            <Text style={styles.itemPrice}>₹{item.pricePerDay}/day × {item.quantity || 1}</Text>
+            <View>
+              <Text style={styles.itemName}>{item.equipmentName}</Text>
+              <Text style={styles.itemQuantity}>Quantity: {item.quantity || 1}</Text>
+              <Text style={styles.itemStock}>Available: {item.currentStock || 0} units</Text>
+            </View>
+            <Text style={styles.itemPrice}>
+              ₹{item.pricePerDay} × {item.quantity || 1} = ₹{(item.pricePerDay * (item.quantity || 1)).toFixed(2)}/day
+            </Text>
           </View>
         ))}
         <View style={styles.totalRow}>
@@ -150,10 +265,10 @@ export default function CheckoutScreen({ navigation, route }) {
       {/* Rental Period */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Rental Period</Text>
-        
+
         <View style={styles.dateRow}>
           <Text style={styles.dateLabel}>Start Date:</Text>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.dateButton}
             onPress={() => setShowStartPicker(true)}
           >
@@ -163,7 +278,7 @@ export default function CheckoutScreen({ navigation, route }) {
 
         <View style={styles.dateRow}>
           <Text style={styles.dateLabel}>End Date:</Text>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.dateButton}
             onPress={() => setShowEndPicker(true)}
           >
@@ -177,36 +292,36 @@ export default function CheckoutScreen({ navigation, route }) {
       {/* User Details */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Delivery Details</Text>
-        
+
         <TextInput
           style={styles.input}
           placeholder="Full Name"
           value={userDetails.fullName}
-          onChangeText={(text) => setUserDetails({...userDetails, fullName: text})}
+          onChangeText={(text) => setUserDetails({ ...userDetails, fullName: text })}
         />
-        
+
         <TextInput
           style={styles.input}
           placeholder="Phone Number"
           value={userDetails.phoneNumber}
-          onChangeText={(text) => setUserDetails({...userDetails, phoneNumber: text})}
+          onChangeText={(text) => setUserDetails({ ...userDetails, phoneNumber: text })}
           keyboardType="phone-pad"
         />
-        
+
         <TextInput
           style={[styles.input, styles.textArea]}
           placeholder="Delivery Address"
           value={userDetails.deliveryAddress}
-          onChangeText={(text) => setUserDetails({...userDetails, deliveryAddress: text})}
+          onChangeText={(text) => setUserDetails({ ...userDetails, deliveryAddress: text })}
           multiline
           numberOfLines={3}
         />
-        
+
         <TextInput
           style={[styles.input, styles.textArea]}
           placeholder="Additional Notes (optional)"
           value={userDetails.notes}
-          onChangeText={(text) => setUserDetails({...userDetails, notes: text})}
+          onChangeText={(text) => setUserDetails({ ...userDetails, notes: text })}
           multiline
           numberOfLines={2}
         />
@@ -214,25 +329,34 @@ export default function CheckoutScreen({ navigation, route }) {
 
       {/* Action Buttons */}
       <View style={styles.actionButtons}>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.cancelButton}
           onPress={() => navigation.goBack()}
+          disabled={loading || validatingStock}
         >
           <Text style={styles.cancelButtonText}>Cancel</Text>
         </TouchableOpacity>
-        
-        <TouchableOpacity 
-          style={[styles.confirmButton, loading && styles.disabledButton]}
+
+        <TouchableOpacity
+          style={[styles.confirmButton, (loading || validatingStock) && styles.disabledButton]}
           onPress={handleBooking}
-          disabled={loading}
+          disabled={loading || validatingStock}
         >
-          {loading ? (
+          {loading || validatingStock ? (
             <ActivityIndicator color="#fff" />
           ) : (
             <Text style={styles.confirmButtonText}>Confirm Booking</Text>
           )}
         </TouchableOpacity>
       </View>
+
+      {/* Stock Validation Status */}
+      {validatingStock && (
+        <View style={styles.validationContainer}>
+          <ActivityIndicator size="small" color="#3b82f6" />
+          <Text style={styles.validationText}>Checking stock availability...</Text>
+        </View>
+      )}
 
       {/* Date Pickers */}
       {showStartPicker && (
@@ -244,7 +368,7 @@ export default function CheckoutScreen({ navigation, route }) {
           onChange={(event, date) => handleDateChange(event, date, "start")}
         />
       )}
-      
+
       {showEndPicker && (
         <DateTimePicker
           value={endDate}
@@ -298,11 +422,23 @@ const styles = StyleSheet.create({
   itemName: {
     fontSize: 16,
     color: "#475569",
+    fontWeight: "600",
+  },
+  itemQuantity: {
+    fontSize: 12,
+    color: "#64748b",
+    marginTop: 2,
+  },
+  itemStock: {
+    fontSize: 11,
+    color: "#10b981",
+    marginTop: 2,
   },
   itemPrice: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "600",
     color: "#1e293b",
+    textAlign: "right",
   },
   totalRow: {
     flexDirection: "row",
@@ -397,5 +533,21 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "600",
+  },
+  validationContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 12,
+    padding: 12,
+    backgroundColor: "#f0f9ff",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#bae6fd",
+  },
+  validationText: {
+    marginLeft: 8,
+    fontSize: 12,
+    color: "#0369a1",
   },
 });

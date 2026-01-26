@@ -21,7 +21,7 @@ export default function EquipmentDashboardScreen({ route, navigation }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageModalVisible, setImageModalVisible] = useState(false);
 
-  const BASE_URL = "http://192.168.245.72:5000";
+  const BASE_URL = "http://10.80.34.90:5000";
 
   // Fetch equipment function
   const fetchEquipment = async () => {
@@ -32,7 +32,7 @@ export default function EquipmentDashboardScreen({ route, navigation }) {
       );
 
       console.log("📥 Equipment response:", res.data);
-      
+
       if (!res.data.success) {
         throw new Error(res.data.message || "Failed to load equipment");
       }
@@ -40,11 +40,11 @@ export default function EquipmentDashboardScreen({ route, navigation }) {
       // Add full URL to image paths
       const equipmentWithFullUrls = (res.data.equipment || []).map(item => ({
         ...item,
-        imageUrl: item.imageUrl 
-          ? `${BASE_URL}${item.imageUrl}` 
+        imageUrl: item.imageUrl
+          ? `${BASE_URL}${item.imageUrl}`
           : null
       }));
-      
+
       setEquipmentList(equipmentWithFullUrls);
     } catch (err) {
       console.error("❌ Error fetching equipment:", err);
@@ -72,7 +72,7 @@ export default function EquipmentDashboardScreen({ route, navigation }) {
   const renderItem = ({ item }) => (
     <View style={styles.card}>
       {/* Image Section with click to view fullscreen */}
-      <TouchableOpacity 
+      <TouchableOpacity
         onPress={() => {
           if (item.imageUrl) {
             setSelectedImage(item.imageUrl);
@@ -81,8 +81,8 @@ export default function EquipmentDashboardScreen({ route, navigation }) {
         }}
       >
         {item.imageUrl ? (
-          <Image 
-            source={{ uri: item.imageUrl }} 
+          <Image
+            source={{ uri: item.imageUrl }}
             style={styles.image}
             resizeMode="cover"
           />
@@ -92,39 +92,39 @@ export default function EquipmentDashboardScreen({ route, navigation }) {
           </View>
         )}
       </TouchableOpacity>
-      
+
       {/* Info Section */}
       <View style={styles.info}>
         <Text style={styles.name}>{item.equipmentName}</Text>
         <Text style={styles.description} numberOfLines={2}>
           {item.description}
         </Text>
-        
+
         <View style={styles.row}>
           <Text style={styles.stock}>
             Stock: <Text style={styles.stockNumber}>{item.stock}</Text>
           </Text>
           <Text style={styles.price}>₹ {item.pricePerDay} / day</Text>
         </View>
-        
+
         {item.stock > 0 ? (
           <Text style={styles.available}>✓ Available</Text>
         ) : (
           <Text style={styles.outOfStock}>✗ Out of Stock</Text>
         )}
-        
+
         {/* Action Buttons */}
         <View style={styles.buttonRow}>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.editBtn}
-            onPress={() => navigation.navigate("EditEquipment", { 
-              equipment: item 
+            onPress={() => navigation.navigate("EditEquipment", {
+              equipment: item
             })}
           >
             <Text style={styles.editText}>Edit</Text>
           </TouchableOpacity>
-          
-          <TouchableOpacity 
+
+          <TouchableOpacity
             style={styles.deleteBtn}
             onPress={() => handleDelete(item._id)}
           >
@@ -141,8 +141,8 @@ export default function EquipmentDashboardScreen({ route, navigation }) {
       "Are you sure you want to delete this equipment?",
       [
         { text: "Cancel", style: "cancel" },
-        { 
-          text: "Delete", 
+        {
+          text: "Delete",
           style: "destructive",
           onPress: async () => {
             try {
@@ -163,7 +163,7 @@ export default function EquipmentDashboardScreen({ route, navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>My Equipment</Text>
-      
+
       {/* Show count */}
       {!loading && equipmentList.length > 0 && (
         <Text style={styles.countText}>
@@ -184,9 +184,9 @@ export default function EquipmentDashboardScreen({ route, navigation }) {
         data={equipmentList}
         keyExtractor={(item) => item._id}
         renderItem={renderItem}
-        contentContainerStyle={{ 
+        contentContainerStyle={{
           paddingBottom: 120,
-          paddingTop: equipmentList.length === 0 ? 0 : 10 
+          paddingTop: equipmentList.length === 0 ? 0 : 10
         }}
         refreshControl={
           <RefreshControl
@@ -226,20 +226,20 @@ export default function EquipmentDashboardScreen({ route, navigation }) {
         animationType="fade"
         onRequestClose={() => setImageModalVisible(false)}
       >
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.modalContainer}
           activeOpacity={1}
           onPress={() => setImageModalVisible(false)}
         >
           <View style={styles.modalContent}>
             {selectedImage && (
-              <Image 
-                source={{ uri: selectedImage }} 
+              <Image
+                source={{ uri: selectedImage }}
                 style={styles.fullImage}
                 resizeMode="contain"
               />
             )}
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.closeButton}
               onPress={() => setImageModalVisible(false)}
             >
@@ -253,10 +253,10 @@ export default function EquipmentDashboardScreen({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    padding: 16, 
-    backgroundColor: "#f8fafc" 
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: "#f8fafc"
   },
   header: {
     fontSize: 24,
@@ -303,8 +303,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 12,
   },
-  name: { 
-    fontSize: 16, 
+  name: {
+    fontSize: 16,
     fontWeight: "700",
     color: "#1e293b",
     marginBottom: 4,
@@ -328,7 +328,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#1e293b",
   },
-  price: { 
+  price: {
     fontWeight: "700",
     fontSize: 15,
     color: "#16a34a",

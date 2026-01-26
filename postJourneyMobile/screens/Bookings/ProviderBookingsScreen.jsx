@@ -17,7 +17,7 @@ export default function ProviderBookingsScreen({ route, navigation }) {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  const BASE_URL = "http://192.168.245.72:5000";
+  const BASE_URL = "http://10.80.34.90:5000";
 
   const fetchBookings = async () => {
     try {
@@ -50,7 +50,7 @@ export default function ProviderBookingsScreen({ route, navigation }) {
       const res = await axios.put(`${BASE_URL}/booking/update-status/${bookingId}`, {
         status
       });
-      
+
       if (res.data.success) {
         Alert.alert("Success", `Booking ${status} successfully`);
         fetchBookings();
@@ -83,7 +83,7 @@ export default function ProviderBookingsScreen({ route, navigation }) {
       <Text style={styles.patient}>Patient: {item.patientName}</Text>
       <Text style={styles.contact}>Phone: {item.contactPhone}</Text>
       <Text style={styles.address}>Address: {item.deliveryAddress}</Text>
-      
+
       <View style={styles.datesContainer}>
         <Text style={styles.dateText}>
           {new Date(item.startDate).toLocaleDateString()} - {new Date(item.endDate).toLocaleDateString()}
@@ -109,7 +109,7 @@ export default function ProviderBookingsScreen({ route, navigation }) {
             </TouchableOpacity>
           </>
         )}
-        
+
         {item.status === "confirmed" && (
           <TouchableOpacity
             style={styles.inProgressBtn}
@@ -118,7 +118,7 @@ export default function ProviderBookingsScreen({ route, navigation }) {
             <Text style={styles.btnText}>Mark as In Progress</Text>
           </TouchableOpacity>
         )}
-        
+
         {item.status === "in-progress" && (
           <TouchableOpacity
             style={styles.completeBtn}

@@ -8,12 +8,13 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { sendOtpMail } from "./utils/sendOtpMail.js";
 import User from "./models/User.js";
+import doctorRoutes from "./routes/doctorRoutes.js";
 import Equipment from "./models/Equipment.js";
 import Booking from "./models/Booking.js";
 import multer from "multer";
 import fs from "fs";
 
-// ✅ LOAD ENV
+// ? LOAD ENV
 dotenv.config();
 
 // ES module fix for __dirname
@@ -28,7 +29,7 @@ app.use(cors({
   origin: [
     "http://localhost:5173",
     "http://localhost:8081",
-    "http://192.168.245.72:5000",
+    "http://10.80.34.90:5000",
     "http://192.168.112.170",
     "http://192.168.8.135:5000",
     "http://localhost:19006"
@@ -38,11 +39,11 @@ app.use(cors({
   credentials: true,
 }));
 app.use(express.json());
-
+app.use("/api", doctorRoutes);
 // Right after: app.use(express.json());
 // Add request logging
 app.use((req, res, next) => {
-  console.log(`📥 ${new Date().toLocaleTimeString()} - ${req.method} ${req.originalUrl}`);
+  console.log(`?? ${new Date().toLocaleTimeString()} - ${req.method} ${req.originalUrl}`);
   next();
 });
 
@@ -54,8 +55,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/postJourneyDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => console.log("✅ MongoDB Connected"))
-.catch(err => console.error("❌ MongoDB Connection Error:", err));
+  .then(() => console.log("? MongoDB Connected"))
+  .catch(err => console.error("? MongoDB Connection Error:", err));
 
 // Multer configuration for file uploads
 const storage = multer.diskStorage({
@@ -72,14 +73,14 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ 
+const upload = multer({
   storage: storage,
   limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
   fileFilter: (req, file, cb) => {
     const allowedTypes = /jpeg|jpg|png|gif/;
     const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = allowedTypes.test(file.mimetype);
-    
+
     if (extname && mimetype) {
       return cb(null, true);
     } else {
@@ -109,9 +110,9 @@ app.post("/register", async (req, res) => {
       return res.json({ success: false, message: "Invalid email format." });
 
     if (!passwordRegex.test(password))
-      return res.json({ 
-        success: false, 
-        message: "Password must be at least 8 characters with uppercase, lowercase, number, and special character." 
+      return res.json({
+        success: false,
+        message: "Password must be at least 8 characters with uppercase, lowercase, number, and special character."
       });
 
     const existingUser = await User.findOne({ email });
@@ -181,6 +182,76 @@ app.post("/verify-otp", async (req, res) => {
   }
 });
 
+// ========== GOOGLE AUTHENTICATION ==========
+app.post("/auth/google", async (req, res) => {
+  try {
+    const { name, email, googleId, picture, userType } = req.body;
+
+    if (!email || !googleId) {
+      return res.json({ success: false, message: "Email and Google ID are required" });
+    }
+
+    // Check if user already exists
+    let user = await User.findOne({ email });
+
+    if (user) {
+      // User exists - update Google ID if not set, and log them in
+      if (!user.googleId) {
+        user.googleId = googleId;
+        user.picture = picture;
+        await user.save();
+      }
+
+      // Check if user is blocked
+      if (user.isBlocked) {
+        return res.json({ success: false, message: "Your account has been blocked" });
+      }
+
+      console.log("✅ Google login successful for:", email);
+      return res.json({
+        success: true,
+        message: "Login successful",
+        name: user.name,
+        email: user.email,
+        userId: user._id,
+        userType: user.userType,
+        profileCompleted: user.profileCompleted,
+      });
+    }
+
+    // New user - create account
+    if (!userType) {
+      return res.json({ success: false, message: "User type is required for new users" });
+    }
+
+    user = new User({
+      name,
+      email,
+      googleId,
+      picture,
+      userType,
+      isVerified: true, // Google accounts are pre-verified
+      profileCompleted: false,
+    });
+
+    await user.save();
+    console.log("✅ New Google user created:", email);
+
+    return res.json({
+      success: true,
+      message: "Registration successful",
+      name: user.name,
+      email: user.email,
+      userId: user._id,
+      userType: user.userType,
+      profileCompleted: false,
+    });
+  } catch (err) {
+    console.error("Google auth error:", err);
+    return res.json({ success: false, message: "Server error during Google authentication" });
+  }
+});
+
 // Resend OTP
 app.post("/resend-otp", async (req, res) => {
   try {
@@ -229,32 +300,32 @@ app.post("/login", async (req, res) => {
 
     // Normalize userType for validation
     let userType = user.userType || "";
-    
+
     // Accept both formats
     if (userType === "service-provider" || userType === "service provider") {
       const verificationStatus = user.providerVerification?.status || "";
-      
+
       if (verificationStatus === "rejected") {
         return res.json({
           success: false,
           message: "Your provider application has been rejected.",
         });
       }
-      
+
       if (!verificationStatus || verificationStatus === "pending") {
         return res.json({
           success: false,
           message: "Provider account pending admin approval.",
         });
       }
-      
+
       if (verificationStatus !== "approved") {
         return res.json({
           success: false,
           message: "Account verification required.",
         });
       }
-      
+
       // Normalize to hyphenated format for response
       userType = "service-provider";
     }
@@ -263,7 +334,7 @@ app.post("/login", async (req, res) => {
     if (!isMatch)
       return res.json({ success: false, message: "Invalid credentials" });
 
-    console.log("✅ Login successful for:", user.email);
+    console.log("? Login successful for:", user.email);
 
     return res.json({
       success: true,
@@ -276,7 +347,7 @@ app.post("/login", async (req, res) => {
     });
 
   } catch (err) {
-    console.error("❌ Login error:", err);
+    console.error("? Login error:", err);
     return res.json({
       success: false,
       message: "Server error occurred",
@@ -336,26 +407,28 @@ app.get("/api/youtube/search", async (req, res) => {
 });
 
 // ========== EQUIPMENT ROUTES ==========
-// Get all equipment (for patients)
+// ✅ FIXED: Get all equipment (for patients)
 app.get("/equipment/all", async (req, res) => {
   try {
-    const equipment = await Equipment.find({ isAvailable: true, stock: { $gt: 0 } })
+    console.log("🔍 Fetching all available equipment...");
+    const equipment = await Equipment.find({ stock: { $gt: 0 } }) // Only show items with stock > 0
       .sort({ createdAt: -1 })
       .populate("providerId", "name email");
-    
+
+    console.log(`✅ Found ${equipment.length} equipment items`);
+
     return res.json({ success: true, equipment });
   } catch (err) {
-    console.error(err);
+    console.error("❌ Error fetching equipment:", err);
     return res.json({ success: false, message: "Failed to fetch equipment" });
   }
 });
 
-// Get equipment by provider
 app.get("/equipment/provider/:providerId", async (req, res) => {
   try {
     const equipment = await Equipment.find({ providerId: req.params.providerId })
       .sort({ createdAt: -1 });
-    
+
     return res.json({ success: true, equipment });
   } catch (err) {
     console.error(err);
@@ -363,45 +436,41 @@ app.get("/equipment/provider/:providerId", async (req, res) => {
   }
 });
 
-// Add equipment (with image upload)
-// Add equipment (with image upload)
 app.post("/equipment/add", upload.single("image"), async (req, res) => {
   try {
     console.log("🔧 Equipment add request received");
     console.log("Request body:", req.body);
     console.log("Request file:", req.file);
-    
-    const { 
-      equipmentName, 
-      description, 
-      pricePerDay, 
-      stock, 
-      providerId, 
-      providerName, 
-      category 
+
+    const {
+      equipmentName,
+      description,
+      pricePerDay,
+      stock,
+      providerId,
+      providerName,
+      category
     } = req.body;
 
     if (!equipmentName || !description || !pricePerDay || !stock || !providerId || !providerName)
       return res.json({ success: false, message: "All fields are required" });
 
-    // Check if provider exists - UPDATED to handle both formats
     const provider = await User.findById(providerId);
     console.log("🔍 Provider found:", provider);
-    
+
     if (!provider) {
       console.log("❌ Provider not found with ID:", providerId);
       return res.json({ success: false, message: "Provider not found" });
     }
-    
-    // Check user type - accept both "service provider" and "service provider"
-    const isValidProvider = provider.userType === "service-provider" || 
-                           provider.userType === "service provider";
-    
+
+    const isValidProvider = provider.userType === "service-provider" ||
+      provider.userType === "service provider";
+
     if (!isValidProvider) {
       console.log("❌ Invalid user type:", provider.userType);
-      return res.json({ 
-        success: false, 
-        message: `User is not a service provider. User type: ${provider.userType}` 
+      return res.json({
+        success: false,
+        message: `User is not a service provider. User type: ${provider.userType}`
       });
     }
 
@@ -413,55 +482,112 @@ app.post("/equipment/add", upload.single("image"), async (req, res) => {
       pricePerDay: parseFloat(pricePerDay),
       stock: parseInt(stock),
       providerId,
-      providerName: provider.name || providerName, // Use provider's actual name
+      providerName: provider.name || providerName,
       category: category || "other",
       imageUrl
     });
 
     await equipment.save();
     console.log("✅ Equipment saved successfully:", equipment);
-    
-    return res.json({ 
-      success: true, 
-      message: "Equipment added successfully", 
-      equipment 
+
+    return res.json({
+      success: true,
+      message: "Equipment added successfully",
+      equipment
     });
   } catch (err) {
     console.error("❌ Error adding equipment:", err);
-    return res.json({ 
-      success: false, 
-      message: "Failed to add equipment: " + err.message 
+    return res.json({
+      success: false,
+      message: "Failed to add equipment: " + err.message
     });
   }
 });
 
-// Update equipment
+// In your equipment update route
 app.put("/equipment/update/:id", upload.single("image"), async (req, res) => {
   try {
     const { id } = req.params;
     const updates = req.body;
-    
+
     if (req.file) {
       updates.imageUrl = `/uploads/equipment/${req.file.filename}`;
     }
 
-    const equipment = await Equipment.findByIdAndUpdate(
-      id,
-      { $set: updates },
-      { new: true }
-    );
-
-    if (!equipment)
+    // Find equipment first
+    const equipment = await Equipment.findById(id);
+    if (!equipment) {
       return res.json({ success: false, message: "Equipment not found" });
+    }
 
-    return res.json({ success: true, message: "Equipment updated", equipment });
+    // Update stock and automatically set isAvailable
+    if (updates.stock !== undefined) {
+      const stockValue = parseInt(updates.stock);
+      equipment.stock = stockValue;
+      equipment.isAvailable = stockValue > 0;
+
+      // Save the equipment with proper middleware triggers
+      await equipment.save();
+
+      // Remove stock from updates object since we already updated it
+      delete updates.stock;
+      delete updates.isAvailable;
+    }
+
+    // Update other fields if any
+    if (Object.keys(updates).length > 0) {
+      await Equipment.findByIdAndUpdate(id, { $set: updates });
+    }
+
+    // Fetch updated equipment
+    const updatedEquipment = await Equipment.findById(id);
+
+    console.log("✅ Equipment updated:", {
+      name: updatedEquipment.equipmentName,
+      stock: updatedEquipment.stock,
+      available: updatedEquipment.isAvailable
+    });
+
+    return res.json({
+      success: true,
+      message: "Equipment updated",
+      equipment: updatedEquipment
+    });
   } catch (err) {
-    console.error(err);
+    console.error("❌ Error updating equipment:", err);
     return res.json({ success: false, message: "Failed to update equipment" });
   }
 });
 
-// Delete equipment
+app.get("/fix-equipment-availability", async (req, res) => {
+  try {
+    console.log("🔧 Fixing equipment availability...");
+
+    const allEquipment = await Equipment.find({});
+    let fixedCount = 0;
+
+    for (const equipment of allEquipment) {
+      const shouldBeAvailable = equipment.stock > 0;
+
+      if (equipment.isAvailable !== shouldBeAvailable) {
+        equipment.isAvailable = shouldBeAvailable;
+        await equipment.save();
+        console.log(`✅ Fixed ${equipment.equipmentName}: stock=${equipment.stock}, available=${shouldBeAvailable}`);
+        fixedCount++;
+      }
+    }
+
+    return res.json({
+      success: true,
+      message: `Fixed ${fixedCount} equipment items`,
+      fixedCount
+    });
+  } catch (err) {
+    console.error(err);
+    return res.json({ success: false, message: "Failed to fix equipment" });
+  }
+});
+
 app.delete("/equipment/delete/:id", async (req, res) => {
   try {
     const equipment = await Equipment.findByIdAndDelete(req.params.id);
@@ -475,12 +601,11 @@ app.delete("/equipment/delete/:id", async (req, res) => {
   }
 });
 
-// Get single equipment
 app.get("/equipment/:id", async (req, res) => {
   try {
     const equipment = await Equipment.findById(req.params.id)
       .populate("providerId", "name email phoneNumber address");
-    
+
     if (!equipment)
       return res.json({ success: false, message: "Equipment not found" });
 
@@ -491,11 +616,59 @@ app.get("/equipment/:id", async (req, res) => {
   }
 });
 
+// Get patient's active equipment (equipment they have booked)
+app.get("/patient/:patientId/active-equipment", async (req, res) => {
+  try {
+    const { patientId } = req.params;
+
+    // Get all bookings for this patient that are not cancelled
+    const bookings = await Booking.find({
+      patientId,
+      status: { $nin: ["cancelled", "completed"] } // Active bookings only
+    })
+      .sort({ createdAt: -1 })
+      .populate({
+        path: "equipmentId",
+        select: "equipmentName imageUrl description pricePerDay isAvailable stock",
+        model: "Equipment"
+      })
+      .populate("providerId", "name phoneNumber");
+
+    // Extract equipment from bookings
+    const activeEquipment = bookings
+      .filter(booking => booking.equipmentId) // Only include bookings with equipment
+      .map(booking => ({
+        ...booking.equipmentId.toObject(),
+        bookingDetails: {
+          bookingId: booking._id,
+          startDate: booking.startDate,
+          endDate: booking.endDate,
+          status: booking.status,
+          totalAmount: booking.totalAmount
+        }
+      }));
+
+    return res.json({
+      success: true,
+      activeEquipment,
+      total: activeEquipment.length
+    });
+  } catch (err) {
+    console.error("❌ Error fetching active equipment:", err);
+    return res.json({ success: false, message: "Failed to fetch active equipment" });
+  }
+});
+
 // ========== BOOKING ROUTES ==========
 // Create booking
+// Update the booking create endpoint in server.js
 app.post("/booking/create", async (req, res) => {
   try {
-    const {
+    console.log("📝 ========== BOOKING CREATE REQUEST ==========");
+    console.log("📥 Full request body:", JSON.stringify(req.body, null, 2));
+
+    // Extract all variables - ADD QUANTITY
+    let {
       patientId,
       patientName,
       equipmentId,
@@ -505,67 +678,227 @@ app.post("/booking/create", async (req, res) => {
       startDate,
       endDate,
       pricePerDay,
+      quantity = 1, // ADD QUANTITY WITH DEFAULT
       deliveryAddress,
       contactPhone,
       notes
     } = req.body;
 
+    // Log all IDs with type
+    console.log("🔍 Patient ID:", patientId, "Type:", typeof patientId);
+    console.log("🔍 Equipment ID:", equipmentId, "Type:", typeof equipmentId);
+    console.log("🔍 Provider ID:", providerId, "Type:", typeof providerId);
+    console.log("🔍 Quantity:", quantity, "Type:", typeof quantity);
+
+    // Check if providerId is an object
+    if (providerId && typeof providerId === 'object') {
+      console.log("⚠️ ProviderId is an object, extracting _id...");
+      console.log("ProviderId object:", JSON.stringify(providerId, null, 2));
+      if (providerId._id) {
+        providerId = providerId._id;
+        console.log("✅ Extracted providerId:", providerId);
+      }
+    }
+
     // Validate required fields
-    if (!patientId || !equipmentId || !startDate || !endDate || !deliveryAddress || !contactPhone)
-      return res.json({ success: false, message: "All required fields are missing" });
+    const requiredFields = [
+      patientId, equipmentId, startDate, endDate,
+      deliveryAddress, contactPhone, pricePerDay
+    ];
+
+    const missingFields = requiredFields.filter(field => !field);
+    if (missingFields.length > 0) {
+      console.log("❌ Missing required fields:", missingFields);
+      return res.json({
+        success: false,
+        message: "Missing required fields: " + missingFields.join(", ")
+      });
+    }
+
+    // Validate quantity
+    if (!quantity || quantity < 1) {
+      quantity = 1; // Default to 1
+    }
+
+    // Check if patient exists
+    console.log("🔍 Checking if patient exists...");
+    let patient;
+    try {
+      if (mongoose.Types.ObjectId.isValid(patientId)) {
+        patient = await User.findById(patientId);
+        console.log("✅ Patient found:", patient ? `${patient.name} (${patient.email})` : "NOT FOUND");
+      } else {
+        console.log("❌ Invalid patient ID format:", patientId);
+        return res.json({ success: false, message: "Invalid patient ID format" });
+      }
+    } catch (error) {
+      console.error("❌ Error finding patient:", error);
+      return res.json({ success: false, message: "Error finding patient" });
+    }
+
+    if (!patient) {
+      console.log("❌ Patient not found");
+      return res.json({ success: false, message: "Patient not found" });
+    }
 
     // Check equipment availability
+    console.log("🔍 Checking equipment...");
     const equipment = await Equipment.findById(equipmentId);
-    if (!equipment || equipment.stock < 1)
-      return res.json({ success: false, message: "Equipment not available" });
+    if (!equipment) {
+      console.log("❌ Equipment not found");
+      return res.json({ success: false, message: "Equipment not found" });
+    }
 
-    // Create booking
+    console.log("📊 Equipment:", equipment.equipmentName, "Stock:", equipment.stock, "Requested quantity:", quantity);
+
+    // Check if enough stock is available
+    if (equipment.stock < quantity) {
+      console.log("❌ Not enough stock");
+      return res.json({
+        success: false,
+        message: `Only ${equipment.stock} unit(s) available, requested ${quantity}`
+      });
+    }
+
+    // Check if provider exists
+    console.log("🔍 Checking provider...");
+    const provider = await User.findById(providerId);
+    if (!provider) {
+      console.log("❌ Provider not found with ID:", providerId);
+      return res.json({ success: false, message: "Provider not found" });
+    }
+    console.log("✅ Provider found:", provider.name);
+
+    // Parse dates
+    console.log("📅 Parsing dates...");
+    const parsedStartDate = new Date(startDate);
+    const parsedEndDate = new Date(endDate);
+
+    console.log("Start:", parsedStartDate.toISOString());
+    console.log("End:", parsedEndDate.toISOString());
+
+    if (isNaN(parsedStartDate.getTime()) || isNaN(parsedEndDate.getTime())) {
+      console.log("❌ Invalid date format");
+      return res.json({ success: false, message: "Invalid date format" });
+    }
+
+    if (parsedEndDate <= parsedStartDate) {
+      console.log("❌ End date must be after start date");
+      return res.json({ success: false, message: "End date must be after start date" });
+    }
+
+    // Calculate total days
+    const timeDiff = Math.abs(parsedEndDate - parsedStartDate);
+    const totalDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    const totalAmount = totalDays * parseFloat(pricePerDay) * parseInt(quantity); // Multiply by quantity
+
+    console.log("📊 Calculations:");
+    console.log("- Total days:", totalDays);
+    console.log("- Price per day:", pricePerDay);
+    console.log("- Quantity:", quantity);
+    console.log("- Total amount:", totalAmount);
+
+    // Create booking WITH QUANTITY
+    console.log("📝 Creating booking...");
     const booking = new Booking({
-      patientId,
-      patientName,
-      equipmentId,
-      equipmentName,
-      providerId,
-      providerName,
-      startDate: new Date(startDate),
-      endDate: new Date(endDate),
+      patientId: patient._id,
+      patientName: patientName || patient.name,
+      equipmentId: equipment._id,
+      equipmentName: equipmentName || equipment.equipmentName,
+      providerId: provider._id,
+      providerName: providerName || provider.name,
+      startDate: parsedStartDate,
+      endDate: parsedEndDate,
+      totalDays,
       pricePerDay: parseFloat(pricePerDay),
+      quantity: parseInt(quantity), // Save quantity
+      totalAmount,
       deliveryAddress,
       contactPhone,
       notes: notes || "",
-      status: "pending"
+      status: "confirmed",
+      paymentStatus: "paid"
     });
 
-    // Reduce equipment stock by 1
-    equipment.stock -= 1;
-    if (equipment.stock === 0) {
-      equipment.isAvailable = false;
-    }
+    console.log("📋 Booking document created:", {
+      patient: booking.patientName,
+      equipment: booking.equipmentName,
+      provider: booking.providerName,
+      quantity: booking.quantity,
+      amount: booking.totalAmount,
+      days: booking.totalDays
+    });
 
+    // Reduce equipment stock by quantity
+    console.log("📦 Updating equipment stock...");
+    console.log("Old stock:", equipment.stock);
+    equipment.stock -= parseInt(quantity);
+
+    // Automatically update isAvailable based on stock
+    equipment.isAvailable = equipment.stock > 0;
+
+    console.log("New stock:", equipment.stock, "Available:", equipment.isAvailable);
+
+    // Save both
+    console.log("💾 Saving to database...");
     await Promise.all([booking.save(), equipment.save()]);
 
-    return res.json({ 
-      success: true, 
-      message: "Booking created successfully", 
-      booking 
+    console.log("✅ Booking saved! ID:", booking._id);
+    console.log("✅ Equipment updated!");
+
+    return res.json({
+      success: true,
+      message: `Booking created successfully for ${quantity} unit(s)`,
+      bookingId: booking._id,
+      booking: {
+        _id: booking._id,
+        patientName: booking.patientName,
+        equipmentName: booking.equipmentName,
+        providerName: booking.providerName,
+        quantity: booking.quantity,
+        totalAmount: booking.totalAmount,
+        status: booking.status,
+        startDate: booking.startDate,
+        endDate: booking.endDate
+      }
     });
   } catch (err) {
-    console.error(err);
-    return res.json({ success: false, message: "Failed to create booking" });
+    console.error("❌ CRITICAL ERROR:", err);
+    console.error("❌ Error stack:", err.stack);
+    return res.json({
+      success: false,
+      message: "Server error: " + err.message
+    });
   }
 });
 
 // Get patient bookings
+// Get patient bookings - DON'T filter by equipment availability
 app.get("/booking/patient/:patientId", async (req, res) => {
   try {
+    console.log("🔍 Fetching bookings for patient:", req.params.patientId);
+
     const bookings = await Booking.find({ patientId: req.params.patientId })
       .sort({ createdAt: -1 })
-      .populate("equipmentId", "equipmentName imageUrl")
+      .populate({
+        path: "equipmentId",
+        select: "equipmentName imageUrl isAvailable stock", // Include isAvailable and stock
+        model: "Equipment"
+      })
       .populate("providerId", "name agencyName");
-    
+
+    console.log(`✅ Found ${bookings.length} bookings for patient`);
+
+    // Log equipment status for debugging
+    bookings.forEach(booking => {
+      if (booking.equipmentId) {
+        console.log(`📦 Booking ${booking._id}: ${booking.equipmentId.equipmentName} - Available: ${booking.equipmentId.isAvailable}, Stock: ${booking.equipmentId.stock}`);
+      }
+    });
+
     return res.json({ success: true, bookings });
   } catch (err) {
-    console.error(err);
+    console.error("❌ Error fetching patient bookings:", err);
     return res.json({ success: false, message: "Failed to fetch bookings" });
   }
 });
@@ -577,7 +910,7 @@ app.get("/booking/provider/:providerId", async (req, res) => {
       .sort({ createdAt: -1 })
       .populate("equipmentId", "equipmentName imageUrl")
       .populate("patientId", "name email");
-    
+
     return res.json({ success: true, bookings });
   } catch (err) {
     console.error(err);
@@ -616,7 +949,6 @@ app.put("/booking/update-status/:id", async (req, res) => {
     return res.json({ success: false, message: "Failed to update booking" });
   }
 });
-
 // ========== PROFILE ROUTES ==========
 // Complete patient profile
 app.post("/api/patient/complete-profile", async (req, res) => {
@@ -628,7 +960,7 @@ app.post("/api/patient/complete-profile", async (req, res) => {
 
     const user = await User.findOneAndUpdate(
       { email },
-      { 
+      {
         name: fullName,
         phoneNumber,
         city,
@@ -649,7 +981,7 @@ app.post("/api/patient/complete-profile", async (req, res) => {
 });
 
 // Complete service provider profile
-app.post("/api/service provider/complete-profile", async (req, res) => {
+app.post("/api/service-provider/complete-profile", async (req, res) => {
   try {
     const { email, agencyName, serviceType, phoneNumber, city, licenseNumber } = req.body;
 
@@ -658,7 +990,7 @@ app.post("/api/service provider/complete-profile", async (req, res) => {
 
     const user = await User.findOneAndUpdate(
       { email },
-      { 
+      {
         agencyName,
         serviceType,
         phoneNumber,
@@ -680,6 +1012,88 @@ app.post("/api/service provider/complete-profile", async (req, res) => {
     return res.json({ success: true, message: "Profile submitted for admin approval" });
   } catch (err) {
     console.error(err);
+    return res.json({ success: false, message: "Server error" });
+  }
+});
+
+// Get patient profile
+app.get("/api/patient/profile/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const user = await User.findById(userId).select("-password -otp -otpExpiry");
+
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
+
+    if (user.userType !== "patient") {
+      return res.json({ success: false, message: "User is not a patient" });
+    }
+
+    return res.json({
+      success: true,
+      profile: {
+        name: user.name || "",
+        email: user.email || "",
+        age: user.age || "",
+        gender: user.gender || "",
+        phoneNumber: user.phoneNumber || "",
+        city: user.city || "",
+        primaryCondition: user.primaryCondition || "",
+        profileCompleted: user.profileCompleted || false,
+      }
+    });
+  } catch (err) {
+    console.error("Error fetching patient profile:", err);
+    return res.json({ success: false, message: "Server error" });
+  }
+});
+
+// Update patient profile
+app.put("/api/patient/update-profile", async (req, res) => {
+  try {
+    const { userId, fullName, age, gender, phoneNumber, city, primaryCondition } = req.body;
+
+    if (!userId) {
+      return res.json({ success: false, message: "User ID is required" });
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
+
+    if (user.userType !== "patient") {
+      return res.json({ success: false, message: "User is not a patient" });
+    }
+
+    // Update fields
+    if (fullName) user.name = fullName;
+    if (age) user.age = parseInt(age);
+    if (gender) user.gender = gender;
+    if (phoneNumber) user.phoneNumber = phoneNumber;
+    if (city) user.city = city;
+    if (primaryCondition) user.primaryCondition = primaryCondition;
+
+    await user.save();
+
+    return res.json({
+      success: true,
+      message: "Profile updated successfully",
+      profile: {
+        name: user.name,
+        email: user.email,
+        age: user.age,
+        gender: user.gender,
+        phoneNumber: user.phoneNumber,
+        city: user.city,
+        primaryCondition: user.primaryCondition,
+      }
+    });
+  } catch (err) {
+    console.error("Error updating patient profile:", err);
     return res.json({ success: false, message: "Server error" });
   }
 });
@@ -707,6 +1121,171 @@ app.get("/admin/users", async (req, res) => {
     res.json({ success: true, users });
   } catch {
     res.json({ success: false, message: "Failed to fetch users" });
+  }
+});
+
+// Get all patients for admin
+app.get("/admin/patients", async (req, res) => {
+  try {
+    const users = await User.find({ userType: "patient" }, { password: 0 }).sort({ createdAt: -1 });
+    res.json({ success: true, users });
+  } catch (err) {
+    console.error("Error fetching patients:", err);
+    res.json({ success: false, message: "Failed to fetch patients" });
+  }
+});
+
+// Get all service providers for admin
+app.get("/admin/providers", async (req, res) => {
+  try {
+    const users = await User.find({ userType: "service-provider" }, { password: 0 }).sort({ createdAt: -1 });
+    // Also check for "service provider" with space for backwards compatibility
+    const usersWithSpace = await User.find({ userType: "service provider" }, { password: 0 }).sort({ createdAt: -1 });
+    const allProviders = [...users, ...usersWithSpace];
+    res.json({ success: true, users: allProviders });
+  } catch (err) {
+    console.error("Error fetching providers:", err);
+    res.json({ success: false, message: "Failed to fetch providers" });
+  }
+});
+
+// Verify/Reject provider (PATCH endpoint for mobile app)
+app.patch("/admin/providers/:id/verify", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status, rejectionReason, deleteAccount } = req.body;
+
+    if (!["approved", "rejected"].includes(status)) {
+      return res.json({ success: false, message: "Invalid status" });
+    }
+
+    // If deleteAccount is true and status is rejected, delete the user
+    if (deleteAccount && status === "rejected") {
+      await User.findByIdAndDelete(id);
+      return res.json({ success: true, message: "Provider rejected and account deleted" });
+    }
+
+    const user = await User.findById(id);
+    if (!user) {
+      return res.json({ success: false, message: "Provider not found" });
+    }
+
+    user.providerVerification = {
+      status: status,
+      verifiedAt: new Date(),
+      rejectionReason: rejectionReason || "",
+    };
+
+    await user.save();
+
+    res.json({
+      success: true,
+      message: status === "approved" ? "Provider approved successfully" : "Provider rejected",
+      user
+    });
+  } catch (err) {
+    console.error("Error updating provider status:", err);
+    res.json({ success: false, message: "Failed to update provider status" });
+  }
+});
+
+// Block/Unblock user
+app.patch("/admin/users/:id/block", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { isBlocked } = req.body;
+
+    const user = await User.findByIdAndUpdate(
+      id,
+      { isBlocked: isBlocked },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
+
+    res.json({
+      success: true,
+      message: isBlocked ? "User blocked successfully" : "User unblocked successfully",
+      user
+    });
+  } catch (err) {
+    console.error("Error updating user block status:", err);
+    res.json({ success: false, message: "Failed to update user status" });
+  }
+});
+
+// Delete user (for admin)
+app.delete("/admin/users/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findByIdAndDelete(id);
+
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
+
+    res.json({
+      success: true,
+      message: "User deleted successfully"
+    });
+  } catch (err) {
+    console.error("Error deleting user:", err);
+    res.json({ success: false, message: "Failed to delete user" });
+  }
+});
+
+// Get user details with related data (for admin)
+app.get("/admin/users/:id/details", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Get user profile
+    const user = await User.findById(id).select("-password -otp -otpExpiry");
+
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
+
+    let relatedData = {};
+
+    if (user.userType === "patient") {
+      // For patients: Get their booking/purchase history
+      const bookings = await Booking.find({ patientId: id })
+        .sort({ createdAt: -1 });
+
+      relatedData = {
+        bookings: bookings,
+        totalBookings: bookings.length,
+        totalSpent: bookings.reduce((sum, b) => sum + (b.totalAmount || 0), 0)
+      };
+    } else if (user.userType === "service-provider" || user.userType === "service provider") {
+      // For providers: Get their equipment and sales
+      const equipment = await Equipment.find({ providerId: id })
+        .sort({ createdAt: -1 });
+
+      const bookings = await Booking.find({ providerId: id })
+        .sort({ createdAt: -1 });
+
+      relatedData = {
+        equipment: equipment,
+        totalEquipment: equipment.length,
+        sales: bookings,
+        totalSales: bookings.length,
+        totalEarnings: bookings.reduce((sum, b) => sum + (b.totalAmount || 0), 0)
+      };
+    }
+
+    res.json({
+      success: true,
+      user: user,
+      relatedData: relatedData
+    });
+  } catch (err) {
+    console.error("Error fetching user details:", err);
+    res.json({ success: false, message: "Failed to fetch user details" });
   }
 });
 
@@ -761,7 +1340,7 @@ app.get("/admin/bookings", async (req, res) => {
       .populate("patientId", "name email")
       .populate("providerId", "name agencyName")
       .populate("equipmentId", "equipmentName");
-    
+
     res.json({ success: true, bookings });
   } catch (err) {
     console.error(err);
@@ -771,7 +1350,7 @@ app.get("/admin/bookings", async (req, res) => {
 
 // ========== TEST ROUTE ==========
 app.get("/", (req, res) => {
-  res.json({ 
+  res.json({
     message: "Medical Equipment Marketplace API",
     status: "Running",
     endpoints: {
@@ -790,9 +1369,9 @@ app.get("/equipment/:id/reviews", async (req, res) => {
   try {
     const { id } = req.params;
     console.log("🔍 Fetching reviews for equipment ID:", id);
-    
+
     const equipment = await Equipment.findById(id).select("reviews averageRating totalReviews");
-    
+
     if (!equipment) {
       console.log("❌ Equipment not found for ID:", id);
       return res.json({ success: false, message: "Equipment not found" });
@@ -800,9 +1379,9 @@ app.get("/equipment/:id/reviews", async (req, res) => {
 
     console.log("✅ Found equipment:", equipment.equipmentName);
     console.log("📝 Number of reviews:", equipment.reviews?.length || 0);
-    
-    return res.json({ 
-      success: true, 
+
+    return res.json({
+      success: true,
       reviews: equipment.reviews || [],
       averageRating: equipment.averageRating || 0,
       totalReviews: equipment.totalReviews || 0
@@ -824,16 +1403,16 @@ app.post("/equipment/:id/review", async (req, res) => {
     console.log("👤 User:", userName, "Rating:", rating);
 
     if (!userId || !userName || !rating) {
-      return res.json({ 
-        success: false, 
-        message: "User ID, name, and rating are required" 
+      return res.json({
+        success: false,
+        message: "User ID, name, and rating are required"
       });
     }
 
     if (rating < 1 || rating > 5) {
-      return res.json({ 
-        success: false, 
-        message: "Rating must be between 1 and 5" 
+      return res.json({
+        success: false,
+        message: "Rating must be between 1 and 5"
       });
     }
 
@@ -846,9 +1425,9 @@ app.post("/equipment/:id/review", async (req, res) => {
 
     if (!hasBooked) {
       console.log("❌ User hasn't completed a booking for this equipment");
-      return res.json({ 
-        success: false, 
-        message: "You must complete a booking before reviewing" 
+      return res.json({
+        success: false,
+        message: "You must complete a booking before reviewing"
       });
     }
 
@@ -858,15 +1437,15 @@ app.post("/equipment/:id/review", async (req, res) => {
       return res.json({ success: false, message: "Equipment not found" });
     }
 
-    const existingReview = equipment.reviews.find(review => 
+    const existingReview = equipment.reviews.find(review =>
       review.userId.toString() === userId
     );
 
     if (existingReview) {
       console.log("❌ User already reviewed this equipment");
-      return res.json({ 
-        success: false, 
-        message: "You have already reviewed this equipment" 
+      return res.json({
+        success: false,
+        message: "You have already reviewed this equipment"
       });
     }
 
@@ -886,8 +1465,8 @@ app.post("/equipment/:id/review", async (req, res) => {
     console.log("📊 New average rating:", equipment.averageRating);
     console.log("🔢 Total reviews:", equipment.totalReviews);
 
-    return res.json({ 
-      success: true, 
+    return res.json({
+      success: true,
       message: "Review submitted successfully",
       averageRating: equipment.averageRating,
       totalReviews: equipment.totalReviews
@@ -920,15 +1499,15 @@ app.get("/equipment/:id/can-review/:userId", async (req, res) => {
     if (!equipment) {
       return res.json({ success: false, message: "Equipment not found" });
     }
-    
-    const hasReviewed = equipment.reviews?.some(review => 
+
+    const hasReviewed = equipment.reviews?.some(review =>
       review.userId.toString() === userId
     ) || false;
 
     console.log("📝 Has reviewed:", hasReviewed);
     console.log("✅ Can review:", !!hasBooked && !hasReviewed);
 
-    return res.json({ 
+    return res.json({
       success: true,
       canReview: !!hasBooked && !hasReviewed,
       hasBooked: !!hasBooked,
@@ -966,7 +1545,7 @@ app.get("/test-provider/:id", async (req, res) => {
     if (!provider) {
       return res.json({ success: false, message: "Provider not found" });
     }
-    
+
     res.json({
       success: true,
       provider: {
@@ -982,10 +1561,9 @@ app.get("/test-provider/:id", async (req, res) => {
   }
 });
 
-
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Server running on port ${PORT} (LAN enabled)`);
-  console.log(`📁 Uploads directory: ${path.join(__dirname, "uploads")}`);
+  console.log(`?? Server running on port ${PORT} (LAN enabled)`);
+  console.log(`?? Uploads directory: ${path.join(__dirname, "uploads")}`);
 });

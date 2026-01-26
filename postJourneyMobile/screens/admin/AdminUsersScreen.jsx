@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { 
-  View, 
-  Text, 
-  FlatList, 
-  ActivityIndicator, 
-  StyleSheet, 
-  TouchableOpacity, 
+import {
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  StyleSheet,
+  TouchableOpacity,
   Alert,
-  Platform 
+  Platform
 } from "react-native";
 import axios from "axios";
 
-export default function AdminUsersScreen() {
+export default function AdminUsersScreen({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [patients, setPatients] = useState([]);
   const [error, setError] = useState(null);
 
-  const BASE_URL = Platform.OS === "web" 
-    ? "http://localhost:5000" 
-    : "http://192.168.245.72:5000";
+  const BASE_URL = Platform.OS === "web"
+    ? "http://localhost:5000"
+    : "http://10.80.34.90:5000";
 
-  // ✅ FIXED: Fetch patients function
+  // ? FIXED: Fetch patients function
   const fetchPatients = async () => {
     setLoading(true);
     setError(null);
@@ -28,7 +28,7 @@ export default function AdminUsersScreen() {
       console.log("Fetching patients from:", `${BASE_URL}/admin/patients`);
       const response = await axios.get(`${BASE_URL}/admin/patients`);
       console.log("Patients response:", response.data);
-      
+
       if (response.data.success) {
         setPatients(response.data.users);
       } else {
@@ -47,7 +47,7 @@ export default function AdminUsersScreen() {
     fetchPatients();
   }, []);
 
-  // ✅ FIXED: Block/Unblock function
+  // ? FIXED: Block/Unblock function
   const toggleBlock = async (id, currentStatus) => {
     try {
       // Note: This endpoint might not exist yet - we'll create it
@@ -62,7 +62,7 @@ export default function AdminUsersScreen() {
     }
   };
 
-  // ✅ FIXED: Delete user function
+  // ? FIXED: Delete user function
   const deleteUser = (id) => {
     Alert.alert(
       "Confirm Delete",
@@ -88,11 +88,19 @@ export default function AdminUsersScreen() {
     );
   };
 
+
   const renderPatient = ({ item }) => {
     const createdDate = new Date(item.createdAt).toLocaleString();
 
     return (
-      <View style={styles.card}>
+      <TouchableOpacity
+        style={styles.card}
+        onPress={() => navigation.navigate("AdminUserDetailsScreen", {
+          userId: item._id,
+          userType: item.userType
+        })}
+        activeOpacity={0.7}
+      >
         <Text style={styles.name}>{item.name}</Text>
         <Text style={styles.email}>{item.email}</Text>
 
@@ -133,7 +141,7 @@ export default function AdminUsersScreen() {
             <Text style={styles.actionText}>Delete</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -160,7 +168,7 @@ export default function AdminUsersScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>All Patients ({patients.length})</Text>
-      
+
       {patients.length === 0 ? (
         <View style={styles.center}>
           <Text>No patients found</Text>

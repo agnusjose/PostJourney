@@ -14,7 +14,7 @@ import axios from "axios";
 
 export default function EditEquipment({ route, navigation }) {
   const { equipment } = route.params;
-  const BASE_URL = "http://192.168.245.72:5000";
+  const BASE_URL = "http://10.80.34.90:5000";
 
   const [form, setForm] = useState({
     equipmentName: equipment.equipmentName || "",
@@ -23,7 +23,7 @@ export default function EditEquipment({ route, navigation }) {
     stock: equipment.stock?.toString() || "1",
     category: equipment.category || "other",
   });
-  
+
   const [image, setImage] = useState(equipment.imageUrl ? { uri: equipment.imageUrl } : null);
   const [loading, setLoading] = useState(false);
 
@@ -83,7 +83,7 @@ export default function EditEquipment({ route, navigation }) {
       formData.append("pricePerDay", form.pricePerDay);
       formData.append("stock", form.stock);
       formData.append("category", form.category);
-      
+
       // Only append image if new one is selected
       if (image && image.uri !== equipment.imageUrl) {
         formData.append("image", {
@@ -94,10 +94,10 @@ export default function EditEquipment({ route, navigation }) {
       }
 
       console.log("📤 Updating equipment:", equipment._id);
-      
+
       const response = await axios.put(
-        `${BASE_URL}/equipment/update/${equipment._id}`, 
-        formData, 
+        `${BASE_URL}/equipment/update/${equipment._id}`,
+        formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -234,8 +234,8 @@ export default function EditEquipment({ route, navigation }) {
             "Are you sure you want to delete this equipment?",
             [
               { text: "Cancel", style: "cancel" },
-              { 
-                text: "Delete", 
+              {
+                text: "Delete",
                 style: "destructive",
                 onPress: async () => {
                   try {

@@ -14,7 +14,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import axios from "axios";
-import { useAuth } from "../../context/AuthContext"; // Import useAuth
+import { useAuth } from "../context/AuthContext"; // Import useAuth
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -32,29 +32,29 @@ export default function LoginScreen({ navigation }) {
 
     try {
       const response = await axios.post(
-        "http://192.168.245.72:5000/login",
+        "http://10.80.34.90:5000/login",
         { email: email.toLowerCase().trim(), password }
       );
-      
+
       const data = response.data;
       console.log("Full login response:", data);
-      
+
       if (data.success) {
         // ✅ Get ALL data from response
-        const { 
-          userType, 
-          name, 
-          email: userEmail, 
-          userId, 
-          profileCompleted 
+        const {
+          userType,
+          name,
+          email: userEmail,
+          userId,
+          profileCompleted
         } = data;
 
-        console.log("Received data:", { 
-          userType, 
-          name, 
-          userEmail, 
+        console.log("Received data:", {
+          userType,
+          name,
+          userEmail,
           userId,
-          profileCompleted 
+          profileCompleted
         });
 
         // ✅ SAVE USER DATA TO AUTHCONTEXT
@@ -78,12 +78,12 @@ export default function LoginScreen({ navigation }) {
                 text: "Complete Profile",
                 onPress: () => {
                   if (userType === "patient") {
-                    navigation.navigate("PatientProfileCompletion", { 
-                      email: userEmail 
+                    navigation.navigate("PatientProfileCompletion", {
+                      email: userEmail
                     });
                   } else {
-                    navigation.navigate("ServiceProviderProfileCompletion", { 
-                      email: userEmail 
+                    navigation.navigate("ServiceProviderProfileCompletion", {
+                      email: userEmail
                     });
                   }
                 }
@@ -96,7 +96,7 @@ export default function LoginScreen({ navigation }) {
 
         // ✅ NAVIGATION based on user type
         console.log("Navigating to dashboard for:", userType);
-        
+
         if (userType === "patient") {
           navigation.navigate("PatientDashboard", {
             userId: userId || userEmail,
@@ -110,7 +110,7 @@ export default function LoginScreen({ navigation }) {
             userName: name,
             userEmail: userEmail,
           });
-          
+
         } else {
           Alert.alert("Error", "Unknown user type: " + userType);
         }
@@ -123,9 +123,9 @@ export default function LoginScreen({ navigation }) {
         response: err.response?.data,
         status: err.response?.status
       });
-      
+
       Alert.alert(
-        "Error", 
+        "Error",
         err.response?.data?.message || err.message || "Something went wrong. Try again."
       );
     } finally {
@@ -190,7 +190,7 @@ export default function LoginScreen({ navigation }) {
               Don't have an account? Register
             </Text>
           </TouchableOpacity>
-          
+
           <TouchableOpacity
             onPress={() => navigation.navigate("AdminLoginScreen")}
             style={styles.adminLink}

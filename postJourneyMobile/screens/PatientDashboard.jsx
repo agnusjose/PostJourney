@@ -11,6 +11,7 @@ import {
   Alert,
   Dimensions,
 } from "react-native";
+import { useAuth } from "../context/AuthContext";
 
 const { width } = Dimensions.get("window");
 
@@ -29,7 +30,26 @@ const getYoutubeThumbnail = (videoId) =>
 export default function PatientDashboard({ navigation, route }) {
 
   const [videos, setVideos] = useState([]);
-const { userName } = route.params;
+  const { userName, userId, userEmail } = route.params;
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    Alert.alert(
+      "Logout",
+      "Are you sure you want to logout?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Logout",
+          style: "destructive",
+          onPress: async () => {
+            await logout();
+            navigation.replace("LoginScreen");
+          },
+        },
+      ]
+    );
+  };
 
   const rawVideos = [
     "https://youtu.be/Hqe5Bk_suEA?si=-r4I3RbXwNQto7e3",
@@ -45,39 +65,39 @@ const { userName } = route.params;
 
 
 
-const fetchVideoTitles = async () => {
-  try {
-    const response = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=12&videoDuration=medium&q=medical+rehabilitation+exercise+demonstration&key=${youtubeapi}`
-    );
+  const fetchVideoTitles = async () => {
+    try {
+      const response = await fetch(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=12&videoDuration=medium&q=medical+rehabilitation+exercise+demonstration&key=${youtubeapi}`
+      );
 
-    const data = await response.json();
-    if (!data.items) return;
+      const data = await response.json();
+      if (!data.items) return;
 
-    // Shuffle results
-    const shuffled = data.items.sort(() => 0.5 - Math.random());
+      // Shuffle results
+      const shuffled = data.items.sort(() => 0.5 - Math.random());
 
-    // Pick first 5
-    const selected = shuffled.slice(0, 5);
+      // Pick first 5
+      const selected = shuffled.slice(0, 5);
 
-    const formatted = selected.map((item) => ({
-      id: item.id.videoId,
-      title: item.snippet.title,
-      thumbnail: item.snippet.thumbnails.high.url,
-      url: `https://www.youtube.com/watch?v=${item.id.videoId}`,
-    }));
+      const formatted = selected.map((item) => ({
+        id: item.id.videoId,
+        title: item.snippet.title,
+        thumbnail: item.snippet.thumbnails.high.url,
+        url: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+      }));
 
-    setVideos(formatted);
-  } catch (error) {
-    console.log("YouTube fetch error:", error);
-  }
-};
+      setVideos(formatted);
+    } catch (error) {
+      console.log("YouTube fetch error:", error);
+    }
+  };
 
-console.log("ROUTE PARAMS:", route.params);
+  console.log("ROUTE PARAMS:", route.params);
 
 
   const openYoutube = async (url) => {
-    try { await Linking.openURL(url); } 
+    try { await Linking.openURL(url); }
     catch { Alert.alert("Error", "Cannot open this video"); }
   };
 
@@ -97,13 +117,24 @@ console.log("ROUTE PARAMS:", route.params);
             <View>
               <Text style={styles.welcome}>Welcome Back,</Text>
               <Text style={styles.userName}>
-  {userName || "Loading..."}
-</Text>
+                {userName || "Loading..."}
+              </Text>
 
             </View>
-            <View style={styles.statusBadge}>
-              <View style={styles.statusDot} />
-              <Text style={styles.statusText}>Active Plan</Text>
+            <View style={styles.headerRight}>
+              <View style={styles.statusBadge}>
+                <View style={styles.statusDot} />
+                <Text style={styles.statusText}>Active Plan</Text>
+              </View>
+              <TouchableOpacity
+                style={styles.profileButton}
+                onPress={() => navigation.navigate("PatientProfileScreen", {
+                  userId: userId,
+                  userEmail: userEmail,
+                })}
+              >
+                <Text style={styles.profileButtonText}>👤</Text>
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -127,10 +158,27 @@ console.log("ROUTE PARAMS:", route.params);
                 onPress={() => navigation.navigate("ServiceBookingScreen")}
                 activeOpacity={0.7}
               >
+
+
+
                 <View style={styles.iconCircle}>
                   <Image source={require("../assets/exercise.jpeg")} style={styles.cardIcon} />
                 </View>
                 <Text style={styles.cardText}>Equipment Booking</Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* Second Row - Consult Doctor */}
+            <View style={[styles.row, { marginTop: 16 }]}>
+              <TouchableOpacity
+                style={styles.card}
+                onPress={() => navigation.navigate("ConsultDoctor")}
+                activeOpacity={0.7}
+              >
+                <View style={styles.iconCircle}>
+                  <Image source={require("../assets/icon.png")} style={styles.cardIcon} />
+                </View>
+                <Text style={styles.cardText}>Consult a Doctor</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -181,15 +229,23 @@ console.log("ROUTE PARAMS:", route.params);
               Perform exercises in a well-lit area. Proper lighting helps the AI track your joint angles with higher precision.
             </Text>
           </View>
+
+          {/* Logout Button */}
+          <TouchableOpacity
+            style={styles.logoutButton}
+            onPress={handleLogout}
+          >
+            <Text style={styles.logoutButtonText}>Logout</Text>
+          </TouchableOpacity>
         </ScrollView>
-      </View>
-    </ImageBackground>
+      </View >
+    </ImageBackground >
   );
 }
 
 const styles = StyleSheet.create({
   bg: { flex: 1 },
-  overlay: { flex: 1, backgroundColor: 'rgba(245, 250, 255, 0.75)' }, 
+  overlay: { flex: 1, backgroundColor: 'rgba(245, 250, 255, 0.75)' },
 
   container: {
     paddingHorizontal: 22,
@@ -240,6 +296,27 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '700',
     color: '#388E3C',
+  },
+
+  headerRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+
+  profileButton: {
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    backgroundColor: '#E3F2FD',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#BBDEFB',
+  },
+
+  profileButtonText: {
+    fontSize: 18,
   },
 
   section: { marginBottom: 30 },
@@ -404,5 +481,25 @@ const styles = StyleSheet.create({
     color: "#4F6F52",
     lineHeight: 22,
     fontWeight: "500",
+  },
+
+  logoutButton: {
+    backgroundColor: "#DC2626",
+    paddingVertical: 16,
+    borderRadius: 15,
+    alignItems: "center",
+    marginTop: 20,
+    marginBottom: 20,
+    shadowColor: "#DC2626",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+
+  logoutButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "700",
   },
 });

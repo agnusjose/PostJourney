@@ -36,10 +36,10 @@ export default function PatientProfileCompletion({ route, navigation }) {
     }
 
     setLoading(true);
-    
+
     try {
       const response = await axios.post(
-        "http://192.168.245.72:5000/api/patient/complete-profile",
+        "http://10.80.34.90:5000/api/patient/complete-profile",
         {
           email,
           fullName: formData.fullName,
@@ -86,7 +86,7 @@ export default function PatientProfileCompletion({ route, navigation }) {
           style={styles.input}
           placeholder="Enter your full name"
           value={formData.fullName}
-          onChangeText={(text) => setFormData({...formData, fullName: text})}
+          onChangeText={(text) => setFormData({ ...formData, fullName: text })}
         />
 
         <View style={styles.row}>
@@ -97,7 +97,7 @@ export default function PatientProfileCompletion({ route, navigation }) {
               placeholder="Age"
               keyboardType="numeric"
               value={formData.age}
-              onChangeText={(text) => setFormData({...formData, age: text})}
+              onChangeText={(text) => setFormData({ ...formData, age: text })}
             />
           </View>
 
@@ -106,7 +106,7 @@ export default function PatientProfileCompletion({ route, navigation }) {
             <View style={styles.pickerContainer}>
               <Picker
                 selectedValue={formData.gender}
-                onValueChange={(value) => setFormData({...formData, gender: value})}
+                onValueChange={(value) => setFormData({ ...formData, gender: value })}
                 style={styles.picker}
               >
                 <Picker.Item label="Male" value="male" />
@@ -124,7 +124,7 @@ export default function PatientProfileCompletion({ route, navigation }) {
           keyboardType="phone-pad"
           maxLength={10}
           value={formData.phoneNumber}
-          onChangeText={(text) => setFormData({...formData, phoneNumber: text})}
+          onChangeText={(text) => setFormData({ ...formData, phoneNumber: text })}
         />
 
         <Text style={styles.label}>City *</Text>
@@ -132,7 +132,7 @@ export default function PatientProfileCompletion({ route, navigation }) {
           style={styles.input}
           placeholder="Your city"
           value={formData.city}
-          onChangeText={(text) => setFormData({...formData, city: text})}
+          onChangeText={(text) => setFormData({ ...formData, city: text })}
         />
 
         <Text style={styles.label}>Primary Health Condition *</Text>
@@ -140,7 +140,7 @@ export default function PatientProfileCompletion({ route, navigation }) {
           style={styles.input}
           placeholder="e.g., Knee pain, Back pain, Stroke recovery"
           value={formData.primaryCondition}
-          onChangeText={(text) => setFormData({...formData, primaryCondition: text})}
+          onChangeText={(text) => setFormData({ ...formData, primaryCondition: text })}
         />
       </View>
 

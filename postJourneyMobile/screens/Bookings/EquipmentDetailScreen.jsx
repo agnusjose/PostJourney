@@ -23,8 +23,8 @@ export default function EquipmentDetailScreen() {
   const route = useRoute();
   const navigation = useNavigation();
   const { equipmentId } = route.params;
-  const { addToCart } = useCart();
-  
+  const { addToCart, loading: cartLoading } = useCart();
+
   const [equipment, setEquipment] = useState(null);
   const [loading, setLoading] = useState(true);
   const [reviews, setReviews] = useState([]);
@@ -32,7 +32,8 @@ export default function EquipmentDetailScreen() {
   const [totalReviews, setTotalReviews] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [showFullImage, setShowFullImage] = useState(false);
-  
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+
   // Review modal state
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [userRating, setUserRating] = useState(5);
@@ -40,7 +41,7 @@ export default function EquipmentDetailScreen() {
   const [submittingReview, setSubmittingReview] = useState(false);
   const [canReview, setCanReview] = useState(false);
 
-  const BASE_URL = "http://192.168.245.72:5000";
+  const BASE_URL = "http://10.80.34.90:5000";
 
   useEffect(() => {
     fetchEquipmentDetails();
@@ -52,6 +53,8 @@ export default function EquipmentDetailScreen() {
       const res = await axios.get(`${BASE_URL}/equipment/${equipmentId}`);
       if (res.data.success) {
         setEquipment(res.data.equipment);
+        // Reset quantity to 1 when equipment loads
+        setQuantity(1);
       }
     } catch (error) {
       Alert.alert("Error", "Failed to load equipment details");
@@ -73,60 +76,18 @@ export default function EquipmentDetailScreen() {
     }
   };
 
-  const checkCanReview = async () => {
-    // You need to get the current user ID from your auth system
-    const userId = "current_user_id_here"; // Replace with actual user ID
-    
-    try {
-      const res = await axios.get(`${BASE_URL}/equipment/${equipmentId}/can-review/${userId}`);
-      if (res.data.success) {
-        setCanReview(res.data.canReview);
-      }
-    } catch (error) {
-      console.error("Failed to check review eligibility:", error);
-    }
-  };
-
-  const handleSubmitReview = async () => {
-    if (!userRating || userRating < 1 || userRating > 5) {
-      Alert.alert("Error", "Please select a rating between 1 and 5");
-      return;
-    }
-
-    const userId = "current_user_id_here"; // Replace with actual user ID
-    const userName = "Current User"; // Replace with actual user name
-
-    setSubmittingReview(true);
-
-    try {
-      const res = await axios.post(`${BASE_URL}/equipment/${equipmentId}/review`, {
-        userId,
-        userName,
-        rating: userRating,
-        comment: userComment
-      });
-
-      if (res.data.success) {
-        Alert.alert("Success", "Thank you for your review!");
-        setShowReviewModal(false);
-        setUserRating(5);
-        setUserComment("");
-        fetchReviews(); // Refresh reviews
-      } else {
-        Alert.alert("Error", res.data.message);
-      }
-    } catch (error) {
-      Alert.alert("Error", "Failed to submit review");
-    } finally {
-      setSubmittingReview(false);
-    }
-  };
-
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!equipment || equipment.stock === 0) {
       Alert.alert("Out of Stock", "This equipment is currently unavailable");
       return;
     }
+
+    if (quantity > equipment.stock) {
+      Alert.alert("Insufficient Stock", `Only ${equipment.stock} unit(s) available`);
+      return;
+    }
+
+    setIsAddingToCart(true);
 
     const cartItem = {
       _id: equipment._id,
@@ -136,30 +97,43 @@ export default function EquipmentDetailScreen() {
       providerName: equipment.providerName,
       providerId: equipment.providerId,
       category: equipment.category,
-      quantity: quantity
+      quantity: quantity,
+      currentStock: equipment.stock // Pass current stock for validation
     };
-    
-    addToCart(cartItem);
-    
-    Alert.alert(
-      "Added to Cart",
-      `${quantity}x ${equipment.equipmentName} added to cart`,
-      [
-        { text: "Continue Shopping", style: "cancel" },
-        { 
-          text: "View Cart", 
-          onPress: () => navigation.navigate("PatientCart")
-        }
-      ]
-    );
+
+    const result = await addToCart(cartItem);
+
+    if (result.success) {
+      Alert.alert(
+        "Added to Cart",
+        `${quantity}x ${equipment.equipmentName} added to cart`,
+        [
+          { text: "Continue Shopping", style: "cancel" },
+          {
+            text: "View Cart",
+            onPress: () => navigation.navigate("PatientCart")
+          }
+        ]
+      );
+    } else {
+      Alert.alert("Error", result.message || "Failed to add to cart");
+    }
+
+    setIsAddingToCart(false);
   };
 
-  const handleBookNow = () => {
+  const handleBookNow = async () => {
     if (!equipment || equipment.stock === 0) {
       Alert.alert("Out of Stock", "This equipment is currently unavailable");
       return;
     }
 
+    if (quantity > equipment.stock) {
+      Alert.alert("Insufficient Stock", `Only ${equipment.stock} unit(s) available`);
+      return;
+    }
+
+    // Add to cart first
     const cartItem = {
       _id: equipment._id,
       equipmentName: equipment.equipmentName,
@@ -168,21 +142,39 @@ export default function EquipmentDetailScreen() {
       providerName: equipment.providerName,
       providerId: equipment.providerId,
       category: equipment.category,
-      quantity: quantity
+      quantity: quantity,
+      currentStock: equipment.stock
     };
-    
-    addToCart(cartItem);
-    navigation.navigate("CheckoutScreen", { 
-      item: equipment,
-      quantity: quantity 
-    });
+
+    const result = await addToCart(cartItem);
+
+    if (result.success) {
+      // Navigate directly to checkout
+      navigation.navigate("CheckoutScreen");
+    } else {
+      Alert.alert("Error", result.message || "Failed to proceed to checkout");
+    }
+  };
+
+  const handleIncreaseQuantity = () => {
+    if (quantity < equipment.stock) {
+      setQuantity(quantity + 1);
+    } else {
+      Alert.alert("Maximum Quantity", `Only ${equipment.stock} unit(s) available`);
+    }
+  };
+
+  const handleDecreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
   };
 
   const renderStars = (rating) => {
     const stars = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
-    
+
     for (let i = 1; i <= 5; i++) {
       if (i <= fullStars) {
         stars.push(<Ionicons key={i} name="star" size={16} color="#fbbf24" />);
@@ -208,7 +200,7 @@ export default function EquipmentDetailScreen() {
     return (
       <View style={styles.errorContainer}>
         <Text>Equipment not found</Text>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
@@ -218,7 +210,7 @@ export default function EquipmentDetailScreen() {
     );
   }
 
-  const imageUrl = equipment.imageUrl 
+  const imageUrl = equipment.imageUrl
     ? `${BASE_URL}${equipment.imageUrl}`
     : "https://via.placeholder.com/300";
 
@@ -235,8 +227,8 @@ export default function EquipmentDetailScreen() {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Product Images */}
       <TouchableOpacity onPress={() => setShowFullImage(true)}>
-        <Image 
-          source={{ uri: imageUrl }} 
+        <Image
+          source={{ uri: imageUrl }}
           style={styles.mainImage}
           resizeMode="cover"
         />
@@ -260,23 +252,13 @@ export default function EquipmentDetailScreen() {
           <Text style={styles.providerText}>Sold by: {equipment.providerName}</Text>
         </View>
 
-        {/* Rating Section - REAL RATINGS */}
+        {/* Rating Section */}
         <View style={styles.ratingContainer}>
           <View style={styles.ratingStars}>
             {renderStars(averageRating)}
             <Text style={styles.ratingValue}>{averageRating.toFixed(1)}</Text>
           </View>
           <Text style={styles.ratingCount}>({totalReviews} {totalReviews === 1 ? 'review' : 'reviews'})</Text>
-          
-          {canReview && (
-            <TouchableOpacity 
-              style={styles.addReviewButton}
-              onPress={() => setShowReviewModal(true)}
-            >
-              <Ionicons name="add-circle" size={16} color="#3b82f6" />
-              <Text style={styles.addReviewText}>Add Review</Text>
-            </TouchableOpacity>
-          )}
         </View>
 
         {/* Price */}
@@ -301,75 +283,36 @@ export default function EquipmentDetailScreen() {
         </View>
 
         {/* Quantity Selector */}
-        <View style={styles.quantityContainer}>
-          <Text style={styles.quantityLabel}>Quantity:</Text>
-          <View style={styles.quantityControls}>
-            <TouchableOpacity 
-              style={styles.quantityBtn}
-              onPress={() => setQuantity(Math.max(1, quantity - 1))}
-              disabled={quantity <= 1}
-            >
-              <Ionicons name="remove" size={20} color="#475569" />
-            </TouchableOpacity>
-            <Text style={styles.quantityText}>{quantity}</Text>
-            <TouchableOpacity 
-              style={styles.quantityBtn}
-              onPress={() => setQuantity(Math.min(equipment.stock, quantity + 1))}
-              disabled={quantity >= equipment.stock}
-            >
-              <Ionicons name="add" size={20} color="#475569" />
-            </TouchableOpacity>
+        {equipment.stock > 0 && (
+          <View style={styles.quantityContainer}>
+            <Text style={styles.quantityLabel}>Quantity:</Text>
+            <View style={styles.quantityControls}>
+              <TouchableOpacity
+                style={[styles.quantityBtn, quantity <= 1 && styles.disabledQuantityBtn]}
+                onPress={handleDecreaseQuantity}
+                disabled={quantity <= 1}
+              >
+                <Ionicons name="remove" size={20} color={quantity <= 1 ? "#cbd5e1" : "#475569"} />
+              </TouchableOpacity>
+              <Text style={styles.quantityText}>{quantity}</Text>
+              <TouchableOpacity
+                style={[styles.quantityBtn, quantity >= equipment.stock && styles.disabledQuantityBtn]}
+                onPress={handleIncreaseQuantity}
+                disabled={quantity >= equipment.stock}
+              >
+                <Ionicons name="add" size={20} color={quantity >= equipment.stock ? "#cbd5e1" : "#475569"} />
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.quantityHint}>
+              Max: {equipment.stock} unit(s)
+            </Text>
           </View>
-        </View>
+        )}
 
         {/* Description */}
         <View style={styles.descriptionContainer}>
           <Text style={styles.sectionTitle}>Description</Text>
           <Text style={styles.description}>{equipment.description}</Text>
-        </View>
-
-        {/* Reviews Section */}
-        <View style={styles.reviewsContainer}>
-          <Text style={styles.sectionTitle}>Customer Reviews</Text>
-          
-          {reviews.length === 0 ? (
-            <View style={styles.noReviews}>
-              <Ionicons name="chatbubble-outline" size={40} color="#cbd5e1" />
-              <Text style={styles.noReviewsText}>No reviews yet</Text>
-              <Text style={styles.noReviewsSubtext}>Be the first to review this product</Text>
-            </View>
-          ) : (
-            <>
-              {reviews.slice(0, 3).map((review, index) => (
-                <View key={index} style={styles.reviewItem}>
-                  <View style={styles.reviewHeader}>
-                    <Text style={styles.reviewerName}>{review.userName}</Text>
-                    <View style={styles.reviewStars}>
-                      {renderStars(review.rating)}
-                    </View>
-                  </View>
-                  <Text style={styles.reviewDate}>
-                    {new Date(review.date).toLocaleDateString()}
-                  </Text>
-                  {review.comment && (
-                    <Text style={styles.reviewComment}>{review.comment}</Text>
-                  )}
-                </View>
-              ))}
-              
-              {reviews.length > 3 && (
-                <TouchableOpacity 
-                  style={styles.viewAllReviews}
-                  onPress={() => navigation.navigate("EquipmentReviews", { equipmentId })}
-                >
-                  <Text style={styles.viewAllReviewsText}>
-                    View all {reviews.length} reviews
-                  </Text>
-                  <Ionicons name="chevron-forward" size={16} color="#3b82f6" />
-                </TouchableOpacity>
-              )}
-            </>
-          )}
         </View>
 
         {/* Specifications */}
@@ -395,19 +338,25 @@ export default function EquipmentDetailScreen() {
 
         {/* Action Buttons */}
         <View style={styles.actionButtons}>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={[styles.addToCartBtn, equipment.stock === 0 && styles.disabledBtn]}
             onPress={handleAddToCart}
-            disabled={equipment.stock === 0}
+            disabled={equipment.stock === 0 || isAddingToCart || cartLoading}
           >
-            <Ionicons name="cart" size={20} color="#fff" />
-            <Text style={styles.addToCartText}>Add to Cart</Text>
+            {isAddingToCart || cartLoading ? (
+              <ActivityIndicator color="#fff" size="small" />
+            ) : (
+              <>
+                <Ionicons name="cart" size={20} color="#fff" />
+                <Text style={styles.addToCartText}>Add to Cart</Text>
+              </>
+            )}
           </TouchableOpacity>
 
-          <TouchableOpacity 
+          <TouchableOpacity
             style={[styles.buyNowBtn, equipment.stock === 0 && styles.disabledBtn]}
             onPress={handleBookNow}
-            disabled={equipment.stock === 0}
+            disabled={equipment.stock === 0 || isAddingToCart || cartLoading}
           >
             <Ionicons name="flash" size={20} color="#fff" />
             <Text style={styles.buyNowText}>Book Now</Text>
@@ -426,72 +375,6 @@ export default function EquipmentDetailScreen() {
         </View>
       </View>
 
-      {/* Review Modal */}
-      <Modal
-        visible={showReviewModal}
-        transparent={true}
-        animationType="slide"
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Add Your Review</Text>
-              <TouchableOpacity onPress={() => setShowReviewModal(false)}>
-                <Ionicons name="close" size={24} color="#64748b" />
-              </TouchableOpacity>
-            </View>
-
-            <Text style={styles.ratingPrompt}>How would you rate this equipment?</Text>
-            
-            <View style={styles.ratingInput}>
-              {[1, 2, 3, 4, 5].map((star) => (
-                <TouchableOpacity
-                  key={star}
-                  onPress={() => setUserRating(star)}
-                >
-                  <Ionicons 
-                    name={star <= userRating ? "star" : "star-outline"} 
-                    size={32} 
-                    color="#fbbf24" 
-                  />
-                </TouchableOpacity>
-              ))}
-            </View>
-
-            <TextInput
-              style={styles.commentInput}
-              placeholder="Share your experience (optional)"
-              value={userComment}
-              onChangeText={setUserComment}
-              multiline
-              numberOfLines={4}
-              textAlignVertical="top"
-            />
-
-            <View style={styles.modalActions}>
-              <TouchableOpacity 
-                style={styles.cancelModalBtn}
-                onPress={() => setShowReviewModal(false)}
-              >
-                <Text style={styles.cancelModalText}>Cancel</Text>
-              </TouchableOpacity>
-              
-              <TouchableOpacity 
-                style={styles.submitReviewBtn}
-                onPress={handleSubmitReview}
-                disabled={submittingReview}
-              >
-                {submittingReview ? (
-                  <ActivityIndicator color="#fff" />
-                ) : (
-                  <Text style={styles.submitReviewText}>Submit Review</Text>
-                )}
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
-
       {/* Full Screen Image Modal */}
       <Modal
         visible={showFullImage}
@@ -499,14 +382,14 @@ export default function EquipmentDetailScreen() {
         animationType="fade"
       >
         <View style={styles.fullImageModal}>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.closeFullImage}
             onPress={() => setShowFullImage(false)}
           >
             <Ionicons name="close" size={30} color="#fff" />
           </TouchableOpacity>
-          <Image 
-            source={{ uri: imageUrl }} 
+          <Image
+            source={{ uri: imageUrl }}
             style={styles.fullImage}
             resizeMode="contain"
           />
@@ -572,10 +455,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 12,
   },
-  ratingText: {
-    marginLeft: 6,
+  ratingStars: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  ratingValue: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#1e293b",
+    marginLeft: 4,
+  },
+  ratingCount: {
     fontSize: 14,
-    color: "#6b7280",
+    color: "#64748b",
+    marginLeft: 8,
   },
   priceContainer: {
     flexDirection: "row",
@@ -610,9 +503,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   quantityContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
     marginBottom: 20,
     paddingVertical: 12,
     borderTopWidth: 1,
@@ -623,10 +513,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     color: "#475569",
+    marginBottom: 8,
   },
   quantityControls: {
     flexDirection: "row",
     alignItems: "center",
+    marginBottom: 4,
   },
   quantityBtn: {
     width: 36,
@@ -638,11 +530,20 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#cbd5e1",
   },
+  disabledQuantityBtn: {
+    backgroundColor: "#f8fafc",
+    borderColor: "#e2e8f0",
+  },
   quantityText: {
     fontSize: 18,
     fontWeight: "600",
     marginHorizontal: 16,
     minWidth: 30,
+    textAlign: "center",
+  },
+  quantityHint: {
+    fontSize: 12,
+    color: "#94a3b8",
     textAlign: "center",
   },
   descriptionContainer: {
@@ -744,171 +645,5 @@ const styles = StyleSheet.create({
   fullImage: {
     width: width * 0.9,
     height: width * 0.9,
-  },
-   ratingStars: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  ratingValue: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#1e293b",
-    marginLeft: 4,
-  },
-  ratingCount: {
-    fontSize: 14,
-    color: "#64748b",
-    marginLeft: 8,
-  },
-  addReviewButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginLeft: "auto",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 6,
-    backgroundColor: "#f1f5f9",
-  },
-  addReviewText: {
-    marginLeft: 4,
-    fontSize: 14,
-    color: "#3b82f6",
-    fontWeight: "500",
-  },
-  reviewsContainer: {
-    marginBottom: 20,
-  },
-  noReviews: {
-    alignItems: "center",
-    paddingVertical: 30,
-    backgroundColor: "#f8fafc",
-    borderRadius: 12,
-  },
-  noReviewsText: {
-    fontSize: 16,
-    color: "#64748b",
-    marginTop: 12,
-  },
-  noReviewsSubtext: {
-    fontSize: 14,
-    color: "#94a3b8",
-    marginTop: 4,
-  },
-  reviewItem: {
-    backgroundColor: "#f8fafc",
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 12,
-  },
-  reviewHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 4,
-  },
-  reviewerName: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#1e293b",
-  },
-  reviewStars: {
-    flexDirection: "row",
-  },
-  reviewDate: {
-    fontSize: 12,
-    color: "#94a3b8",
-    marginBottom: 8,
-  },
-  reviewComment: {
-    fontSize: 14,
-    color: "#475569",
-    lineHeight: 20,
-  },
-  viewAllReviews: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-  },
-  viewAllReviewsText: {
-    fontSize: 14,
-    color: "#3b82f6",
-    fontWeight: "600",
-    marginRight: 4,
-  },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  modalContent: {
-    backgroundColor: "#fff",
-    borderRadius: 16,
-    padding: 20,
-    width: "100%",
-    maxWidth: 400,
-  },
-  modalHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: "700",
-    color: "#1e293b",
-  },
-  ratingPrompt: {
-    fontSize: 16,
-    color: "#475569",
-    marginBottom: 16,
-    textAlign: "center",
-  },
-  ratingInput: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginBottom: 20,
-    gap: 8,
-  },
-  commentInput: {
-    borderWidth: 1,
-    borderColor: "#e2e8f0",
-    borderRadius: 8,
-    padding: 12,
-    fontSize: 16,
-    minHeight: 100,
-    marginBottom: 20,
-    textAlignVertical: "top",
-  },
-  modalActions: {
-    flexDirection: "row",
-    gap: 12,
-  },
-  cancelModalBtn: {
-    flex: 1,
-    padding: 16,
-    borderRadius: 8,
-    backgroundColor: "#f1f5f9",
-    alignItems: "center",
-  },
-  cancelModalText: {
-    fontSize: 16,
-    color: "#64748b",
-    fontWeight: "600",
-  },
-  submitReviewBtn: {
-    flex: 2,
-    padding: 16,
-    borderRadius: 8,
-    backgroundColor: "#10b981",
-    alignItems: "center",
-  },
-  submitReviewText: {
-    fontSize: 16,
-    color: "#fff",
-    fontWeight: "600",
   },
 });

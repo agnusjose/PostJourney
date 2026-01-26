@@ -14,13 +14,13 @@ import { useRoute } from "@react-navigation/native";
 export default function EquipmentReviewsScreen() {
   const route = useRoute();
   const { equipmentId } = route.params;
-  
+
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [averageRating, setAverageRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
 
-  const BASE_URL = "http://192.168.245.72:5000";
+  const BASE_URL = "http://10.80.34.90:5000";
 
   useEffect(() => {
     fetchReviews();
@@ -45,11 +45,11 @@ export default function EquipmentReviewsScreen() {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       stars.push(
-        <Ionicons 
-          key={i} 
-          name={i <= rating ? "star" : i === Math.ceil(rating) && rating % 1 !== 0 ? "star-half" : "star-outline"} 
-          size={16} 
-          color="#fbbf24" 
+        <Ionicons
+          key={i}
+          name={i <= rating ? "star" : i === Math.ceil(rating) && rating % 1 !== 0 ? "star-half" : "star-outline"}
+          size={16}
+          color="#fbbf24"
         />
       );
     }

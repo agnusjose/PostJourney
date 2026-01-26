@@ -10,46 +10,46 @@ export default function AdminLoginScreen({ navigation }) {
   const [errorMessage, setErrorMessage] = useState("");
   // Choose correct base URL for your environment:
   // Android emulator -> "http://10.0.2.2:5000"
-  // Real device (same WiFi) -> "http://172.16.229.212:5000"
+  // Real device (same WiFi) -> "http://10.80.34.90:5000"
   // iOS simulator -> "http://localhost:5000"
-const BASE_URL = "http://192.168.245.72:5000";
+  const BASE_URL = "http://10.80.34.90:5000";
 
   const handleAdminLogin = async () => {
-  console.log("ADMIN LOGIN CLICKED");
+    console.log("ADMIN LOGIN CLICKED");
 
-  setErrorMessage(""); // clear previous errors
+    setErrorMessage(""); // clear previous errors
 
-  if (!email || !password) {
-    setErrorMessage("Email and password are required.");
-    return;
-  }
-
-  try {
-    const response = await axios.post(`${BASE_URL}/admin/login`, {
-      secretKey: "POSTJOURNEY2024",
-      email,
-      password,
-    });
-
-    console.log("ADMIN LOGIN RESPONSE:", response.data);
-
-    if (!response.data.success) {
-      // SHOW ERROR ON SCREEN
-      setErrorMessage(response.data.message || "Invalid credentials");
+    if (!email || !password) {
+      setErrorMessage("Email and password are required.");
       return;
     }
 
-    // SUCCESS — navigate to admin panel
-navigation.reset({
-  index: 0,
-  routes: [{ name: "AdminStackNavigator" }],
-});
+    try {
+      const response = await axios.post(`${BASE_URL}/admin/login`, {
+        secretKey: "POSTJOURNEY2024",
+        email,
+        password,
+      });
 
-  } catch (err) {
-    console.log("ADMIN LOGIN ERROR:", err);
-    setErrorMessage("Server error. Unable to connect.");
-  }
-};
+      console.log("ADMIN LOGIN RESPONSE:", response.data);
+
+      if (!response.data.success) {
+        // SHOW ERROR ON SCREEN
+        setErrorMessage(response.data.message || "Invalid credentials");
+        return;
+      }
+
+      // SUCCESS � navigate to admin panel
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "AdminStackNavigator" }],
+      });
+
+    } catch (err) {
+      console.log("ADMIN LOGIN ERROR:", err);
+      setErrorMessage("Server error. Unable to connect.");
+    }
+  };
 
 
 
@@ -77,10 +77,10 @@ navigation.reset({
           placeholderTextColor="#555"
         />
         {errorMessage ? (
-  <Text style={{ color: "red", marginBottom: 10, fontSize: 14 }}>
-    {errorMessage}
-  </Text>
-) : null}
+          <Text style={{ color: "red", marginBottom: 10, fontSize: 14 }}>
+            {errorMessage}
+          </Text>
+        ) : null}
 
         <TouchableOpacity style={styles.button} onPress={handleAdminLogin}>
           <Text style={styles.buttonText}>LOGIN</Text>

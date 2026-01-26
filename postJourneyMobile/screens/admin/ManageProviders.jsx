@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { 
-  View, 
-  Text, 
-  FlatList, 
-  StyleSheet, 
-  TouchableOpacity, 
-  Alert, 
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
   Platform,
   ActivityIndicator,
   Modal,
-  TextInput 
+  TextInput
 } from "react-native";
 import axios from "axios";
 
-export default function ManageProviders() {
+export default function ManageProviders({ navigation }) {
   const [providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,9 +21,9 @@ export default function ManageProviders() {
   const [rejectReason, setRejectReason] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
 
-  const BASE_URL = Platform.OS === "web" 
-    ? "http://localhost:5000" 
-    : "http://192.168.245.72:5000";
+  const BASE_URL = Platform.OS === "web"
+    ? "http://localhost:5000"
+    : "http://10.80.34.90:5000";
 
   // Fetch providers function
   const fetchProviders = async () => {
@@ -33,7 +33,7 @@ export default function ManageProviders() {
       console.log("Fetching providers from:", `${BASE_URL}/admin/providers`);
       const response = await axios.get(`${BASE_URL}/admin/providers`);
       console.log("Providers response:", response.data);
-      
+
       if (response.data.success) {
         setProviders(response.data.users);
       } else {
@@ -56,12 +56,12 @@ export default function ManageProviders() {
   const toggleBlockProvider = async (id, isCurrentlyBlocked) => {
     try {
       const action = isCurrentlyBlocked ? "unblock" : "block";
-      
+
       // CORRECT ENDPOINT: /admin/users/:id/block
       const response = await axios.patch(`${BASE_URL}/admin/users/${id}/block`, {
         isBlocked: !isCurrentlyBlocked
       });
-      
+
       if (response.data.success) {
         Alert.alert("Success", `Provider ${action}ed successfully`);
         fetchProviders(); // Refresh list
@@ -81,14 +81,14 @@ export default function ManageProviders() {
       `Are you sure you want to delete ${name}? This action cannot be undone.`,
       [
         { text: "Cancel", style: "cancel" },
-        { 
-          text: "Delete", 
+        {
+          text: "Delete",
           style: "destructive",
           onPress: async () => {
             try {
               // CORRECT ENDPOINT: /admin/users/:id
               const response = await axios.delete(`${BASE_URL}/admin/users/${id}`);
-              
+
               if (response.data.success) {
                 Alert.alert("Success", "Provider deleted successfully");
                 fetchProviders(); // Refresh list
@@ -105,212 +105,216 @@ export default function ManageProviders() {
     );
   };
 
-// ✅ UPDATED: Verify provider with strict rejection logic
-const verifyProvider = async (id, status, reason = "") => {
-  try {
-    // CORRECT ENDPOINT: /admin/providers/:id/verify
-    const endpoint = `${BASE_URL}/admin/providers/${id}/verify`;
-    
-    if (status === "rejected") {
-      // For rejection, ask if they want to delete or just reject
-      Alert.alert(
-        "Reject Provider",
-        "Choose action:",
-        [
-          {
-            text: "Just Reject (User stays but cannot login)",
-            onPress: async () => {
-              try {
-                const response = await axios.patch(endpoint, { 
-                  status: "rejected", 
-                  reason,
-                  autoDelete: false 
-                });
-                
-                if (response.data.success) {
-                  Alert.alert(
-                    "Provider Rejected", 
-                    "User marked as rejected. They cannot login but account remains."
-                  );
-                  fetchProviders(); // Refresh list
+  // ✅ UPDATED: Verify provider with strict rejection logic
+  const verifyProvider = async (id, status, reason = "") => {
+    try {
+      // CORRECT ENDPOINT: /admin/providers/:id/verify
+      const endpoint = `${BASE_URL}/admin/providers/${id}/verify`;
+
+      if (status === "rejected") {
+        // For rejection, ask if they want to delete or just reject
+        Alert.alert(
+          "Reject Provider",
+          "Choose action:",
+          [
+            {
+              text: "Just Reject (User stays but cannot login)",
+              onPress: async () => {
+                try {
+                  const response = await axios.patch(endpoint, {
+                    status: "rejected",
+                    reason,
+                    autoDelete: false
+                  });
+
+                  if (response.data.success) {
+                    Alert.alert(
+                      "Provider Rejected",
+                      "User marked as rejected. They cannot login but account remains."
+                    );
+                    fetchProviders(); // Refresh list
+                  }
+                } catch (err) {
+                  console.error("Reject error:", err);
+                  Alert.alert("Error", "Unable to reject provider");
                 }
-              } catch (err) {
-                console.error("Reject error:", err);
-                Alert.alert("Error", "Unable to reject provider");
               }
-            }
-          },
-          {
-            text: "Reject & Delete (Remove from system)",
-            style: "destructive",
-            onPress: async () => {
-              try {
-                const response = await axios.patch(endpoint, { 
-                  status: "rejected", 
-                  reason,
-                  autoDelete: true 
-                });
-                
-                if (response.data.success) {
-                  Alert.alert(
-                    "Provider Rejected & Deleted", 
-                    "User has been removed from the system."
-                  );
-                  fetchProviders(); // Refresh list
+            },
+            {
+              text: "Reject & Delete (Remove from system)",
+              style: "destructive",
+              onPress: async () => {
+                try {
+                  const response = await axios.patch(endpoint, {
+                    status: "rejected",
+                    reason,
+                    autoDelete: true
+                  });
+
+                  if (response.data.success) {
+                    Alert.alert(
+                      "Provider Rejected & Deleted",
+                      "User has been removed from the system."
+                    );
+                    fetchProviders(); // Refresh list
+                  }
+                } catch (err) {
+                  console.error("Delete error:", err);
+                  Alert.alert("Error", "Unable to delete provider");
                 }
-              } catch (err) {
-                console.error("Delete error:", err);
-                Alert.alert("Error", "Unable to delete provider");
               }
+            },
+            {
+              text: "Cancel",
+              style: "cancel"
             }
-          },
-          {
-            text: "Cancel",
-            style: "cancel"
-          }
-        ]
-      );
-    } else {
-      // For approval
-      const response = await axios.patch(endpoint, { 
-        status: "approved" 
-      });
-      
-      if (response.data.success) {
-        Alert.alert("Success", "Provider approved successfully");
-        fetchProviders(); // Refresh list
+          ]
+        );
       } else {
-        Alert.alert("Error", response.data.message || "Failed to approve provider");
+        // For approval
+        const response = await axios.patch(endpoint, {
+          status: "approved"
+        });
+
+        if (response.data.success) {
+          Alert.alert("Success", "Provider approved successfully");
+          fetchProviders(); // Refresh list
+        } else {
+          Alert.alert("Error", response.data.message || "Failed to approve provider");
+        }
       }
+    } catch (err) {
+      console.error("Verify provider error:", err);
+      console.error("Error details:", err.response?.data);
+      Alert.alert(
+        "Error",
+        err.response?.data?.message || "Unable to update provider status"
+      );
     }
-  } catch (err) {
-    console.error("Verify provider error:", err);
-    console.error("Error details:", err.response?.data);
+  };
+
+  // ✅ SIMPLIFIED: Approve provider function
+  const approveProvider = async (id) => {
     Alert.alert(
-      "Error", 
-      err.response?.data?.message || "Unable to update provider status"
+      "Approve Provider",
+      "Are you sure you want to approve this provider?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Approve",
+          onPress: async () => {
+            try {
+              const response = await axios.patch(
+                `${BASE_URL}/admin/providers/${id}/verify`,
+                { status: "approved" }
+              );
+
+              if (response.data.success) {
+                Alert.alert("Success", "Provider approved successfully");
+                fetchProviders(); // Refresh list
+              } else {
+                Alert.alert("Error", response.data.message || "Failed to approve");
+              }
+            } catch (err) {
+              console.error("Approve error:", err);
+              Alert.alert("Error", "Unable to approve provider");
+            }
+          }
+        }
+      ]
     );
-  }
-};
+  };
 
-// ✅ SIMPLIFIED: Approve provider function
-const approveProvider = async (id) => {
-  Alert.alert(
-    "Approve Provider",
-    "Are you sure you want to approve this provider?",
-    [
-      { text: "Cancel", style: "cancel" },
-      { 
-        text: "Approve", 
-        onPress: async () => {
-          try {
-            const response = await axios.patch(
-              `${BASE_URL}/admin/providers/${id}/verify`, 
-              { status: "approved" }
-            );
-            
-            if (response.data.success) {
-              Alert.alert("Success", "Provider approved successfully");
-              fetchProviders(); // Refresh list
-            } else {
-              Alert.alert("Error", response.data.message || "Failed to approve");
-            }
-          } catch (err) {
-            console.error("Approve error:", err);
-            Alert.alert("Error", "Unable to approve provider");
-          }
-        }
-      }
-    ]
-  );
-};
+  // ✅ UPDATED: Reject with modal (now with option to delete or just reject)
+  const openRejectModal = (provider) => {
+    setSelectedProvider(provider);
+    setRejectReason("");
+    setModalVisible(true);
+  };
 
-// ✅ UPDATED: Reject with modal (now with option to delete or just reject)
-const openRejectModal = (provider) => {
-  setSelectedProvider(provider);
-  setRejectReason("");
-  setModalVisible(true);
-};
+  // ✅ UPDATED: Confirm rejection with options
+  const confirmRejection = () => {
+    if (!rejectReason.trim()) {
+      Alert.alert("Error", "Please provide a reason for rejection");
+      return;
+    }
 
-// ✅ UPDATED: Confirm rejection with options
-const confirmRejection = () => {
-  if (!rejectReason.trim()) {
-    Alert.alert("Error", "Please provide a reason for rejection");
-    return;
-  }
-  
-  Alert.alert(
-    "Reject Provider",
-    `Choose action for ${selectedProvider?.name}:`,
-    [
-      {
-        text: "Just Reject (Cannot login)",
-        onPress: async () => {
-          try {
-            const response = await axios.patch(
-              `${BASE_URL}/admin/providers/${selectedProvider._id}/verify`, 
-              { 
-                status: "rejected", 
-                reason: rejectReason,
-                autoDelete: false 
-              }
-            );
-            
-            if (response.data.success) {
-              Alert.alert(
-                "Provider Rejected", 
-                "User marked as rejected. They cannot login."
+    Alert.alert(
+      "Reject Provider",
+      `Choose action for ${selectedProvider?.name}:`,
+      [
+        {
+          text: "Just Reject (Cannot login)",
+          onPress: async () => {
+            try {
+              const response = await axios.patch(
+                `${BASE_URL}/admin/providers/${selectedProvider._id}/verify`,
+                {
+                  status: "rejected",
+                  reason: rejectReason,
+                  autoDelete: false
+                }
               );
-              fetchProviders(); // Refresh list
-              setModalVisible(false);
-            }
-          } catch (err) {
-            console.error("Reject error:", err);
-            Alert.alert("Error", "Unable to reject provider");
-          }
-        }
-      },
-      {
-        text: "Reject & Delete",
-        style: "destructive",
-        onPress: async () => {
-          try {
-            const response = await axios.patch(
-              `${BASE_URL}/admin/providers/${selectedProvider._id}/verify`, 
-              { 
-                status: "rejected", 
-                reason: rejectReason,
-                autoDelete: true 
+
+              if (response.data.success) {
+                Alert.alert(
+                  "Provider Rejected",
+                  "User marked as rejected. They cannot login."
+                );
+                fetchProviders(); // Refresh list
+                setModalVisible(false);
               }
-            );
-            
-            if (response.data.success) {
-              Alert.alert(
-                "Provider Rejected & Deleted", 
-                "User has been removed from the system."
-              );
-              fetchProviders(); // Refresh list
-              setModalVisible(false);
+            } catch (err) {
+              console.error("Reject error:", err);
+              Alert.alert("Error", "Unable to reject provider");
             }
-          } catch (err) {
-            console.error("Delete error:", err);
-            Alert.alert("Error", "Unable to delete provider");
           }
+        },
+        {
+          text: "Reject & Delete",
+          style: "destructive",
+          onPress: async () => {
+            try {
+              const response = await axios.patch(
+                `${BASE_URL}/admin/providers/${selectedProvider._id}/verify`,
+                {
+                  status: "rejected",
+                  reason: rejectReason,
+                  autoDelete: true
+                }
+              );
+
+              if (response.data.success) {
+                Alert.alert(
+                  "Provider Rejected & Deleted",
+                  "User has been removed from the system."
+                );
+                fetchProviders(); // Refresh list
+                setModalVisible(false);
+              }
+            } catch (err) {
+              console.error("Delete error:", err);
+              Alert.alert("Error", "Unable to delete provider");
+            }
+          }
+        },
+        {
+          text: "Cancel",
+          style: "cancel"
         }
-      },
-      {
-        text: "Cancel",
-        style: "cancel"
-      }
-    ]
-  );
-};
+      ]
+    );
+  };
 
   const renderProvider = ({ item }) => (
-    <View style={[
-      styles.card,
-      item.isBlocked && styles.blockedCard
-    ]}>
+    <TouchableOpacity
+      style={[
+        styles.card,
+        item.isBlocked && styles.blockedCard
+      ]}
+      onPress={() => navigation.navigate("AdminUserDetailsScreen", { userId: item._id, userType: item.userType })}
+      activeOpacity={0.7}
+    >
       <View style={styles.cardHeader}>
         <Text style={styles.name}>{item.name}</Text>
         <View style={styles.statusBadges}>
@@ -331,15 +335,15 @@ const confirmRejection = () => {
           )}
         </View>
       </View>
-      
+
       <Text style={styles.email}>{item.email}</Text>
-      
+
       <View style={styles.detailsRow}>
         <Text style={[
           styles.status,
-          { 
-            color: item.providerVerification?.status === "approved" ? "green" : 
-                   item.providerVerification?.status === "rejected" ? "red" : "orange" 
+          {
+            color: item.providerVerification?.status === "approved" ? "green" :
+              item.providerVerification?.status === "rejected" ? "red" : "orange"
           }
         ]}>
           Verification: {item.providerVerification?.status?.toUpperCase() || "PENDING"}
@@ -348,7 +352,7 @@ const confirmRejection = () => {
           Email: {item.isVerified ? "Verified" : "Not Verified"}
         </Text>
       </View>
-      
+
       <Text style={styles.date}>
         Joined: {new Date(item.createdAt).toLocaleDateString()}
       </Text>
@@ -378,7 +382,7 @@ const confirmRejection = () => {
       <View style={styles.actions}>
         <TouchableOpacity
           style={[
-            styles.btn, 
+            styles.btn,
             styles.blockBtn,
             item.isBlocked && styles.unblockBtn
           ]}
@@ -396,7 +400,7 @@ const confirmRejection = () => {
           <Text style={styles.btnText}>🗑️ Delete</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   if (loading) {
@@ -435,7 +439,7 @@ const confirmRejection = () => {
           </Text>
         </View>
       </View>
-      
+
       {providers.length === 0 ? (
         <View style={styles.center}>
           <Text style={styles.emptyText}>No service providers found</Text>
@@ -449,95 +453,95 @@ const confirmRejection = () => {
           showsVerticalScrollIndicator={false}
         />
       )}
-      
+
       <TouchableOpacity style={styles.refreshBtn} onPress={fetchProviders}>
         <Text style={styles.refreshText}>🔄 Refresh List</Text>
       </TouchableOpacity>
 
       {/* Rejection Reason Modal */}
-<Modal
-  animationType="slide"
-  transparent={true}
-  visible={modalVisible}
-  onRequestClose={() => setModalVisible(false)}
->
-  <View style={styles.modalOverlay}>
-    <View style={styles.modalContent}>
-      <Text style={styles.modalTitle}>Reject Provider</Text>
-      <Text style={styles.modalSubtitle}>
-        {selectedProvider?.name} ({selectedProvider?.email})
-      </Text>
-      
-      <View style={styles.optionsContainer}>
-        <View style={styles.optionCard}>
-          <Text style={styles.optionTitle}>Option 1: Just Reject</Text>
-          <Text style={styles.optionDescription}>
-            • User stays in system
-            • Cannot login
-            • Status: Rejected
-          </Text>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Reject Provider</Text>
+            <Text style={styles.modalSubtitle}>
+              {selectedProvider?.name} ({selectedProvider?.email})
+            </Text>
+
+            <View style={styles.optionsContainer}>
+              <View style={styles.optionCard}>
+                <Text style={styles.optionTitle}>Option 1: Just Reject</Text>
+                <Text style={styles.optionDescription}>
+                  • User stays in system
+                  • Cannot login
+                  • Status: Rejected
+                </Text>
+              </View>
+
+              <View style={[styles.optionCard, styles.deleteOption]}>
+                <Text style={styles.optionTitle}>Option 2: Reject & Delete</Text>
+                <Text style={styles.optionDescription}>
+                  • User removed from system
+                  • Cannot login
+                  • Permanent deletion
+                </Text>
+              </View>
+            </View>
+
+            <TextInput
+              style={styles.reasonInput}
+              placeholder="Enter reason for rejection (required)..."
+              value={rejectReason}
+              onChangeText={setRejectReason}
+              multiline
+              numberOfLines={3}
+              textAlignVertical="top"
+            />
+
+            <View style={styles.modalActions}>
+              <TouchableOpacity
+                style={[styles.modalBtn, styles.cancelBtn]}
+                onPress={() => setModalVisible(false)}
+              >
+                <Text style={styles.modalBtnText}>Cancel</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[styles.modalBtn, styles.rejectBtn]}
+                onPress={confirmRejection}
+                disabled={!rejectReason.trim()}
+              >
+                <Text style={styles.modalBtnText}>Choose Action</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
-        
-        <View style={[styles.optionCard, styles.deleteOption]}>
-          <Text style={styles.optionTitle}>Option 2: Reject & Delete</Text>
-          <Text style={styles.optionDescription}>
-            • User removed from system
-            • Cannot login
-            • Permanent deletion
-          </Text>
-        </View>
-      </View>
-      
-      <TextInput
-        style={styles.reasonInput}
-        placeholder="Enter reason for rejection (required)..."
-        value={rejectReason}
-        onChangeText={setRejectReason}
-        multiline
-        numberOfLines={3}
-        textAlignVertical="top"
-      />
-      
-      <View style={styles.modalActions}>
-        <TouchableOpacity
-          style={[styles.modalBtn, styles.cancelBtn]}
-          onPress={() => setModalVisible(false)}
-        >
-          <Text style={styles.modalBtnText}>Cancel</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity
-          style={[styles.modalBtn, styles.rejectBtn]}
-          onPress={confirmRejection}
-          disabled={!rejectReason.trim()}
-        >
-          <Text style={styles.modalBtnText}>Choose Action</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  </View>
-</Modal>
+      </Modal>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    padding: 16, 
-    backgroundColor: "#f8f9fa" 
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: "#f8f9fa"
   },
-  center: { 
-    flex: 1, 
-    justifyContent: "center", 
-    alignItems: "center" 
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
   },
   header: {
     marginBottom: 16,
   },
-  heading: { 
-    fontSize: 24, 
-    fontWeight: "bold", 
+  heading: {
+    fontSize: 24,
+    fontWeight: "bold",
     color: "#333",
     textAlign: "center",
     marginBottom: 8,
@@ -578,11 +582,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#777",
   },
-  card: { 
-    backgroundColor: "#fff", 
-    padding: 16, 
-    borderRadius: 12, 
-    marginBottom: 12, 
+  card: {
+    backgroundColor: "#fff",
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 12,
     elevation: 3,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -600,8 +604,8 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     marginBottom: 4,
   },
-  name: { 
-    fontSize: 18, 
+  name: {
+    fontSize: 18,
     fontWeight: "700",
     color: "#333",
     flex: 1,
@@ -645,8 +649,8 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: "bold",
   },
-  email: { 
-    fontSize: 14, 
+  email: {
+    fontSize: 14,
     color: "#555",
     marginBottom: 8,
   },
@@ -655,8 +659,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 4,
   },
-  status: { 
-    fontSize: 13, 
+  status: {
+    fontSize: 13,
     fontWeight: "600",
   },
   verified: {
@@ -668,20 +672,20 @@ const styles = StyleSheet.create({
     color: "#888",
     marginBottom: 10,
   },
-  actions: { 
-    flexDirection: "row", 
+  actions: {
+    flexDirection: "row",
     marginTop: 8,
     gap: 8,
   },
-  btn: { 
-    flex: 1, 
-    padding: 10, 
-    borderRadius: 6, 
+  btn: {
+    flex: 1,
+    padding: 10,
+    borderRadius: 6,
     alignItems: "center",
     justifyContent: "center",
   },
-  btnText: { 
-    color: "#fff", 
+  btnText: {
+    color: "#fff",
     fontWeight: "bold",
     fontSize: 12,
   },
@@ -779,28 +783,28 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   optionsContainer: {
-  marginBottom: 15,
-},
-optionCard: {
-  backgroundColor: "#f8f9fa",
-  padding: 10,
-  borderRadius: 8,
-  marginBottom: 8,
-  borderWidth: 1,
-  borderColor: "#dee2e6",
-},
-deleteOption: {
-  backgroundColor: "#fff5f5",
-  borderColor: "#f5c6cb",
-},
-optionTitle: {
-  fontWeight: "bold",
-  marginBottom: 4,
-  fontSize: 14,
-},
-optionDescription: {
-  fontSize: 12,
-  color: "#666",
-  lineHeight: 16,
-},
+    marginBottom: 15,
+  },
+  optionCard: {
+    backgroundColor: "#f8f9fa",
+    padding: 10,
+    borderRadius: 8,
+    marginBottom: 8,
+    borderWidth: 1,
+    borderColor: "#dee2e6",
+  },
+  deleteOption: {
+    backgroundColor: "#fff5f5",
+    borderColor: "#f5c6cb",
+  },
+  optionTitle: {
+    fontWeight: "bold",
+    marginBottom: 4,
+    fontSize: 14,
+  },
+  optionDescription: {
+    fontSize: 12,
+    color: "#666",
+    lineHeight: 16,
+  },
 });

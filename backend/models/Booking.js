@@ -44,6 +44,12 @@ const bookingSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  quantity: { // ADD THIS FIELD
+    type: Number,
+    required: true,
+    default: 1,
+    min: 1
+  },
   totalAmount: {
     type: Number,
     required: true
@@ -83,16 +89,16 @@ const bookingSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Calculate total days and amount before saving
-bookingSchema.pre("save", function(next) {
+// Update the pre-save middleware to calculate total amount with quantity
+bookingSchema.pre("save", function (next) {
   const start = new Date(this.startDate);
   const end = new Date(this.endDate);
   const timeDiff = Math.abs(end - start);
   this.totalDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-  this.totalAmount = this.totalDays * this.pricePerDay;
+  this.totalAmount = this.totalDays * this.pricePerDay * this.quantity; // Multiply by quantity
   next();
 });
 
-// ✅ FIX: Export as default
+// Make sure this line is exactly like this:
 const Booking = mongoose.model("Booking", bookingSchema);
-export default Booking;  // Make sure this line exists
+export default Booking; // This line is crucial

@@ -34,10 +34,10 @@ export default function ServiceProviderProfileCompletion({ route, navigation }) 
     }
 
     setLoading(true);
-    
+
     try {
       const response = await axios.post(
-        "http://192.168.245.72:5000/api/service provider/complete-profile",
+        "http://10.80.34.90:5000/api/service-provider/complete-profile",
         {
           email,
           agencyName: formData.agencyName,
@@ -66,9 +66,9 @@ export default function ServiceProviderProfileCompletion({ route, navigation }) 
     } catch (error) {
       console.error("Submit error:", error);
       Alert.alert(
-        "Error", 
-        error.response?.data?.message || 
-        error.message || 
+        "Error",
+        error.response?.data?.message ||
+        error.message ||
         "Failed to save profile. Please try again."
       );
     } finally {
@@ -89,14 +89,14 @@ export default function ServiceProviderProfileCompletion({ route, navigation }) 
           style={styles.input}
           placeholder="Enter your agency name"
           value={formData.agencyName}
-          onChangeText={(text) => setFormData({...formData, agencyName: text})}
+          onChangeText={(text) => setFormData({ ...formData, agencyName: text })}
         />
 
         <Text style={styles.label}>Service Type *</Text>
         <View style={styles.pickerContainer}>
           <Picker
             selectedValue={formData.serviceType}
-            onValueChange={(value) => setFormData({...formData, serviceType: value})}
+            onValueChange={(value) => setFormData({ ...formData, serviceType: value })}
             style={styles.picker}
           >
             <Picker.Item label="Medical Equipment Provider" value="equipment" />
@@ -111,7 +111,7 @@ export default function ServiceProviderProfileCompletion({ route, navigation }) 
           keyboardType="phone-pad"
           maxLength={10}
           value={formData.phoneNumber}
-          onChangeText={(text) => setFormData({...formData, phoneNumber: text})}
+          onChangeText={(text) => setFormData({ ...formData, phoneNumber: text })}
         />
 
         <Text style={styles.label}>City *</Text>
@@ -119,7 +119,7 @@ export default function ServiceProviderProfileCompletion({ route, navigation }) 
           style={styles.input}
           placeholder="Your city"
           value={formData.city}
-          onChangeText={(text) => setFormData({...formData, city: text})}
+          onChangeText={(text) => setFormData({ ...formData, city: text })}
         />
       </View>
 

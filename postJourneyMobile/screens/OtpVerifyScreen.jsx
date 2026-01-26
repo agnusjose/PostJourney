@@ -20,12 +20,12 @@ export default function OtpVerifyScreen({ route, navigation }) {
   const [loading, setLoading] = useState(false);
   const [debugInfo, setDebugInfo] = useState("");
 
-  const BASE_URL = "http://192.168.245.72:5000";
+  const BASE_URL = "http://10.80.34.90:5000";
 
   useEffect(() => {
     console.log("OTP Screen loaded with params:", { email, userType });
     setDebugInfo(`Email: ${email}, UserType: ${userType}`);
-    
+
     if (timer === 0) {
       setCanResend(true);
       return;
@@ -41,7 +41,7 @@ export default function OtpVerifyScreen({ route, navigation }) {
   const handleVerifyOtp = async () => {
     console.log("Verify OTP clicked:", { email, otp, userType });
     setDebugInfo(`Verifying OTP: ${otp} for ${email}`);
-    
+
     if (!otp) {
       Alert.alert("Error", "Please enter OTP");
       return;
@@ -72,10 +72,10 @@ export default function OtpVerifyScreen({ route, navigation }) {
         return;
       }
 
-      // ✅ SUCCESS - Navigate WITHOUT showing Alert first
+      // ? SUCCESS - Navigate WITHOUT showing Alert first
       console.log("OTP verified successfully, navigating...");
       console.log("UserType for navigation:", userType);
-      
+
       // Use setTimeout to ensure navigation happens after state updates
       setTimeout(() => {
         if (userType === 'patient') {
@@ -94,7 +94,7 @@ export default function OtpVerifyScreen({ route, navigation }) {
       console.error("OTP Verification Error:", err);
       console.error("Error details:", err.response?.data || err.message);
       setDebugInfo(`Error: ${err.message}`);
-      
+
       if (err.response) {
         Alert.alert("Server Error", err.response.data?.message || "Server error occurred");
         setErrorMessage(err.response.data?.message || "Server error occurred");
@@ -145,7 +145,7 @@ export default function OtpVerifyScreen({ route, navigation }) {
       <Text style={styles.subtitle}>
         OTP sent to {email}
       </Text>
-      
+
       <Text style={styles.userType}>
         Registering as: {userType === 'patient' ? 'Patient' : 'Service Provider'}
       </Text>
@@ -167,8 +167,8 @@ export default function OtpVerifyScreen({ route, navigation }) {
         <Text style={styles.error}>{errorMessage}</Text>
       ) : null}
 
-      <TouchableOpacity 
-        style={[styles.button, loading && styles.buttonDisabled]} 
+      <TouchableOpacity
+        style={[styles.button, loading && styles.buttonDisabled]}
         onPress={handleVerifyOtp}
         disabled={loading}
       >
@@ -194,11 +194,11 @@ export default function OtpVerifyScreen({ route, navigation }) {
         <View style={styles.debugContainer}>
           <Text style={styles.debugTitle}>Debug Info:</Text>
           <Text style={styles.debugText}>{debugInfo}</Text>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.debugButton}
             onPress={() => {
               console.log("Current state:", { email, otp, userType, loading, errorMessage });
-              Alert.alert("Debug Info", 
+              Alert.alert("Debug Info",
                 `Email: ${email}\n` +
                 `OTP: ${otp}\n` +
                 `UserType: ${userType}\n` +

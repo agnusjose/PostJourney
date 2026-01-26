@@ -25,7 +25,7 @@ export default function LegRaiseMonitor() {
 
         if (!photo?.base64) return;
 
-        const res = await fetch("http://192.168.245.72.72.1:8000/pose/analyze", {
+        const res = await fetch("http://10.80.34.90.72.1:8000/pose/analyze", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -49,7 +49,7 @@ export default function LegRaiseMonitor() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" translucent />
-      
+
       <CameraView
         ref={cameraRef}
         facing="front"
@@ -64,13 +64,13 @@ export default function LegRaiseMonitor() {
             <View style={styles.pulseDot} />
             <Text style={styles.statusText}>AI MONITORING ACTIVE</Text>
           </View>
-          
+
           <Text style={styles.feedbackText}>{feedback}</Text>
-          
+
           {angle !== null && (
             <View style={styles.angleContainer}>
               <Text style={styles.angleLabel}>LEG ANGLE</Text>
-              <Text style={styles.angleValue}>{angle}°</Text>
+              <Text style={styles.angleValue}>{angle}�</Text>
             </View>
           )}
         </View>

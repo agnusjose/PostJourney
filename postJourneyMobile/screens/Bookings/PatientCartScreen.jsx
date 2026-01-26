@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,30 +7,48 @@ import {
   StyleSheet,
   Alert,
   Image,
-  ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import { useCart } from "../../context/CartContext";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
 
 export default function PatientCartScreen() {
-  const { cart, removeFromCart, clearCart, updateQuantity } = useCart();
+  const { cart, removeFromCart, clearCart, updateQuantity, validateCartStock, checkStockAvailability } = useCart();
   const navigation = useNavigation();
-  
-  const [quantities, setQuantities] = useState({});
+
+  const [loading, setLoading] = useState(false);
+  const [checkingStock, setCheckingStock] = useState({});
 
   const calculateTotal = () => {
     return cart.reduce((sum, item) => {
-      const quantity = quantities[item._id] || 1;
+      const quantity = item.quantity || 1;
       return sum + (item.pricePerDay * quantity);
     }, 0);
   };
 
-  const handleQuantityChange = (itemId, change) => {
-    const currentQty = quantities[itemId] || 1;
+  const handleQuantityChange = async (itemId, change) => {
+    const item = cart.find(item => item._id === itemId);
+    if (!item) return;
+
+    const currentQty = item.quantity || 1;
     const newQty = Math.max(1, currentQty + change);
-    setQuantities({ ...quantities, [itemId]: newQty });
-    updateQuantity(itemId, newQty);
+
+    // Don't update if quantity doesn't change
+    if (newQty === currentQty) return;
+
+    setCheckingStock(prev => ({ ...prev, [itemId]: true }));
+
+    try {
+      const success = await updateQuantity(itemId, newQty);
+      if (!success) {
+        Alert.alert("Stock Update Failed", "Failed to update quantity");
+      }
+    } catch (error) {
+      Alert.alert("Stock Limit", error.message);
+    } finally {
+      setCheckingStock(prev => ({ ...prev, [itemId]: false }));
+    }
   };
 
   const handleRemoveItem = (itemId) => {
@@ -39,8 +57,8 @@ export default function PatientCartScreen() {
       "Are you sure you want to remove this item from cart?",
       [
         { text: "Cancel", style: "cancel" },
-        { 
-          text: "Remove", 
+        {
+          text: "Remove",
           style: "destructive",
           onPress: () => removeFromCart(itemId)
         }
@@ -48,13 +66,38 @@ export default function PatientCartScreen() {
     );
   };
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (cart.length === 0) {
       Alert.alert("Cart Empty", "Add equipment before checkout");
       return;
     }
 
-    navigation.navigate("CheckoutScreen");
+    setLoading(true);
+    try {
+      // Validate stock before checkout
+      const stockValidation = await validateCartStock();
+      const outOfStockItems = stockValidation.filter(item => !item.available);
+
+      if (outOfStockItems.length > 0) {
+        const itemNames = outOfStockItems.map(item =>
+          `• ${item.itemName}: Only ${item.currentStock} available, requested ${item.requested}`
+        ).join('\n');
+
+        Alert.alert(
+          "Stock Issue",
+          `Some items in your cart are no longer available:\n\n${itemNames}\n\nPlease update your cart.`,
+          [{ text: "OK" }]
+        );
+        return;
+      }
+
+      // Navigate to checkout
+      navigation.navigate("CheckoutScreen");
+    } catch (error) {
+      Alert.alert("Error", "Failed to validate cart items");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleContinueShopping = () => {
@@ -62,44 +105,59 @@ export default function PatientCartScreen() {
   };
 
   const renderItem = ({ item }) => {
-    const quantity = quantities[item._id] || 1;
-    const imageUrl = item.imageUrl 
-      ? `http://192.168.245.72:5000${item.imageUrl}`
+    const quantity = item.quantity || 1;
+    const imageUrl = item.imageUrl
+      ? `http://10.80.34.90:5000${item.imageUrl}`
       : "https://via.placeholder.com/100";
+
+    const isCheckingStock = checkingStock[item._id];
 
     return (
       <View style={styles.cartItem}>
         <Image source={{ uri: imageUrl }} style={styles.itemImage} />
-        
+
         <View style={styles.itemDetails}>
           <Text style={styles.itemName}>{item.equipmentName}</Text>
           <Text style={styles.itemProvider}>Provider: {item.providerName}</Text>
-          
+
           <View style={styles.priceRow}>
             <Text style={styles.itemPrice}>₹ {item.pricePerDay} / day</Text>
             <Text style={styles.itemTotal}>₹ {item.pricePerDay * quantity} total</Text>
           </View>
 
+          <View style={styles.stockRow}>
+            <Text style={styles.stockText}>
+              Available: {item.currentStock || 0} units
+            </Text>
+          </View>
+
           <View style={styles.quantityControls}>
-            <TouchableOpacity 
-              style={styles.qtyBtn}
+            <TouchableOpacity
+              style={[styles.qtyBtn, quantity <= 1 && styles.disabledQtyBtn]}
               onPress={() => handleQuantityChange(item._id, -1)}
+              disabled={quantity <= 1 || isCheckingStock}
             >
-              <Ionicons name="remove" size={20} color="#475569" />
+              <Ionicons name="remove" size={20} color={quantity <= 1 ? "#cbd5e1" : "#475569"} />
             </TouchableOpacity>
-            
-            <Text style={styles.qtyText}>{quantity}</Text>
-            
-            <TouchableOpacity 
-              style={styles.qtyBtn}
+
+            {isCheckingStock ? (
+              <ActivityIndicator size="small" color="#3b82f6" style={styles.qtyLoader} />
+            ) : (
+              <Text style={styles.qtyText}>{quantity}</Text>
+            )}
+
+            <TouchableOpacity
+              style={[styles.qtyBtn, quantity >= (item.currentStock || 0) && styles.disabledQtyBtn]}
               onPress={() => handleQuantityChange(item._id, 1)}
+              disabled={quantity >= (item.currentStock || 0) || isCheckingStock}
             >
-              <Ionicons name="add" size={20} color="#475569" />
+              <Ionicons name="add" size={20} color={quantity >= (item.currentStock || 0) ? "#cbd5e1" : "#475569"} />
             </TouchableOpacity>
-            
-            <TouchableOpacity 
+
+            <TouchableOpacity
               style={styles.removeBtn}
               onPress={() => handleRemoveItem(item._id)}
+              disabled={isCheckingStock}
             >
               <Ionicons name="trash" size={18} color="#ef4444" />
             </TouchableOpacity>
@@ -130,7 +188,7 @@ export default function PatientCartScreen() {
           <Text style={styles.emptySubtext}>
             Add equipment to get started
           </Text>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.shopBtn}
             onPress={handleContinueShopping}
           >
@@ -150,37 +208,40 @@ export default function PatientCartScreen() {
           <View style={styles.summaryContainer}>
             <View style={styles.summaryRow}>
               <Text style={styles.summaryLabel}>Subtotal</Text>
-              <Text style={styles.summaryValue}>₹ {totalAmount}</Text>
+              <Text style={styles.summaryValue}>₹ {totalAmount.toFixed(2)}</Text>
             </View>
-            
+
             <View style={styles.summaryRow}>
               <Text style={styles.summaryLabel}>Delivery</Text>
               <Text style={styles.summaryValue}>Free</Text>
             </View>
-            
-            <View style={styles.summaryRow}>
-              <Text style={styles.summaryLabel}>Tax (18%)</Text>
-              <Text style={styles.summaryValue}>₹ {(totalAmount * 0.18).toFixed(2)}</Text>
-            </View>
-            
+
             <View style={styles.divider} />
-            
+
             <View style={styles.totalRow}>
               <Text style={styles.totalLabel}>Total Amount</Text>
-              <Text style={styles.totalAmount}>₹ {(totalAmount * 1.18).toFixed(2)}</Text>
+              <Text style={styles.totalAmount}>₹ {totalAmount.toFixed(2)}</Text>
             </View>
 
             <TouchableOpacity
-              style={styles.checkoutBtn}
+              style={[styles.checkoutBtn, loading && styles.disabledBtn]}
               onPress={handleCheckout}
+              disabled={loading}
             >
-              <Ionicons name="lock-closed" size={20} color="#fff" />
-              <Text style={styles.checkoutText}>Proceed to Checkout</Text>
+              {loading ? (
+                <ActivityIndicator color="#fff" />
+              ) : (
+                <>
+                  <Ionicons name="lock-closed" size={20} color="#fff" />
+                  <Text style={styles.checkoutText}>Proceed to Checkout</Text>
+                </>
+              )}
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.continueBtn}
               onPress={handleContinueShopping}
+              disabled={loading}
             >
               <Text style={styles.continueText}>Continue Shopping</Text>
             </TouchableOpacity>
@@ -278,7 +339,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 8,
+    marginBottom: 4,
   },
   itemPrice: {
     fontSize: 16,
@@ -289,6 +350,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#10b981",
     fontWeight: "600",
+  },
+  stockRow: {
+    marginBottom: 8,
+  },
+  stockText: {
+    fontSize: 12,
+    color: "#64748b",
   },
   quantityControls: {
     flexDirection: "row",
@@ -303,6 +371,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: "#cbd5e1",
+  },
+  disabledQtyBtn: {
+    backgroundColor: "#f8fafc",
+    borderColor: "#e2e8f0",
+  },
+  qtyLoader: {
+    marginHorizontal: 16,
+    minWidth: 30,
   },
   qtyText: {
     fontSize: 16,
@@ -364,6 +440,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     gap: 10,
     marginBottom: 12,
+  },
+  disabledBtn: {
+    backgroundColor: "#94a3b8",
   },
   checkoutText: {
     color: "#fff",
