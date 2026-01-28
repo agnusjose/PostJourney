@@ -14,7 +14,7 @@ import axios from "axios";
 
 export default function EditEquipment({ route, navigation }) {
   const { equipment } = route.params;
-  const BASE_URL = "http://10.80.34.90:5000";
+  const BASE_URL = "http://192.168.115.72:5000";
 
   const [form, setForm] = useState({
     equipmentName: equipment.equipmentName || "",

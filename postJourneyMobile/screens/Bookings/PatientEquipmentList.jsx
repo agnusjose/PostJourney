@@ -24,7 +24,7 @@ export default function PatientEquipmentList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
 
-  const BASE_URL = "http://10.80.34.90:5000";
+  const BASE_URL = "http://192.168.115.72:5000";
 
   const categories = [
     { id: "all", label: "All" },

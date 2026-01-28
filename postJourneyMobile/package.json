@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@mediapipe/hands": "^0.4.1675469240",
-    "@react-native-async-storage/async-storage": "^1.23.1",
+    "@react-native-async-storage/async-storage": "^1.24.0",
     "@react-native-community/datetimepicker": "^8.6.0",
     "@react-native-community/slider": "^5.1.1",
     "@react-native-picker/picker": "^2.11.1",

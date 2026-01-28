@@ -21,7 +21,7 @@ export default function EquipmentDashboardScreen({ route, navigation }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageModalVisible, setImageModalVisible] = useState(false);
 
-  const BASE_URL = "http://10.80.34.90:5000";
+  const BASE_URL = "http://192.168.115.72:5000";
 
   // Fetch equipment function
   const fetchEquipment = async () => {

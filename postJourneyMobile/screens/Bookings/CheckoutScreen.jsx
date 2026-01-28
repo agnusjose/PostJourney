@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+// CheckoutScreen.jsx
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
@@ -13,10 +14,26 @@ import { useCart } from "../../context/CartContext";
 import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { useRoute, useNavigation } from "@react-navigation/native";
 
-export default function CheckoutScreen({ navigation }) {
-  const { cart, clearCart, getCartTotal, validateCartStock } = useCart();
+export default function CheckoutScreen({ route, navigation }) {
+  const { 
+    cart, 
+    clearCart, 
+    getSelectedTotal, 
+    validateSelectedStock,
+    removeSelectedItems 
+  } = useCart();
+  
   const { user } = useAuth();
+
+  // Get items from either route params or cart
+  const { immediateBookingItem, selectedCartItems } = route.params || {};
+  
+  // Determine items to book
+  const itemsToBook = immediateBookingItem 
+    ? [immediateBookingItem] 
+    : (selectedCartItems || cart.filter(item => item.selected));
 
   const [userDetails, setUserDetails] = useState({
     fullName: user?.name || "",
@@ -32,11 +49,12 @@ export default function CheckoutScreen({ navigation }) {
   const [loading, setLoading] = useState(false);
   const [validatingStock, setValidatingStock] = useState(false);
 
-  const BASE_URL = "http://10.80.34.90:5000";
+  const BASE_URL = "http://192.168.115.72:5000";
 
   // Calculate total amount
-  const totalAmount = getCartTotal();
+  const totalAmount = getSelectedTotal();
   const totalDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+  const totalItems = itemsToBook.reduce((sum, item) => sum + (item.quantity || 1), 0);
 
   const handleDateChange = (event, selectedDate, type) => {
     if (type === "start") {
@@ -72,39 +90,54 @@ export default function CheckoutScreen({ navigation }) {
       Alert.alert("Error", "End date must be after start date");
       return false;
     }
-    if (cart.length === 0) {
-      Alert.alert("Error", "Your cart is empty");
+    if (itemsToBook.length === 0) {
+      Alert.alert("Error", "No items to book");
       return false;
     }
 
-    // Check if user is logged in
     if (!user?.userId) {
       Alert.alert("Error", "Please login to book equipment");
-      console.error("❌ No user ID found in auth context");
       return false;
     }
 
-    console.log("✅ Input validation passed");
     return true;
   };
 
   const validateStockBeforeBooking = async () => {
-    setValidatingStock(true);
     try {
-      const stockValidation = await validateCartStock();
-      const outOfStockItems = stockValidation.filter(item => !item.available);
+      setValidatingStock(true);
+      
+      // For immediate booking, check stock individually
+      if (immediateBookingItem) {
+        const response = await axios.get(`${BASE_URL}/equipment/${immediateBookingItem._id}`);
+        if (response.data.success) {
+          const equipment = response.data.equipment;
+          if (equipment.stock < immediateBookingItem.quantity) {
+            Alert.alert(
+              "Stock Unavailable",
+              `Only ${equipment.stock} unit(s) of "${equipment.equipmentName}" available`,
+              [{ text: "OK" }]
+            );
+            return false;
+          }
+        }
+      } else {
+        // For cart items, use existing validation
+        const stockValidation = await validateSelectedStock();
+        const outOfStockItems = stockValidation.filter(item => !item.available);
 
-      if (outOfStockItems.length > 0) {
-        const itemNames = outOfStockItems.map(item =>
-          `• ${item.itemName}: Only ${item.currentStock} available, requested ${item.requested}`
-        ).join('\n');
+        if (outOfStockItems.length > 0) {
+          const itemNames = outOfStockItems.map(item =>
+            `• ${item.itemName}: Only ${item.currentStock} available, requested ${item.requested}`
+          ).join('\n');
 
-        Alert.alert(
-          "Stock Issue",
-          `Some items in your cart are no longer available:\n\n${itemNames}\n\nPlease update your cart.`,
-          [{ text: "OK" }]
-        );
-        return false;
+          Alert.alert(
+            "Stock Issue",
+            `Some items are no longer available:\n\n${itemNames}\n\nPlease update your cart.`,
+            [{ text: "OK", onPress: () => navigation.navigate("PatientCartScreen") }]
+          );
+          return false;
+        }
       }
       return true;
     } catch (error) {
@@ -118,27 +151,18 @@ export default function CheckoutScreen({ navigation }) {
   const handleBooking = async () => {
     if (!validateInputs()) return;
 
-    // Validate stock before proceeding
     const isStockValid = await validateStockBeforeBooking();
     if (!isStockValid) return;
 
     setLoading(true);
 
     try {
-      // Validate stock one more time before actual booking
-      const stockValidation = await validateCartStock();
-      const outOfStockItems = stockValidation.filter(item => !item.available);
-      if (outOfStockItems.length > 0) {
-        throw new Error("Some items are out of stock. Please update your cart.");
-      }
-
       // Prepare cart items with fixed providerId
-      const fixedCart = cart.map(item => {
+      const fixedItems = itemsToBook.map(item => {
         const fixedItem = { ...item };
 
         // Fix providerId if it's an object
         if (item.providerId && typeof item.providerId === 'object') {
-          console.log(`🔄 Fixing providerId for ${item.equipmentName}:`, item.providerId);
           fixedItem.providerId = item.providerId._id;
           if (!fixedItem.providerName && item.providerId.name) {
             fixedItem.providerName = item.providerId.name;
@@ -148,10 +172,10 @@ export default function CheckoutScreen({ navigation }) {
         return fixedItem;
       });
 
-      console.log("📋 Fixed cart items:", fixedCart);
+      console.log("📋 Items to book:", fixedItems);
 
-      // Book each item with quantity
-      const bookingPromises = fixedCart.map(async (item) => {
+      // Book each item
+      const bookingPromises = fixedItems.map(async (item) => {
         const bookingData = {
           patientId: user.userId,
           patientName: userDetails.fullName || user?.name,
@@ -190,14 +214,21 @@ export default function CheckoutScreen({ navigation }) {
 
       console.log("🎉 All bookings successful:", results);
 
+      // Clear appropriate items from cart
+      if (immediateBookingItem) {
+        // For immediate booking, nothing to clear from cart
+      } else {
+        // For cart checkout, remove selected items
+        removeSelectedItems();
+      }
+
       Alert.alert(
         "Success!",
-        `Booking confirmed for ${cart.length} item(s)`,
+        `Booking confirmed for ${itemsToBook.length} item(s)`,
         [
           {
             text: "View My Bookings",
             onPress: () => {
-              clearCart();
               navigation.navigate("PatientBookingsScreen", {
                 patientId: user.userId,
                 refresh: true
@@ -208,7 +239,6 @@ export default function CheckoutScreen({ navigation }) {
             text: "OK",
             style: "default",
             onPress: () => {
-              clearCart();
               navigation.navigate("Home");
             }
           }
@@ -216,17 +246,12 @@ export default function CheckoutScreen({ navigation }) {
       );
     } catch (error) {
       console.error("❌ Booking error:", error);
-      console.error("❌ Error details:", error.response?.data);
-
+      
       let errorMessage = "Failed to create booking. Please try again.";
       if (error.response?.data?.message) {
         errorMessage = error.response.data.message;
-      } else if (error.message.includes("Network Error")) {
-        errorMessage = "Network error. Please check your connection.";
-      } else if (error.message.includes("Patient not found")) {
-        errorMessage = "Your account was not found. Please log out and log in again.";
       } else if (error.message.includes("Only") && error.message.includes("available")) {
-        errorMessage = error.message; // Show stock error message
+        errorMessage = error.message;
       }
 
       Alert.alert("Booking Failed", errorMessage);
@@ -235,32 +260,48 @@ export default function CheckoutScreen({ navigation }) {
     }
   };
 
-  const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-
-  return (
-    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
-      <Text style={styles.header}>Checkout</Text>
-
-      {/* Order Summary */}
+  // Render order summary based on booking type
+  const renderOrderSummary = () => {
+    const isImmediateBooking = !!immediateBookingItem;
+    
+    return (
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Order Summary ({totalItems} items)</Text>
-        {cart.map((item, index) => (
+        <Text style={styles.sectionTitle}>
+          {isImmediateBooking ? "Booking Summary" : `Order Summary (${totalItems} items)`}
+        </Text>
+        
+        {itemsToBook.map((item, index) => (
           <View key={index} style={styles.cartItem}>
             <View>
               <Text style={styles.itemName}>{item.equipmentName}</Text>
               <Text style={styles.itemQuantity}>Quantity: {item.quantity || 1}</Text>
-              <Text style={styles.itemStock}>Available: {item.currentStock || 0} units</Text>
+              <Text style={styles.itemProvider}>Provider: {item.providerName}</Text>
             </View>
             <Text style={styles.itemPrice}>
               ₹{item.pricePerDay} × {item.quantity || 1} = ₹{(item.pricePerDay * (item.quantity || 1)).toFixed(2)}/day
             </Text>
           </View>
         ))}
+        
         <View style={styles.totalRow}>
           <Text style={styles.totalLabel}>Total ({totalDays} days):</Text>
           <Text style={styles.totalAmount}>₹{(totalAmount * totalDays).toFixed(2)}</Text>
         </View>
+        
+        {isImmediateBooking && (
+          <Text style={styles.noteText}>
+            Note: This is an immediate booking. Item will not be added to cart.
+          </Text>
+        )}
       </View>
+    );
+  };
+
+  return (
+    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
+      <Text style={styles.header}>Checkout</Text>
+
+      {renderOrderSummary()}
 
       {/* Rental Period */}
       <View style={styles.section}>
@@ -381,6 +422,7 @@ export default function CheckoutScreen({ navigation }) {
     </ScrollView>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -549,5 +591,14 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     fontSize: 12,
     color: "#0369a1",
+  },
+  noteText: {
+    fontSize: 12,
+    color: "#64748b",
+    fontStyle: "italic",
+    marginTop: 8,
+    padding: 8,
+    backgroundColor: "#f1f5f9",
+    borderRadius: 6,
   },
 });

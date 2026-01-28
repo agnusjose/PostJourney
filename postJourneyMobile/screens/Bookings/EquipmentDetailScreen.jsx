@@ -1,3 +1,4 @@
+// EquipmentDetailScreen.jsx
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -9,7 +10,6 @@ import {
   Alert,
   Modal,
   Dimensions,
-  TextInput,
   ActivityIndicator
 } from "react-native";
 import { useCart } from "../../context/CartContext";
@@ -23,7 +23,13 @@ export default function EquipmentDetailScreen() {
   const route = useRoute();
   const navigation = useNavigation();
   const { equipmentId } = route.params;
-  const { addToCart, loading: cartLoading } = useCart();
+  const { 
+    addToCart, 
+    prepareForImmediateBooking,
+    isItemInCart,
+    getCartItemQuantity,
+    loading: cartLoading 
+  } = useCart();
 
   const [equipment, setEquipment] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -32,29 +38,29 @@ export default function EquipmentDetailScreen() {
   const [totalReviews, setTotalReviews] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [showFullImage, setShowFullImage] = useState(false);
-  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  // Review modal state
-  const [showReviewModal, setShowReviewModal] = useState(false);
-  const [userRating, setUserRating] = useState(5);
-  const [userComment, setUserComment] = useState("");
-  const [submittingReview, setSubmittingReview] = useState(false);
-  const [canReview, setCanReview] = useState(false);
-
-  const BASE_URL = "http://10.80.34.90:5000";
+  const BASE_URL = "http://192.168.115.72:5000";
 
   useEffect(() => {
     fetchEquipmentDetails();
     fetchReviews();
   }, []);
 
+  useEffect(() => {
+    if (equipment) {
+      // Calculate max available quantity
+      const cartQty = getCartItemQuantity(equipment._id);
+      const maxAvailable = Math.max(0, equipment.stock - cartQty);
+      setQuantity(Math.min(1, maxAvailable));
+    }
+  }, [equipment]);
+
   const fetchEquipmentDetails = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/equipment/${equipmentId}`);
       if (res.data.success) {
         setEquipment(res.data.equipment);
-        // Reset quantity to 1 when equipment loads
-        setQuantity(1);
       }
     } catch (error) {
       Alert.alert("Error", "Failed to load equipment details");
@@ -82,12 +88,15 @@ export default function EquipmentDetailScreen() {
       return;
     }
 
-    if (quantity > equipment.stock) {
-      Alert.alert("Insufficient Stock", `Only ${equipment.stock} unit(s) available`);
+    const cartQty = getCartItemQuantity(equipment._id);
+    const available = equipment.stock - cartQty;
+    
+    if (quantity > available) {
+      Alert.alert("Insufficient Stock", `Only ${available} unit(s) available`);
       return;
     }
 
-    setIsAddingToCart(true);
+    setIsProcessing(true);
 
     const cartItem = {
       _id: equipment._id,
@@ -97,8 +106,7 @@ export default function EquipmentDetailScreen() {
       providerName: equipment.providerName,
       providerId: equipment.providerId,
       category: equipment.category,
-      quantity: quantity,
-      currentStock: equipment.stock // Pass current stock for validation
+      quantity: quantity
     };
 
     const result = await addToCart(cartItem);
@@ -116,10 +124,10 @@ export default function EquipmentDetailScreen() {
         ]
       );
     } else {
-      Alert.alert("Error", result.message || "Failed to add to cart");
+      Alert.alert("Cannot Add to Cart", result.message || "Failed to add to cart");
     }
 
-    setIsAddingToCart(false);
+    setIsProcessing(false);
   };
 
   const handleBookNow = async () => {
@@ -128,13 +136,17 @@ export default function EquipmentDetailScreen() {
       return;
     }
 
-    if (quantity > equipment.stock) {
-      Alert.alert("Insufficient Stock", `Only ${equipment.stock} unit(s) available`);
+    const cartQty = getCartItemQuantity(equipment._id);
+    const available = equipment.stock - cartQty;
+    
+    if (quantity > available) {
+      Alert.alert("Insufficient Stock", `Only ${available} unit(s) available`);
       return;
     }
 
-    // Add to cart first
-    const cartItem = {
+    setIsProcessing(true);
+
+    const bookingItem = {
       _id: equipment._id,
       equipmentName: equipment.equipmentName,
       pricePerDay: equipment.pricePerDay,
@@ -142,25 +154,36 @@ export default function EquipmentDetailScreen() {
       providerName: equipment.providerName,
       providerId: equipment.providerId,
       category: equipment.category,
-      quantity: quantity,
-      currentStock: equipment.stock
+      quantity: quantity
     };
 
-    const result = await addToCart(cartItem);
+    const result = await prepareForImmediateBooking(bookingItem);
 
     if (result.success) {
-      // Navigate directly to checkout
-      navigation.navigate("CheckoutScreen");
+      // Navigate directly to checkout with this single item
+      navigation.navigate("CheckoutScreen", {
+        immediateBookingItem: result.bookingItem
+      });
     } else {
-      Alert.alert("Error", result.message || "Failed to proceed to checkout");
+      Alert.alert("Cannot Proceed", result.message || "Failed to proceed to booking");
     }
+
+    setIsProcessing(false);
   };
 
   const handleIncreaseQuantity = () => {
-    if (quantity < equipment.stock) {
+    if (!equipment) return;
+    
+    const cartQty = getCartItemQuantity(equipment._id);
+    const maxAvailable = equipment.stock - cartQty;
+    
+    if (quantity < maxAvailable) {
       setQuantity(quantity + 1);
     } else {
-      Alert.alert("Maximum Quantity", `Only ${equipment.stock} unit(s) available`);
+      Alert.alert(
+        "Maximum Quantity", 
+        `Only ${maxAvailable} unit(s) available (${cartQty} already in cart)`
+      );
     }
   };
 
@@ -223,6 +246,10 @@ export default function EquipmentDetailScreen() {
     "other": "#6b7280"
   };
 
+  const cartQty = getCartItemQuantity(equipment._id);
+  const availableForAdd = Math.max(0, equipment.stock - cartQty);
+  const canAdd = availableForAdd > 0 && quantity <= availableForAdd;
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Product Images */}
@@ -272,7 +299,10 @@ export default function EquipmentDetailScreen() {
           {equipment.stock > 0 ? (
             <>
               <Ionicons name="checkmark-circle" size={18} color="#10b981" />
-              <Text style={styles.inStock}>In Stock ({equipment.stock} available)</Text>
+              <Text style={styles.inStock}>
+                In Stock ({equipment.stock} total)
+                {cartQty > 0 && ` (${cartQty} in cart, ${availableForAdd} available)`}
+              </Text>
             </>
           ) : (
             <>
@@ -283,7 +313,7 @@ export default function EquipmentDetailScreen() {
         </View>
 
         {/* Quantity Selector */}
-        {equipment.stock > 0 && (
+        {equipment.stock > 0 && availableForAdd > 0 && (
           <View style={styles.quantityContainer}>
             <Text style={styles.quantityLabel}>Quantity:</Text>
             <View style={styles.quantityControls}>
@@ -296,15 +326,15 @@ export default function EquipmentDetailScreen() {
               </TouchableOpacity>
               <Text style={styles.quantityText}>{quantity}</Text>
               <TouchableOpacity
-                style={[styles.quantityBtn, quantity >= equipment.stock && styles.disabledQuantityBtn]}
+                style={[styles.quantityBtn, quantity >= availableForAdd && styles.disabledQuantityBtn]}
                 onPress={handleIncreaseQuantity}
-                disabled={quantity >= equipment.stock}
+                disabled={quantity >= availableForAdd}
               >
-                <Ionicons name="add" size={20} color={quantity >= equipment.stock ? "#cbd5e1" : "#475569"} />
+                <Ionicons name="add" size={20} color={quantity >= availableForAdd ? "#cbd5e1" : "#475569"} />
               </TouchableOpacity>
             </View>
             <Text style={styles.quantityHint}>
-              Max: {equipment.stock} unit(s)
+              Max: {availableForAdd} unit(s) available
             </Text>
           </View>
         )}
@@ -339,27 +369,35 @@ export default function EquipmentDetailScreen() {
         {/* Action Buttons */}
         <View style={styles.actionButtons}>
           <TouchableOpacity
-            style={[styles.addToCartBtn, equipment.stock === 0 && styles.disabledBtn]}
+            style={[styles.addToCartBtn, (!canAdd || isProcessing || cartLoading) && styles.disabledBtn]}
             onPress={handleAddToCart}
-            disabled={equipment.stock === 0 || isAddingToCart || cartLoading}
+            disabled={!canAdd || isProcessing || cartLoading}
           >
-            {isAddingToCart || cartLoading ? (
+            {isProcessing || cartLoading ? (
               <ActivityIndicator color="#fff" size="small" />
             ) : (
               <>
                 <Ionicons name="cart" size={20} color="#fff" />
-                <Text style={styles.addToCartText}>Add to Cart</Text>
+                <Text style={styles.addToCartText}>
+                  {cartQty > 0 ? 'Add More to Cart' : 'Add to Cart'}
+                </Text>
               </>
             )}
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.buyNowBtn, equipment.stock === 0 && styles.disabledBtn]}
+            style={[styles.buyNowBtn, (!canAdd || isProcessing || cartLoading) && styles.disabledBtn]}
             onPress={handleBookNow}
-            disabled={equipment.stock === 0 || isAddingToCart || cartLoading}
+            disabled={!canAdd || isProcessing || cartLoading}
           >
-            <Ionicons name="flash" size={20} color="#fff" />
-            <Text style={styles.buyNowText}>Book Now</Text>
+            {isProcessing || cartLoading ? (
+              <ActivityIndicator color="#fff" size="small" />
+            ) : (
+              <>
+                <Ionicons name="flash" size={20} color="#fff" />
+                <Text style={styles.buyNowText}>Book Now</Text>
+              </>
+            )}
           </TouchableOpacity>
         </View>
 
@@ -398,6 +436,7 @@ export default function EquipmentDetailScreen() {
     </ScrollView>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

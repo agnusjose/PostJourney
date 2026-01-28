@@ -29,7 +29,7 @@ app.use(cors({
   origin: [
     "http://localhost:5173",
     "http://localhost:8081",
-    "http://10.80.34.90:5000",
+    "http://192.168.115.72:5000",
     "http://192.168.112.170",
     "http://192.168.8.135:5000",
     "http://localhost:19006"
@@ -55,8 +55,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/postJourneyDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-  .then(() => console.log("? MongoDB Connected"))
-  .catch(err => console.error("? MongoDB Connection Error:", err));
+.then(() => console.log("✅ MongoDB Connected"))
+.catch(err => console.error("❌ MongoDB Connection Error:", err));
 
 // Multer configuration for file uploads
 const storage = multer.diskStorage({
@@ -661,13 +661,13 @@ app.get("/patient/:patientId/active-equipment", async (req, res) => {
 
 // ========== BOOKING ROUTES ==========
 // Create booking
-// Update the booking create endpoint in server.js
+// In your booking creation route in server.js
 app.post("/booking/create", async (req, res) => {
   try {
     console.log("📝 ========== BOOKING CREATE REQUEST ==========");
     console.log("📥 Full request body:", JSON.stringify(req.body, null, 2));
 
-    // Extract all variables - ADD QUANTITY
+    // Extract all variables
     let {
       patientId,
       patientName,
@@ -678,12 +678,13 @@ app.post("/booking/create", async (req, res) => {
       startDate,
       endDate,
       pricePerDay,
-      quantity = 1, // ADD QUANTITY WITH DEFAULT
+      quantity = 1,
       deliveryAddress,
       contactPhone,
       notes
     } = req.body;
 
+    console.log("🔍 Quantity requested:", quantity);
     // Log all IDs with type
     console.log("🔍 Patient ID:", patientId, "Type:", typeof patientId);
     console.log("🔍 Equipment ID:", equipmentId, "Type:", typeof equipmentId);
@@ -741,22 +742,22 @@ app.post("/booking/create", async (req, res) => {
       return res.json({ success: false, message: "Patient not found" });
     }
 
-    // Check equipment availability
-    console.log("🔍 Checking equipment...");
+   // Check equipment availability with fresh data
+    console.log("🔍 Checking equipment availability...");
     const equipment = await Equipment.findById(equipmentId);
     if (!equipment) {
       console.log("❌ Equipment not found");
       return res.json({ success: false, message: "Equipment not found" });
     }
 
-    console.log("📊 Equipment:", equipment.equipmentName, "Stock:", equipment.stock, "Requested quantity:", quantity);
+    console.log("📊 Equipment stock:", equipment.stock, "Requested:", quantity);
 
-    // Check if enough stock is available
+    // Check stock using the equipment's current stock (not cached)
     if (equipment.stock < quantity) {
-      console.log("❌ Not enough stock");
+      console.log("❌ Not enough stock available");
       return res.json({
         success: false,
-        message: `Only ${equipment.stock} unit(s) available, requested ${quantity}`
+        message: `Insufficient stock. Only ${equipment.stock} unit(s) available now.`
       });
     }
 
@@ -829,22 +830,17 @@ app.post("/booking/create", async (req, res) => {
       days: booking.totalDays
     });
 
-    // Reduce equipment stock by quantity
-    console.log("📦 Updating equipment stock...");
-    console.log("Old stock:", equipment.stock);
+    // Reduce stock by quantity
+    console.log("📦 Reducing equipment stock...");
     equipment.stock -= parseInt(quantity);
-
-    // Automatically update isAvailable based on stock
     equipment.isAvailable = equipment.stock > 0;
+    
+    console.log("📊 New stock:", equipment.stock);
 
-    console.log("New stock:", equipment.stock, "Available:", equipment.isAvailable);
-
-    // Save both
-    console.log("💾 Saving to database...");
+    // Save booking and equipment
     await Promise.all([booking.save(), equipment.save()]);
 
-    console.log("✅ Booking saved! ID:", booking._id);
-    console.log("✅ Equipment updated!");
+    console.log("✅ Booking created and stock updated!");
 
     return res.json({
       success: true,
@@ -1564,6 +1560,6 @@ app.get("/test-provider/:id", async (req, res) => {
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`?? Server running on port ${PORT} (LAN enabled)`);
-  console.log(`?? Uploads directory: ${path.join(__dirname, "uploads")}`);
+  console.log(`🚀 Server running on port ${PORT} (LAN enabled)`);
+  console.log(`📁 Uploads directory: ${path.join(__dirname, "uploads")}`);
 });

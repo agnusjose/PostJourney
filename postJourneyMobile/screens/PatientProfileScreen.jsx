@@ -39,7 +39,7 @@ export default function PatientProfileScreen({ route, navigation }) {
         try {
             setLoading(true);
             const response = await axios.get(
-                `http://10.80.34.90:5000/api/patient/profile/${userId}`
+                `http://192.168.115.72:5000/api/patient/profile/${userId}`
             );
 
             if (response.data.success) {
@@ -66,7 +66,7 @@ export default function PatientProfileScreen({ route, navigation }) {
         try {
             setSaving(true);
             const response = await axios.put(
-                "http://10.80.34.90:5000/api/patient/update-profile",
+                "http://192.168.115.72:5000/api/patient/update-profile",
                 {
                     userId,
                     fullName: editedProfile.name,

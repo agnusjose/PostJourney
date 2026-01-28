@@ -25,7 +25,7 @@ export default function LegRaiseMonitor() {
 
         if (!photo?.base64) return;
 
-        const res = await fetch("http://10.80.34.90.72.1:8000/pose/analyze", {
+        const res = await fetch("http://192.168.115.72.72.1:8000/pose/analyze", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

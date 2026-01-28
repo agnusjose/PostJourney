@@ -1,3 +1,4 @@
+// PatientCartScreen.jsx
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -14,17 +15,59 @@ import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
 
 export default function PatientCartScreen() {
-  const { cart, removeFromCart, clearCart, updateQuantity, validateCartStock, checkStockAvailability } = useCart();
+  const { 
+    cart, 
+    removeFromCart, 
+    updateQuantity, 
+    validateSelectedStock,
+    toggleItemSelection,
+    selectAllItems,
+    deselectAllItems,
+    getSelectedItems,
+    getSelectedTotal,
+    getSelectedCount,
+    loading: cartLoading 
+  } = useCart();
+  
   const navigation = useNavigation();
 
   const [loading, setLoading] = useState(false);
   const [checkingStock, setCheckingStock] = useState({});
+  const [outOfStockItems, setOutOfStockItems] = useState([]);
+  const [allSelected, setAllSelected] = useState(false);
 
-  const calculateTotal = () => {
-    return cart.reduce((sum, item) => {
-      const quantity = item.quantity || 1;
-      return sum + (item.pricePerDay * quantity);
-    }, 0);
+  // Update allSelected state
+  useEffect(() => {
+    if (cart.length > 0) {
+      const allSelected = cart.every(item => item.selected);
+      setAllSelected(allSelected);
+    } else {
+      setAllSelected(false);
+    }
+  }, [cart]);
+
+  // Check for out of stock items
+  useEffect(() => {
+    const checkStock = async () => {
+      if (cart.length === 0) {
+        setOutOfStockItems([]);
+        return;
+      }
+
+      const stockValidation = await validateSelectedStock();
+      const unavailableItems = stockValidation.filter(item => !item.available);
+      setOutOfStockItems(unavailableItems.map(item => item.itemId));
+    };
+
+    checkStock();
+  }, [cart]);
+
+  const handleToggleSelectAll = () => {
+    if (allSelected) {
+      deselectAllItems();
+    } else {
+      selectAllItems();
+    }
   };
 
   const handleQuantityChange = async (itemId, change) => {
@@ -34,7 +77,6 @@ export default function PatientCartScreen() {
     const currentQty = item.quantity || 1;
     const newQty = Math.max(1, currentQty + change);
 
-    // Don't update if quantity doesn't change
     if (newQty === currentQty) return;
 
     setCheckingStock(prev => ({ ...prev, [itemId]: true }));
@@ -42,7 +84,7 @@ export default function PatientCartScreen() {
     try {
       const success = await updateQuantity(itemId, newQty);
       if (!success) {
-        Alert.alert("Stock Update Failed", "Failed to update quantity");
+        Alert.alert("Error", "Failed to update quantity");
       }
     } catch (error) {
       Alert.alert("Stock Limit", error.message);
@@ -67,32 +109,51 @@ export default function PatientCartScreen() {
   };
 
   const handleCheckout = async () => {
-    if (cart.length === 0) {
-      Alert.alert("Cart Empty", "Add equipment before checkout");
+    const selectedItems = getSelectedItems();
+    
+    if (selectedItems.length === 0) {
+      Alert.alert("No Items Selected", "Please select items to checkout");
+      return;
+    }
+
+    // Check for out of stock items
+    const selectedOutOfStock = selectedItems.filter(item => 
+      outOfStockItems.includes(item._id)
+    );
+    
+    if (selectedOutOfStock.length > 0) {
+      const itemNames = selectedOutOfStock.map(item => `• ${item.equipmentName}`).join('\n');
+      Alert.alert(
+        "Stock Issue",
+        `Some selected items are no longer available:\n\n${itemNames}\n\nPlease remove them before checkout.`,
+        [{ text: "OK" }]
+      );
       return;
     }
 
     setLoading(true);
     try {
-      // Validate stock before checkout
-      const stockValidation = await validateCartStock();
-      const outOfStockItems = stockValidation.filter(item => !item.available);
+      // Validate stock with fresh data
+      const stockValidation = await validateSelectedStock();
+      const unavailableItems = stockValidation.filter(item => !item.available);
 
-      if (outOfStockItems.length > 0) {
-        const itemNames = outOfStockItems.map(item =>
+      if (unavailableItems.length > 0) {
+        const itemNames = unavailableItems.map(item =>
           `• ${item.itemName}: Only ${item.currentStock} available, requested ${item.requested}`
         ).join('\n');
 
         Alert.alert(
           "Stock Issue",
-          `Some items in your cart are no longer available:\n\n${itemNames}\n\nPlease update your cart.`,
+          `Some items are no longer available:\n\n${itemNames}\n\nPlease update your cart.`,
           [{ text: "OK" }]
         );
         return;
       }
 
-      // Navigate to checkout
-      navigation.navigate("CheckoutScreen");
+      // Navigate to checkout with selected items
+      navigation.navigate("CheckoutScreen", {
+        selectedCartItems: selectedItems
+      });
     } catch (error) {
       Alert.alert("Error", "Failed to validate cart items");
     } finally {
@@ -106,52 +167,88 @@ export default function PatientCartScreen() {
 
   const renderItem = ({ item }) => {
     const quantity = item.quantity || 1;
+    const currentStock = item.currentStock || 0;
     const imageUrl = item.imageUrl
-      ? `http://10.80.34.90:5000${item.imageUrl}`
+      ? `http://192.168.115.72:5000${item.imageUrl}`
       : "https://via.placeholder.com/100";
 
     const isCheckingStock = checkingStock[item._id];
+    const isOutOfStock = currentStock < quantity;
+    const canIncrease = currentStock > quantity;
 
     return (
-      <View style={styles.cartItem}>
+      <View style={[styles.cartItem, isOutOfStock && styles.outOfStockItem]}>
+        {/* Selection checkbox */}
+        <TouchableOpacity
+          style={styles.checkbox}
+          onPress={() => toggleItemSelection(item._id)}
+        >
+          {item.selected ? (
+            <Ionicons name="checkbox" size={24} color="#3b82f6" />
+          ) : (
+            <Ionicons name="square-outline" size={24} color="#94a3b8" />
+          )}
+        </TouchableOpacity>
+
         <Image source={{ uri: imageUrl }} style={styles.itemImage} />
 
         <View style={styles.itemDetails}>
-          <Text style={styles.itemName}>{item.equipmentName}</Text>
+          <Text style={[styles.itemName, isOutOfStock && styles.outOfStockText]}>
+            {item.equipmentName}
+          </Text>
           <Text style={styles.itemProvider}>Provider: {item.providerName}</Text>
 
           <View style={styles.priceRow}>
-            <Text style={styles.itemPrice}>₹ {item.pricePerDay} / day</Text>
-            <Text style={styles.itemTotal}>₹ {item.pricePerDay * quantity} total</Text>
+            <Text style={[styles.itemPrice, isOutOfStock && styles.outOfStockText]}>
+              ₹ {item.pricePerDay} / day
+            </Text>
+            <Text style={[styles.itemTotal, isOutOfStock && styles.outOfStockText]}>
+              ₹ {item.pricePerDay * quantity} total/day
+            </Text>
           </View>
 
           <View style={styles.stockRow}>
-            <Text style={styles.stockText}>
-              Available: {item.currentStock || 0} units
+            <Text style={[
+              styles.stockText,
+              isOutOfStock && styles.outOfStockText
+            ]}>
+              {isOutOfStock
+                ? `Currently unavailable (${currentStock} in stock)`
+                : `Available: ${currentStock} units`
+              }
             </Text>
           </View>
 
           <View style={styles.quantityControls}>
             <TouchableOpacity
-              style={[styles.qtyBtn, quantity <= 1 && styles.disabledQtyBtn]}
+              style={[styles.qtyBtn, (quantity <= 1 || isOutOfStock || isCheckingStock) && styles.disabledQtyBtn]}
               onPress={() => handleQuantityChange(item._id, -1)}
-              disabled={quantity <= 1 || isCheckingStock}
+              disabled={quantity <= 1 || isOutOfStock || isCheckingStock}
             >
-              <Ionicons name="remove" size={20} color={quantity <= 1 ? "#cbd5e1" : "#475569"} />
+              <Ionicons name="remove" size={20} color={
+                quantity <= 1 || isOutOfStock || isCheckingStock ? "#cbd5e1" : "#475569"
+              } />
             </TouchableOpacity>
 
             {isCheckingStock ? (
               <ActivityIndicator size="small" color="#3b82f6" style={styles.qtyLoader} />
             ) : (
-              <Text style={styles.qtyText}>{quantity}</Text>
+              <Text style={[
+                styles.qtyText,
+                isOutOfStock && styles.outOfStockText
+              ]}>
+                {quantity}
+              </Text>
             )}
 
             <TouchableOpacity
-              style={[styles.qtyBtn, quantity >= (item.currentStock || 0) && styles.disabledQtyBtn]}
+              style={[styles.qtyBtn, (!canIncrease || isOutOfStock || isCheckingStock) && styles.disabledQtyBtn]}
               onPress={() => handleQuantityChange(item._id, 1)}
-              disabled={quantity >= (item.currentStock || 0) || isCheckingStock}
+              disabled={!canIncrease || isOutOfStock || isCheckingStock}
             >
-              <Ionicons name="add" size={20} color={quantity >= (item.currentStock || 0) ? "#cbd5e1" : "#475569"} />
+              <Ionicons name="add" size={20} color={
+                !canIncrease || isOutOfStock || isCheckingStock ? "#cbd5e1" : "#475569"
+              } />
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -167,7 +264,13 @@ export default function PatientCartScreen() {
     );
   };
 
-  const totalAmount = calculateTotal();
+  const selectedItems = getSelectedItems();
+  const selectedTotal = getSelectedTotal();
+  const selectedCount = getSelectedCount();
+  const hasSelectedItems = selectedItems.length > 0;
+  const hasOutOfStockSelected = selectedItems.some(item => 
+    outOfStockItems.includes(item._id)
+  );
 
   return (
     <View style={styles.container}>
@@ -197,6 +300,35 @@ export default function PatientCartScreen() {
         </View>
       ) : (
         <>
+          {/* Selection Header */}
+          <View style={styles.selectionHeader}>
+            <TouchableOpacity
+              style={styles.selectAllBtn}
+              onPress={handleToggleSelectAll}
+            >
+              {allSelected ? (
+                <Ionicons name="checkbox" size={24} color="#3b82f6" />
+              ) : (
+                <Ionicons name="square-outline" size={24} color="#64748b" />
+              )}
+              <Text style={styles.selectAllText}>
+                {allSelected ? 'Deselect All' : 'Select All'}
+              </Text>
+            </TouchableOpacity>
+            <Text style={styles.selectedCount}>
+              {selectedCount} item{selectedCount !== 1 ? 's' : ''} selected
+            </Text>
+          </View>
+
+          {hasOutOfStockSelected && (
+            <View style={styles.outOfStockBanner}>
+              <Ionicons name="alert-circle" size={20} color="#fff" />
+              <Text style={styles.outOfStockBannerText}>
+                Some selected items are unavailable
+              </Text>
+            </View>
+          )}
+
           <FlatList
             data={cart}
             keyExtractor={(item) => item._id}
@@ -207,8 +339,8 @@ export default function PatientCartScreen() {
 
           <View style={styles.summaryContainer}>
             <View style={styles.summaryRow}>
-              <Text style={styles.summaryLabel}>Subtotal</Text>
-              <Text style={styles.summaryValue}>₹ {totalAmount.toFixed(2)}</Text>
+              <Text style={styles.summaryLabel}>Subtotal ({selectedCount} items)</Text>
+              <Text style={styles.summaryValue}>₹ {selectedTotal.toFixed(2)}/day</Text>
             </View>
 
             <View style={styles.summaryRow}>
@@ -219,21 +351,36 @@ export default function PatientCartScreen() {
             <View style={styles.divider} />
 
             <View style={styles.totalRow}>
-              <Text style={styles.totalLabel}>Total Amount</Text>
-              <Text style={styles.totalAmount}>₹ {totalAmount.toFixed(2)}</Text>
+              <Text style={styles.totalLabel}>Total Amount/Day</Text>
+              <Text style={styles.totalAmount}>₹ {selectedTotal.toFixed(2)}</Text>
             </View>
 
+            {hasOutOfStockSelected && (
+              <View style={styles.warningBox}>
+                <Ionicons name="alert-circle" size={18} color="#f59e0b" />
+                <Text style={styles.warningText}>
+                  Remove unavailable items before checkout
+                </Text>
+              </View>
+            )}
+
             <TouchableOpacity
-              style={[styles.checkoutBtn, loading && styles.disabledBtn]}
+              style={[
+                styles.checkoutBtn,
+                (loading || !hasSelectedItems || hasOutOfStockSelected) && styles.disabledBtn
+              ]}
               onPress={handleCheckout}
-              disabled={loading}
+              disabled={loading || !hasSelectedItems || hasOutOfStockSelected}
             >
               {loading ? (
                 <ActivityIndicator color="#fff" />
               ) : (
                 <>
                   <Ionicons name="lock-closed" size={20} color="#fff" />
-                  <Text style={styles.checkoutText}>Proceed to Checkout</Text>
+                  <Text style={styles.checkoutText}>
+                    {!hasSelectedItems ? 'Select Items to Checkout' : 
+                     hasOutOfStockSelected ? 'Fix Items First' : 'Proceed to Checkout'}
+                  </Text>
                 </>
               )}
             </TouchableOpacity>
@@ -251,6 +398,7 @@ export default function PatientCartScreen() {
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -270,6 +418,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "700",
     color: "#1e293b",
+  },
+  headerActions: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
+  },
+  refreshBtn: {
+    padding: 4,
   },
   emptyContainer: {
     flex: 1,
@@ -299,6 +455,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
   },
+  outOfStockBanner: {
+    backgroundColor: "#ef4444",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 12,
+    gap: 8,
+  },
+  outOfStockBannerText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "600",
+  },
   cartList: {
     padding: 16,
   },
@@ -313,6 +482,30 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
+    position: "relative",
+  },
+  outOfStockItem: {
+    backgroundColor: "#fee2e2",
+    borderWidth: 1,
+    borderColor: "#fca5a5",
+  },
+  outOfStockBadge: {
+    position: "absolute",
+    top: 8,
+    right: 8,
+    backgroundColor: "#ef4444",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 4,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    zIndex: 1,
+  },
+  outOfStockBadgeText: {
+    color: "#fff",
+    fontSize: 11,
+    fontWeight: "600",
   },
   itemImage: {
     width: 80,
@@ -329,6 +522,9 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#1e293b",
     marginBottom: 2,
+  },
+  outOfStockText: {
+    color: "#ef4444",
   },
   itemProvider: {
     fontSize: 12,
@@ -357,6 +553,10 @@ const styles = StyleSheet.create({
   stockText: {
     fontSize: 12,
     color: "#64748b",
+  },
+  lowStockText: {
+    color: "#f59e0b",
+    fontWeight: "600",
   },
   quantityControls: {
     flexDirection: "row",
@@ -391,6 +591,23 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     padding: 8,
   },
+  removeOutOfStockBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#fef2f2",
+    padding: 8,
+    borderRadius: 6,
+    marginTop: 8,
+    borderWidth: 1,
+    borderColor: "#fecaca",
+    gap: 6,
+  },
+  removeOutOfStockText: {
+    color: "#ef4444",
+    fontSize: 12,
+    fontWeight: "600",
+  },
   summaryContainer: {
     backgroundColor: "#fff",
     padding: 20,
@@ -419,7 +636,7 @@ const styles = StyleSheet.create({
   totalRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 20,
+    marginBottom: 16,
   },
   totalLabel: {
     fontSize: 18,
@@ -430,6 +647,22 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "800",
     color: "#16a34a",
+  },
+  warningBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fffbeb",
+    padding: 12,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#fde68a",
+    marginBottom: 16,
+    gap: 8,
+  },
+  warningText: {
+    fontSize: 13,
+    color: "#92400e",
+    flex: 1,
   },
   checkoutBtn: {
     flexDirection: "row",
@@ -446,7 +679,7 @@ const styles = StyleSheet.create({
   },
   checkoutText: {
     color: "#fff",
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "700",
   },
   continueBtn: {
@@ -460,5 +693,32 @@ const styles = StyleSheet.create({
     color: "#2563eb",
     fontSize: 16,
     fontWeight: "600",
+  },
+   selectionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 16,
+    backgroundColor: "#fff",
+    borderBottomWidth: 1,
+    borderBottomColor: "#e2e8f0",
+  },
+  selectAllBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  selectAllText: {
+    fontSize: 14,
+    color: "#64748b",
+    fontWeight: "500",
+  },
+  selectedCount: {
+    fontSize: 14,
+    color: "#3b82f6",
+    fontWeight: "600",
+  },
+  checkbox: {
+    marginRight: 12,
   },
 });

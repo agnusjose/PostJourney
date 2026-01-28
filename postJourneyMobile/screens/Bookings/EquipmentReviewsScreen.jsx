@@ -20,7 +20,7 @@ export default function EquipmentReviewsScreen() {
   const [averageRating, setAverageRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
 
-  const BASE_URL = "http://10.80.34.90:5000";
+  const BASE_URL = "http://192.168.115.72:5000";
 
   useEffect(() => {
     fetchReviews();

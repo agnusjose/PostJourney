@@ -14,7 +14,7 @@ import axios from "axios";
 
 export default function AddEquipment({ route, navigation }) {
   const { providerId } = route.params;
-  const BASE_URL = "http://10.80.34.90:5000";
+  const BASE_URL = "http://192.168.115.72:5000";
 
   // If you have auth context, get user info from there
   // const { user } = useContext(AuthContext);
