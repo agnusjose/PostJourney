@@ -35,7 +35,18 @@ export default function CheckoutScreen({ route, navigation }) {
     ? [immediateBookingItem] 
     : (selectedCartItems || cart.filter(item => item.selected));
 
-  const [userDetails, setUserDetails] = useState({
+  // FIXED: Calculate total amount based on booking type
+  const calculateTotalAmount = () => {
+    if (immediateBookingItem) {
+      // For immediate booking: pricePerDay × quantity
+      return (immediateBookingItem.pricePerDay || 0) * (immediateBookingItem.quantity || 1);
+    } else {
+      // For cart checkout: use getSelectedTotal()
+      return getSelectedTotal();
+    }
+  };
+
+   const [userDetails, setUserDetails] = useState({
     fullName: user?.name || "",
     phoneNumber: user?.phoneNumber || "",
     deliveryAddress: "",
@@ -51,10 +62,17 @@ export default function CheckoutScreen({ route, navigation }) {
 
   const BASE_URL = "http://192.168.115.72:5000";
 
-  // Calculate total amount
-  const totalAmount = getSelectedTotal();
+  // Calculate total amount - USING FIXED FUNCTION
+  const totalAmount = calculateTotalAmount();
   const totalDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
   const totalItems = itemsToBook.reduce((sum, item) => sum + (item.quantity || 1), 0);
+
+  console.log("🧮 Checkout calculations:");
+  console.log("- Booking type:", immediateBookingItem ? "Immediate" : "Cart");
+  console.log("- Items to book:", itemsToBook.length);
+  console.log("- Total amount per day:", totalAmount);
+  console.log("- Total days:", totalDays);
+  console.log("- Final total:", totalAmount * totalDays);
 
   const handleDateChange = (event, selectedDate, type) => {
     if (type === "start") {
@@ -276,12 +294,18 @@ export default function CheckoutScreen({ route, navigation }) {
               <Text style={styles.itemName}>{item.equipmentName}</Text>
               <Text style={styles.itemQuantity}>Quantity: {item.quantity || 1}</Text>
               <Text style={styles.itemProvider}>Provider: {item.providerName}</Text>
+              <Text style={styles.itemPriceSingle}>Price/day: ₹{item.pricePerDay}</Text>
             </View>
             <Text style={styles.itemPrice}>
               ₹{item.pricePerDay} × {item.quantity || 1} = ₹{(item.pricePerDay * (item.quantity || 1)).toFixed(2)}/day
             </Text>
           </View>
         ))}
+        
+        <View style={styles.totalRow}>
+          <Text style={styles.totalLabel}>Daily Total:</Text>
+          <Text style={styles.dailyAmount}>₹{totalAmount.toFixed(2)}/day</Text>
+        </View>
         
         <View style={styles.totalRow}>
           <Text style={styles.totalLabel}>Total ({totalDays} days):</Text>
@@ -600,5 +624,16 @@ const styles = StyleSheet.create({
     padding: 8,
     backgroundColor: "#f1f5f9",
     borderRadius: 6,
+  },
+  itemPriceSingle: {
+    fontSize: 12,
+    color: "#64748b",
+    marginTop: 2,
+  },
+  
+  dailyAmount: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#1e293b",
   },
 });

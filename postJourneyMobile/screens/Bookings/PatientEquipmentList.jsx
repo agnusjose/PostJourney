@@ -1,3 +1,4 @@
+// screens/Bookings/PatientEquipmentList.jsx
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import {
@@ -15,9 +16,11 @@ import {
 } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import axios from "axios";
+import { useCart } from "../../context/CartContext"; // ADD THIS IMPORT
 
 export default function PatientEquipmentList() {
   const navigation = useNavigation();
+  const { getCartCount } = useCart(); // ADD THIS LINE
   const [equipment, setEquipment] = useState([]);
   const [filteredEquipment, setFilteredEquipment] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
@@ -144,7 +147,7 @@ export default function PatientEquipmentList() {
             </ScrollView>
           </View>
 
-          <FlatList
+           <FlatList
             data={filteredEquipment}
             keyExtractor={(item) => item._id}
             renderItem={renderItem}
@@ -154,9 +157,11 @@ export default function PatientEquipmentList() {
           />
         </View>
 
-        {/* Floating Cart - Primary Blue */}
+        {/* Floating Cart - FIXED to show actual count */}
         <TouchableOpacity style={styles.cartFloating} onPress={() => navigation.navigate("PatientCart")}>
-          <View style={styles.cartBadge}><Text style={styles.cartBadgeText}>0</Text></View>
+          <View style={styles.cartBadge}>
+            <Text style={styles.cartBadgeText}>{getCartCount()}</Text>
+          </View>
           <Ionicons name="cart" size={24} color="#fff" />
         </TouchableOpacity>
       </View>

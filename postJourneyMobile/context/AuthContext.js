@@ -1,3 +1,4 @@
+// context/AuthContext.js
 import React, { createContext, useState, useContext, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -31,29 +32,60 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const login = async (userData) => {
-    try {
-      // Save to state
-      setUser(userData);
-      // Persist to storage
-      await AsyncStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userData));
-      console.log("✅ User logged in and saved:", userData.email);
-    } catch (error) {
-      console.error("Error saving user session:", error);
+// In AuthContext.js, update the login function
+// In AuthContext.js - update login function
+const login = async (userData) => {
+  try {
+    console.log("🔑 Login called with userData:", {
+      userId: userData.userId,
+      email: userData.email
+    });
+    
+    // IMPORTANT: Clear cart from previous user BEFORE setting new user
+    if (user?.userId && user.userId !== userData.userId) {
+      const oldCartKey = `@medical_equipment_cart_${user.userId}`;
+      try {
+        await AsyncStorage.removeItem(oldCartKey);
+        console.log("🧹 Cleared old user's cart:", oldCartKey);
+      } catch (error) {
+        console.log("⚠️ No old cart to clear or error clearing:", error);
+      }
     }
-  };
+    
+    // Save to state
+    setUser(userData);
+    
+    // Persist to storage
+    await AsyncStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userData));
+    console.log("✅ User logged in and saved:", userData.email);
+    
+    // Log the cart key that will be used
+    console.log("🔑 Cart storage key:", `@medical_equipment_cart_${userData.userId}`);
+    
+    // Give a small delay for CartContext to detect the user change
+    setTimeout(() => {
+      console.log("🔄 User change should be detected by CartContext now");
+    }, 100);
+    
+  } catch (error) {
+    console.error("❌ Error saving user session:", error);
+  }
+};
 
-  const logout = async () => {
-    try {
-      // Clear state
-      setUser(null);
-      // Clear storage
-      await AsyncStorage.removeItem(USER_STORAGE_KEY);
-      console.log("✅ User logged out");
-    } catch (error) {
-      console.error("Error clearing user session:", error);
-    }
-  };
+const logout = async () => {
+  try {
+    // DO NOT clear cart on logout - preserve it for next login
+    // The cart will persist in AsyncStorage
+    
+    // Clear state
+    setUser(null);
+    // Clear user session only (not cart)
+    await AsyncStorage.removeItem(USER_STORAGE_KEY);
+    console.log("✅ User logged out (cart preserved)");
+  } catch (error) {
+    console.error("Error clearing user session:", error);
+  }
+};
 
   const updateUser = async (updatedData) => {
     try {

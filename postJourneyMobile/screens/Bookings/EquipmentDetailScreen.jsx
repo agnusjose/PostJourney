@@ -40,7 +40,7 @@ export default function EquipmentDetailScreen() {
   const [showFullImage, setShowFullImage] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const BASE_URL = "http://192.168.115.72:5000";
+  const BASE_URL = "http://192.168.115.72:5000"; // Note: Changed from 245 to 115
 
   useEffect(() => {
     fetchEquipmentDetails();
@@ -131,6 +131,10 @@ export default function EquipmentDetailScreen() {
   };
 
   const handleBookNow = async () => {
+      console.log("📱 Book Now clicked");
+  console.log("📱 Equipment ID:", equipmentId);
+  console.log("📱 Equipment data:", equipment);
+  console.log("📱 Quantity:", quantity);
     if (!equipment || equipment.stock === 0) {
       Alert.alert("Out of Stock", "This equipment is currently unavailable");
       return;
@@ -146,20 +150,13 @@ export default function EquipmentDetailScreen() {
 
     setIsProcessing(true);
 
-    const bookingItem = {
-      _id: equipment._id,
-      equipmentName: equipment.equipmentName,
-      pricePerDay: equipment.pricePerDay,
-      imageUrl: equipment.imageUrl,
-      providerName: equipment.providerName,
-      providerId: equipment.providerId,
-      category: equipment.category,
-      quantity: quantity
-    };
-
-    const result = await prepareForImmediateBooking(bookingItem);
-
+    // FIXED: Call prepareForImmediateBooking with correct parameters
+    const result = await prepareForImmediateBooking(equipment._id, quantity);
+ console.log("📱 Booking result:", result);
     if (result.success) {
+      console.log("✅ Booking item prepared:", result.bookingItem);
+      console.log("💰 Price in booking item:", result.bookingItem.pricePerDay);
+    console.log("📱 Booking item total:", result.bookingItem);
       // Navigate directly to checkout with this single item
       navigation.navigate("CheckoutScreen", {
         immediateBookingItem: result.bookingItem
@@ -436,7 +433,6 @@ export default function EquipmentDetailScreen() {
     </ScrollView>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
