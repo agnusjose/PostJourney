@@ -103,9 +103,6 @@ uvicorn webrtc.webrtc_server:app --host 0.0.0.0 --port 8001
 
 > Add screenshots of the application here.
 
-Example:
-
-```markdown
 ![Register Screen](screenshots/1Registerscreen.jpeg)
 ![Sign-in Page](screenshots/2SigninPage.jpeg)
 ![Patient Dashboard](screenshots/3PatientDashboard.jpeg)
@@ -118,7 +115,7 @@ Example:
 ![Doctor Dashboard](screenshots/10DoctorDashboard.jpeg)
 ![Admin Dashboard](screenshots/11AdminDashboard.jpeg)
 ![Equipment Listing](screenshots/12EquipmentListing.jpeg)
-```
+
 
 ---
 
