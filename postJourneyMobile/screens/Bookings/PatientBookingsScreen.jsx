@@ -22,7 +22,7 @@ export default function PatientBookingsScreen({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  const BASE_URL = "http://192.168.91.72:5000";
+  const BASE_URL = "http://192.168.8.72:5000";
 
   const fetchBookings = async () => {
     try {

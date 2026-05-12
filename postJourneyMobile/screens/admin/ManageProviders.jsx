@@ -34,7 +34,7 @@ export default function ManageProviders({ navigation }) {
 
   const BASE_URL = Platform.OS === "web"
     ? "http://localhost:5000"
-    : "http://192.168.91.72:5000";
+    : "http://192.168.8.72:5000";
 
   // Fetch providers function
   const fetchProviders = async () => {

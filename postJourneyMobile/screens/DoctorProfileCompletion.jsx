@@ -37,7 +37,7 @@ export default function DoctorProfileCompletion({ route, navigation }) {
     const fetchProfile = async () => {
         setFetching(true);
         try {
-            const response = await axios.get(`http://192.168.91.72:5000/api/doctor/profile?email=${email}`);
+            const response = await axios.get(`http://192.168.8.72:5000/api/doctor/profile?email=${email}`);
             if (response.data.success) {
                 const p = response.data.profile;
                 setName(p.name || "");
@@ -47,7 +47,7 @@ export default function DoctorProfileCompletion({ route, navigation }) {
                 setLanguages(p.languages);
                 setAbout(p.about);
                 if (p.doctorImage) {
-                    setExistingImageUrl(`http://192.168.91.72:5000${p.doctorImage}`);
+                    setExistingImageUrl(`http://192.168.8.72:5000${p.doctorImage}`);
                 }
                 setLicenseNumber(p.licenseNumber || "");
             }
@@ -104,7 +104,7 @@ export default function DoctorProfileCompletion({ route, navigation }) {
 
         setLoading(true);
         try {
-            const response = await axios.post("http://192.168.91.72:5000/api/doctor/complete-profile", formData, {
+            const response = await axios.post("http://192.168.8.72:5000/api/doctor/complete-profile", formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
 

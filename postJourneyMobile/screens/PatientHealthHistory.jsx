@@ -8,7 +8,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import axios from "axios";
 import * as ImagePicker from "expo-image-picker";
 
-const BASE_URL = "http://192.168.91.72:5000";
+const BASE_URL = "http://192.168.8.72:5000";
 
 const C = {
     primary: "#0A5F7A", secondary: "#1D8FAB", accent: "#2EC4B6",

@@ -7,7 +7,7 @@ import axios from "axios";
 import { useFocusEffect } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const BASE_URL = "http://192.168.91.72:5000";
+const BASE_URL = "http://192.168.8.72:5000";
 
 const STATUS_META = {
     pending: { label: "Pending", color: "#f59e0b", bg: "#fffbeb" },

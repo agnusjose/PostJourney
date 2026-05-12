@@ -95,7 +95,7 @@ export default function PatientProfileCompletion({ route, navigation }) {
 
     try {
       const response = await axios.post(
-        "http://192.168.91.72:5000/api/patient/complete-profile",
+        "http://192.168.8.72:5000/api/patient/complete-profile",
         {
           email,
           ...formData

@@ -25,7 +25,7 @@ export default function ResetPasswordScreen({ route, navigation }) {
         if (newPassword.length < 8) { Alert.alert("Error", "Password must be at least 8 characters"); return; }
         setLoading(true);
         try {
-            const response = await axios.post("http://192.168.91.72:5000/auth/reset-password", { email, otp, newPassword });
+            const response = await axios.post("http://192.168.8.72:5000/auth/reset-password", { email, otp, newPassword });
             if (response.data.success) {
                 Alert.alert("Success", "Password reset successfully. Please login with your new password.");
                 navigation.navigate("LoginScreen");

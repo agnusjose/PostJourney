@@ -19,7 +19,7 @@ export default function ProviderEquipmentDetailsScreen({ navigation, route }) {
     const [equipment, setEquipment] = useState(initialEquipment);
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(false);
-    const BASE_URL = "http://192.168.91.72:5000";
+    const BASE_URL = "http://192.168.8.72:5000";
 
     useFocusEffect(useCallback(() => { fetchEquipmentDetails(); fetchReviews(); }, [equipment._id]));
 

@@ -22,7 +22,7 @@ const CashOnDeliverySuccess = () => {
   const [isConfirming, setIsConfirming] = useState(true);
   const [confirmError, setConfirmError] = useState(null);
 
-  const BASE_URL = "http://192.168.91.72:5000";
+  const BASE_URL = "http://192.168.8.72:5000";
 
   const { bookingId, bookingIds, amount, bookingData } = route.params || {};
 

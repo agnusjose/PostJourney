@@ -14,7 +14,7 @@ import {
 import * as DocumentPicker from 'expo-document-picker';
 import axios from 'axios';
 
-const BASE_URL = "http://192.168.91.72:5000";
+const BASE_URL = "http://192.168.8.72:5000";
 
 export default function PatientDocuments({ route, navigation, embedded = false }) {
     const { userId, userName } = route.params;

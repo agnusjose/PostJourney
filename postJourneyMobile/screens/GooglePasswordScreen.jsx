@@ -50,7 +50,7 @@ export default function GooglePasswordScreen({ route, navigation }) {
         setLoading(true);
         try {
             // Register using the normal registration endpoint
-            const response = await axios.post("http://192.168.91.72:5000/register", {
+            const response = await axios.post("http://192.168.8.72:5000/register", {
                 name: googleUser.name,
                 email: googleUser.email,
                 password: password,

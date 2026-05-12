@@ -21,7 +21,7 @@ const PaymentScreen = () => {
   const route = useRoute();
   const { user } = useAuth();
 
-  const BASE_URL = "http://192.168.91.72:5000";
+  const BASE_URL = "http://192.168.8.72:5000";
 
   const {
     type, amount, bookingId, bookingIds, equipmentId, providerId, bookingData

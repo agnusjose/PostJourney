@@ -38,7 +38,7 @@ export default function AdminPendingApprovalsScreen({ navigation }) {
 
     const BASE_URL = Platform.OS === "web"
         ? "http://localhost:5000"
-        : "http://192.168.91.72:5000";
+        : "http://192.168.8.72:5000";
 
     const fetchPendingProviders = async () => {
         setLoading(true);

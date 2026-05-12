@@ -10,7 +10,7 @@ export default function AdminLoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const BASE_URL = "http://192.168.91.72:5000";
+  const BASE_URL = "http://192.168.8.72:5000";
 
   const handleAdminLogin = async () => {
     console.log("ADMIN LOGIN CLICKED");

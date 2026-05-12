@@ -17,7 +17,7 @@ const C = {
 
 export default function AddEquipment({ route, navigation }) {
   const { providerId } = route.params;
-  const BASE_URL = "http://192.168.91.72:5000";
+  const BASE_URL = "http://192.168.8.72:5000";
   const { user } = useAuth();
   const [form, setForm] = useState({ equipmentName: "", description: "", pricePerDay: "", stock: "1", category: "other" });
   const [image, setImage] = useState(null);
