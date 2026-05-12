@@ -102,10 +102,10 @@ uvicorn webrtc.webrtc_server:app --host 0.0.0.0 --port 8001
 ## 📱 Screenshots
 
 <p align="center">
-  <img src="screenshots/1RegisterScreen.jpeg" width="220"/>
+  <img src="screenshots/1Registerscreen.jpeg" width="220"/>
   <img src="screenshots/2SigninPage.jpeg" width="220"/>
   <img src="screenshots/3PatientDashboard.jpeg" width="220"/>
-  <img src="screenshots/4ExercisesDashboard.jpeg" width="220"/>
+  <img src="screenshots/4ExercicesDashboard.jpeg" width="220"/>
 </p>
 
 <p align="center">
