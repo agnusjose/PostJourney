@@ -1,0 +1,332 @@
+[{
+  "_id": {
+    "$oid": "69991bd385e0685da9a2f2e5"
+  },
+  "name": "Shona",
+  "email": "shonarose2809@gmail.com",
+  "password": "$2b$10$R6iyHE0HK20Ik7dfhpEpme3EXa1Rv/6Y7DvDcgRe6BulA6yx2YOPu",
+  "googleId": null,
+  "picture": null,
+  "userType": "patient",
+  "phoneNumber": "8528546412",
+  "city": "Kochi",
+  "isBlocked": false,
+  "isVerified": true,
+  "profileCompleted": true,
+  "otp": null,
+  "otpExpiry": null,
+  "createdAt": {
+    "$date": "2026-02-21T02:43:31.725Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-26T05:24:30.347Z"
+  },
+  "__v": 0,
+  "patientProfile": {
+    "age": 22,
+    "gender": "female",
+    "address": "",
+    "primaryCondition": "Neck pain",
+    "height": 155,
+    "weight": 45,
+    "bloodGroup": "A+",
+    "medicalHistory": "Chest infection ",
+    "emergencyContact": "59215478312",
+    "activityLevel": "lightly_active",
+    "primaryGoal": "pain_relief",
+    "surgeryHistory": "No",
+    "currentMedications": "Pain killers",
+    "smokingHabit": false,
+    "alcoholConsumption": "occasional",
+    "sleepHours": 7
+  }
+},
+{
+  "_id": {
+    "$oid": "69a13fab1fdc95a8a2a29b4b"
+  },
+  "name": "Dr. Nimmy Shaji",
+  "email": "nimmyshaji09@gmail.com",
+  "password": "$2b$10$CyoDXS.rJ2QzOtFM4us2I.7igIMtBNwFf8GfjRWJeetDdqsM6z00.",
+  "googleId": null,
+  "picture": null,
+  "userType": "doctor",
+  "phoneNumber": "",
+  "city": "",
+  "isBlocked": false,
+  "isVerified": true,
+  "profileCompleted": true,
+  "specialization": "General Practitioner",
+  "experience": "10 Years",
+  "consultationFee": 500,
+  "about": "Experienced general practitioner dedicated to patient care.",
+  "qualification": "MBBS, MD",
+  "languages": "English, Hindi, Malayalam",
+  "isOnline": true,
+  "createdAt": {
+    "$date": "2026-02-27T06:54:35.685Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-12T04:50:23.108Z"
+  },
+  "__v": 0,
+  "doctorImage": "/uploads/doctors/doc-1772175366518.jpeg",
+  "resetPasswordOtp": null,
+  "resetPasswordOtpExpiry": null
+},
+{
+  "_id": {
+    "$oid": "69a141218ce342d4713e5c55"
+  },
+  "name": "Admin",
+  "email": "admin@gmail.com",
+  "password": "$2b$10$vYVVrQZQ.dz9PwzAKGR.QerCH8VvTQ/n6oQIZVXXujSxriA2GJSSe",
+  "googleId": null,
+  "picture": null,
+  "userType": "admin",
+  "phoneNumber": "",
+  "city": "",
+  "isBlocked": false,
+  "isVerified": false,
+  "profileCompleted": false,
+  "createdAt": {
+    "$date": "2026-02-27T07:00:49.949Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-27T07:00:49.949Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a1414918d64a927e474efa"
+  },
+  "name": "Agnus Jose",
+  "email": "agnus.au8@gmail.com",
+  "password": "$2b$10$Itornj/WxT0/Tl1/lHUC9uU05CoJ5pt0o7QZdBNCOuTzUaoQ6Fvri",
+  "googleId": null,
+  "picture": null,
+  "userType": "patient",
+  "phoneNumber": "9766768688",
+  "city": "Kollam",
+  "isBlocked": false,
+  "isVerified": true,
+  "profileCompleted": true,
+  "otp": null,
+  "otpExpiry": null,
+  "createdAt": {
+    "$date": "2026-02-27T07:01:29.595Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-27T07:04:35.657Z"
+  },
+  "__v": 0,
+  "patientProfile": {
+    "age": 10,
+    "gender": "female",
+    "address": "",
+    "primaryCondition": "Fever",
+    "height": 154,
+    "weight": 39,
+    "bloodGroup": "B+",
+    "medicalHistory": "Nil",
+    "emergencyContact": "9463435388",
+    "activityLevel": "lightly_active",
+    "primaryGoal": "pain_relief",
+    "surgeryHistory": "Nil",
+    "currentMedications": "Dolo",
+    "smokingHabit": false,
+    "alcoholConsumption": "never",
+    "sleepHours": 7
+  }
+},
+{
+  "_id": {
+    "$oid": "69a144f918d64a927e474fce"
+  },
+  "name": "Maria Rose Alex",
+  "email": "mariaroseayalloor04@gmail.com",
+  "password": "$2b$10$OAKbEpdodbhtGWKNzqKDxe5dKoL49LbffHnicJW6Hi.oKtL.kQItG",
+  "googleId": null,
+  "picture": null,
+  "userType": "service-provider",
+  "phoneNumber": "9466467679",
+  "city": "Ernakulam ",
+  "isBlocked": false,
+  "isVerified": true,
+  "profileCompleted": true,
+  "otp": null,
+  "otpExpiry": null,
+  "createdAt": {
+    "$date": "2026-02-27T07:17:13.317Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-27T07:20:45.846Z"
+  },
+  "__v": 1,
+  "providerProfile": {
+    "agencyName": "MyCare Agencies",
+    "serviceType": "caregiver",
+    "experienceYears": 9,
+    "aboutUs": "This is my business ",
+    "operatingHours": "8am to 7pm",
+    "fullAddress": "Ernakulam ",
+    "website": "",
+    "licenseNumber": "7182839",
+    "verification": {
+      "status": "approved",
+      "documentUrl": "/uploads/equipment/licenseImage-1772176742979-269722718.jpg",
+      "verifiedBy": null,
+      "verifiedAt": {
+        "$date": "2026-02-27T07:20:02.566Z"
+      },
+      "rejectionReason": ""
+    },
+    "caregiverReviews": [
+      {
+        "userId": {
+          "$oid": "69a1414918d64a927e474efa"
+        },
+        "userName": "Agnus Jose",
+        "rating": 4,
+        "comment": "Very good ",
+        "date": {
+          "$date": "2026-02-27T07:20:45.843Z"
+        }
+      }
+    ]
+  }
+},
+{
+  "_id": {
+    "$oid": "699546514f96b5d5b5616fe8"
+  },
+  "name": "Alene Elsa",
+  "email": "aleneelsa2004@gmail.com",
+  "password": "$2b$10$0h4pg7eNQmXPooYK0q1Ec.mHC6SLBBghNVLI.Hylgmhg9OPk0NrAG",
+  "googleId": null,
+  "picture": null,
+  "userType": "patient",
+  "phoneNumber": "9646656868",
+  "city": "Appanchira",
+  "isBlocked": false,
+  "isVerified": true,
+  "profileCompleted": true,
+  "otp": null,
+  "otpExpiry": null,
+  "createdAt": {
+    "$date": "2026-02-18T04:55:45.568Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T15:01:06.939Z"
+  },
+  "__v": 0,
+  "patientProfile": {
+    "age": 22,
+    "gender": "female",
+    "address": "",
+    "primaryCondition": "Back pain",
+    "height": 155,
+    "weight": 48,
+    "bloodGroup": "AB+",
+    "medicalHistory": "Nothing",
+    "emergencyContact": "9498668689",
+    "activityLevel": "lightly_active",
+    "primaryGoal": "",
+    "surgeryHistory": "Nothing",
+    "currentMedications": "Nothing",
+    "smokingHabit": false,
+    "alcoholConsumption": "occasional",
+    "sleepHours": 7
+  }
+},
+{
+  "_id": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "name": "MedBook",
+  "email": "mijijose00@gmail.com",
+  "password": "$2b$10$0dZB4XBHmJkB43VUnnM42.h0QTJpV1eS3/7kAFIItTLIj20szUz5S",
+  "googleId": null,
+  "picture": null,
+  "userType": "service-provider",
+  "phoneNumber": "9466465665",
+  "city": "Mukkam",
+  "isBlocked": false,
+  "isVerified": true,
+  "profileCompleted": true,
+  "otp": null,
+  "otpExpiry": null,
+  "createdAt": {
+    "$date": "2026-03-01T15:35:20.556Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T15:51:28.830Z"
+  },
+  "__v": 0,
+  "providerProfile": {
+    "agencyName": "MedBook",
+    "serviceType": "equipment",
+    "caregivingServices": "",
+    "patientTypes": "",
+    "serviceLocations": "",
+    "aboutUs": "We provide medical equipments for rent",
+    "operatingHours": "",
+    "fullAddress": "HomelyCare\nMukkam PO\nKozhikkod",
+    "website": "",
+    "licenseNumber": "919883",
+    "verification": {
+      "status": "approved",
+      "documentUrl": "/uploads/equipment/licenseImage-1772379429997-426229833.jpg",
+      "verifiedBy": null,
+      "verifiedAt": {
+        "$date": "2026-03-01T15:43:09.167Z"
+      },
+      "rejectionReason": ""
+    },
+    "caregiverReviews": []
+  }
+},
+{
+  "_id": {
+    "$oid": "69b4e21d1217352fcb120e44"
+  },
+  "name": "Saly Alex",
+  "email": "salyalexayalloor@gmail.com",
+  "password": "$2b$10$iklBx/nPeM4IRhZDh5hqM.AuLhApTQpeFofNWwhkDXtH7PWTmQTH2",
+  "googleId": null,
+  "picture": null,
+  "userType": "patient",
+  "phoneNumber": "9495915870",
+  "city": "Idukki",
+  "isBlocked": false,
+  "isVerified": true,
+  "profileCompleted": true,
+  "otp": null,
+  "otpExpiry": null,
+  "createdAt": {
+    "$date": "2026-03-14T04:20:45.093Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-14T04:25:11.626Z"
+  },
+  "__v": 0,
+  "patientProfile": {
+    "age": 59,
+    "gender": "female",
+    "address": "",
+    "primaryCondition": "Arthritis ",
+    "height": 155,
+    "weight": 60,
+    "bloodGroup": "A+",
+    "medicalHistory": "Arthritis ",
+    "emergencyContact": "9037542150",
+    "activityLevel": "moderately_active",
+    "primaryGoal": "wellness",
+    "surgeryHistory": "Yes.. ",
+    "currentMedications": "Vitamin d ",
+    "smokingHabit": false,
+    "alcoholConsumption": "never",
+    "sleepHours": 6
+  }
+}]

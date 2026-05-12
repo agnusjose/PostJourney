@@ -1,0 +1,104 @@
+[{
+  "_id": {
+    "$oid": "69aecf0704856ac99d22b4d7"
+  },
+  "patientId": {
+    "$oid": "69991bd385e0685da9a2f2e5"
+  },
+  "diseaseHistory": "",
+  "allergies": "",
+  "currentMedications": "",
+  "notes": "",
+  "bpRecords": [
+    {
+      "systolic": 120,
+      "diastolic": 80,
+      "date": {
+        "$date": "2026-03-09T13:45:43.164Z"
+      },
+      "_id": {
+        "$oid": "69aecf0704856ac99d22b4d8"
+      }
+    },
+    {
+      "systolic": 110,
+      "diastolic": 85,
+      "date": {
+        "$date": "2026-03-29T16:58:58.098Z"
+      },
+      "_id": {
+        "$oid": "69c95a52e54f97f957ac9538"
+      }
+    },
+    {
+      "systolic": 190,
+      "diastolic": 140,
+      "date": {
+        "$date": "2026-03-29T16:59:15.061Z"
+      },
+      "_id": {
+        "$oid": "69c95a63e54f97f957ac9549"
+      }
+    },
+    {
+      "systolic": 80,
+      "diastolic": 40,
+      "date": {
+        "$date": "2026-03-29T16:59:24.563Z"
+      },
+      "_id": {
+        "$oid": "69c95a6ce54f97f957ac9561"
+      }
+    }
+  ],
+  "sugarRecords": [
+    {
+      "level": 135,
+      "type": "fasting",
+      "date": {
+        "$date": "2026-03-09T13:47:58.143Z"
+      },
+      "_id": {
+        "$oid": "69aecf8e04856ac99d22b4e8"
+      }
+    },
+    {
+      "level": 238,
+      "type": "postprandial",
+      "date": {
+        "$date": "2026-03-09T13:48:45.995Z"
+      },
+      "_id": {
+        "$oid": "69aecfbd04856ac99d22b4f5"
+      }
+    },
+    {
+      "level": 215,
+      "type": "random",
+      "date": {
+        "$date": "2026-03-09T13:49:18.113Z"
+      },
+      "_id": {
+        "$oid": "69aecfde04856ac99d22b502"
+      }
+    }
+  ],
+  "cholesterolRecords": [
+    {
+      "level": 180,
+      "date": {
+        "$date": "2026-03-09T13:50:02.653Z"
+      },
+      "_id": {
+        "$oid": "69aed00a04856ac99d22b511"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-03-09T13:45:43.173Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-29T16:59:24.564Z"
+  },
+  "__v": 7
+}]

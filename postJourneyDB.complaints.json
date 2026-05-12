@@ -1,0 +1,117 @@
+[{
+  "_id": {
+    "$oid": "69a45f0c57b0b0408abc6a06"
+  },
+  "userId": {
+    "$oid": "699546514f96b5d5b5616fe8"
+  },
+  "userName": "Alene Elsa",
+  "userType": "patient",
+  "subject": "Some issue",
+  "description": "There is an issue with some caregivers",
+  "status": "reviewed",
+  "adminReply": "Tell the issue",
+  "createdAt": {
+    "$date": "2026-03-01T15:45:16.866Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T15:50:00.115Z"
+  },
+  "__v": 0,
+  "repliedAt": {
+    "$date": "2026-03-01T15:50:00.115Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69a45f2857b0b0408abc6a09"
+  },
+  "userId": {
+    "$oid": "699546514f96b5d5b5616fe8"
+  },
+  "userName": "Alene Elsa",
+  "userType": "patient",
+  "subject": "Issue2",
+  "description": "Doctor isn't available for past 2 weeks",
+  "status": "resolved",
+  "adminReply": "Doctor is available now",
+  "createdAt": {
+    "$date": "2026-03-01T15:45:44.479Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T15:49:42.694Z"
+  },
+  "__v": 0,
+  "repliedAt": {
+    "$date": "2026-03-01T15:49:42.694Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69a45f4257b0b0408abc6a0c"
+  },
+  "userId": {
+    "$oid": "699546514f96b5d5b5616fe8"
+  },
+  "userName": "Alene Elsa",
+  "userType": "patient",
+  "subject": "Issue 3",
+  "description": "1 hour isn't enough for consultation",
+  "status": "dismissed",
+  "adminReply": "Its practical",
+  "createdAt": {
+    "$date": "2026-03-01T15:46:10.258Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T15:49:32.350Z"
+  },
+  "__v": 0,
+  "repliedAt": {
+    "$date": "2026-03-01T15:49:32.350Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69a45f5857b0b0408abc6a0f"
+  },
+  "userId": {
+    "$oid": "699546514f96b5d5b5616fe8"
+  },
+  "userName": "Alene Elsa",
+  "userType": "patient",
+  "subject": "Issue 4",
+  "description": "100 rs is more for this consultation",
+  "status": "dismissed",
+  "adminReply": "Its not a valid problem",
+  "createdAt": {
+    "$date": "2026-03-01T15:46:32.524Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T15:48:13.725Z"
+  },
+  "__v": 0,
+  "repliedAt": {
+    "$date": "2026-03-01T15:48:13.725Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69a51c41dbccc7b071ae1eab"
+  },
+  "userId": {
+    "$oid": "69a13fab1fdc95a8a2a29b4b"
+  },
+  "userName": "Dr. Nimmy Shaji",
+  "userType": "doctor",
+  "subject": "Late arrival",
+  "description": "Didn't enter at the right time",
+  "status": "pending",
+  "adminReply": "",
+  "createdAt": {
+    "$date": "2026-03-02T05:12:33.265Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-02T05:12:33.265Z"
+  },
+  "__v": 0
+}]

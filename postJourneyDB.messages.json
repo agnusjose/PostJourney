@@ -1,0 +1,1044 @@
+[{
+  "_id": {
+    "$oid": "69a148323beb3a27e75002b9"
+  },
+  "consultationId": {
+    "$oid": "69a1423418d64a927e474f1a"
+  },
+  "senderId": {
+    "$oid": "69a1414918d64a927e474efa"
+  },
+  "senderRole": "patient",
+  "content": "Hi",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-27T07:30:58.302Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a1484f3beb3a27e75002c9"
+  },
+  "consultationId": {
+    "$oid": "69a1423418d64a927e474f1a"
+  },
+  "senderId": {
+    "$oid": "69a13fab1fdc95a8a2a29b4b"
+  },
+  "senderRole": "doctor",
+  "content": "/uploads/messages/msg-1772177487389.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-02-27T07:31:27.405Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a148703beb3a27e75002db"
+  },
+  "consultationId": {
+    "$oid": "69a1423418d64a927e474f1a"
+  },
+  "senderId": {
+    "$oid": "69a1414918d64a927e474efa"
+  },
+  "senderRole": "patient",
+  "content": "/uploads/messages/msg-1772177520211.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-02-27T07:32:00.223Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a148793beb3a27e75002e3"
+  },
+  "consultationId": {
+    "$oid": "69a1423418d64a927e474f1a"
+  },
+  "senderId": {
+    "$oid": "69a1414918d64a927e474efa"
+  },
+  "senderRole": "patient",
+  "content": "Help me",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-27T07:32:09.841Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a148df3beb3a27e75002f9"
+  },
+  "consultationId": {
+    "$oid": "69a1423418d64a927e474f1a"
+  },
+  "senderId": {
+    "$oid": "69a13fab1fdc95a8a2a29b4b"
+  },
+  "senderRole": "doctor",
+  "content": "Dolo 500",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-27T07:33:51.804Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e8ad936a4665ea0fdf9c2"
+  },
+  "consultationId": {
+    "$oid": "699e831b1a309bfba89a91c5"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "Hi",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-25T05:38:33.504Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e8b1136a4665ea0fdf9dd"
+  },
+  "consultationId": {
+    "$oid": "699e831b1a309bfba89a91c5"
+  },
+  "senderId": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "senderRole": "patient",
+  "content": "Hi doctor",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-25T05:39:29.107Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e8b1936a4665ea0fdf9e7"
+  },
+  "consultationId": {
+    "$oid": "699e831b1a309bfba89a91c5"
+  },
+  "senderId": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "senderRole": "patient",
+  "content": "/uploads/messages/msg-1771997977227.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-02-25T05:39:37.282Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e8c3836a4665ea0fdfa44"
+  },
+  "consultationId": {
+    "$oid": "699e831b1a309bfba89a91c5"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "Whats your problem",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-25T05:44:24.276Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e8c3e36a4665ea0fdfa48"
+  },
+  "consultationId": {
+    "$oid": "699e831b1a309bfba89a91c5"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "/uploads/messages/msg-1771998270066.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-02-25T05:44:30.086Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e8c7536a4665ea0fdfa62"
+  },
+  "consultationId": {
+    "$oid": "699e831b1a309bfba89a91c5"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "/uploads/messages/msg-1771998324501.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-02-25T05:45:25.121Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e8e9336a4665ea0fdfadf"
+  },
+  "consultationId": {
+    "$oid": "699e831b1a309bfba89a91c5"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "/uploads/messages/msg-1771998867861.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-02-25T05:54:27.897Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e8e9b36a4665ea0fdfae7"
+  },
+  "consultationId": {
+    "$oid": "699e831b1a309bfba89a91c5"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "Hello",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-25T05:54:35.926Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e90ea36a4665ea0fdfbad"
+  },
+  "consultationId": {
+    "$oid": "699e831b1a309bfba89a91c5"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "/uploads/messages/msg-1771999466571.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-02-25T06:04:26.579Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e95bd36a4665ea0fdfcd0"
+  },
+  "consultationId": {
+    "$oid": "699e8aa136a4665ea0fdf9b0"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "Hi",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-25T06:25:01.019Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e95c436a4665ea0fdfcd5"
+  },
+  "consultationId": {
+    "$oid": "699e8aa136a4665ea0fdf9b0"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "/uploads/messages/msg-1772000707992.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-02-25T06:25:08.017Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e95d136a4665ea0fdfcde"
+  },
+  "consultationId": {
+    "$oid": "699e8aa136a4665ea0fdf9b0"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "/uploads/messages/msg-1772000721928.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-02-25T06:25:21.940Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e9def36a4665ea0fdfd97"
+  },
+  "consultationId": {
+    "$oid": "699e956636a4665ea0fdfcbc"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "Hi",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-25T06:59:59.936Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e9df236a4665ea0fdfd9b"
+  },
+  "consultationId": {
+    "$oid": "699e956636a4665ea0fdfcbc"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "Hello",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-25T07:00:02.099Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e9df836a4665ea0fdfda0"
+  },
+  "consultationId": {
+    "$oid": "699e956636a4665ea0fdfcbc"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "/uploads/messages/msg-1772002808714.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-02-25T07:00:08.766Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699ea09236a4665ea0fdfdcf"
+  },
+  "consultationId": {
+    "$oid": "699e8aa136a4665ea0fdf9b0"
+  },
+  "senderId": {
+    "$oid": "699e886336a4665ea0fdf970"
+  },
+  "senderRole": "patient",
+  "content": "Hello",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-25T07:11:14.047Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699ea10c36a4665ea0fdfddd"
+  },
+  "consultationId": {
+    "$oid": "699e8aa136a4665ea0fdf9b0"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "Hello",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-25T07:13:16.506Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699ea14136a4665ea0fdfde9"
+  },
+  "consultationId": {
+    "$oid": "699e8aa136a4665ea0fdf9b0"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "/uploads/messages/msg-1772003649538.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-02-25T07:14:09.543Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699ea17d36a4665ea0fdfdf7"
+  },
+  "consultationId": {
+    "$oid": "699e8aa136a4665ea0fdf9b0"
+  },
+  "senderId": {
+    "$oid": "699e886336a4665ea0fdf970"
+  },
+  "senderRole": "patient",
+  "content": "/uploads/messages/msg-1772003709667.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-02-25T07:15:09.673Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699ea3de36a4665ea0fdfe0e"
+  },
+  "consultationId": {
+    "$oid": "699e956636a4665ea0fdfcbc"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "Hi",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-25T07:25:18.943Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699ea4b036a4665ea0fdfe56"
+  },
+  "consultationId": {
+    "$oid": "699e956636a4665ea0fdfcbc"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "Hi",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-25T07:28:48.208Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fdf9654ba91dd3b898033"
+  },
+  "consultationId": {
+    "$oid": "699fde2e54ba91dd3b898013"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "Hello",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-26T05:52:22.037Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fdf9d54ba91dd3b898039"
+  },
+  "consultationId": {
+    "$oid": "699fde2e54ba91dd3b898013"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "/uploads/messages/msg-1772085149564.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-02-26T05:52:29.704Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fe20454ba91dd3b898095"
+  },
+  "consultationId": {
+    "$oid": "699fe1d554ba91dd3b898081"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "Hi",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-26T06:02:44.023Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fe20b54ba91dd3b89809b"
+  },
+  "consultationId": {
+    "$oid": "699fe1d554ba91dd3b898081"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "/uploads/messages/msg-1772085771457.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-02-26T06:02:51.573Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fe5e654ba91dd3b898189"
+  },
+  "consultationId": {
+    "$oid": "699fe1d554ba91dd3b898081"
+  },
+  "senderId": {
+    "$oid": "699e886336a4665ea0fdf970"
+  },
+  "senderRole": "patient",
+  "content": "Hello",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-26T06:19:18.268Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fe71054ba91dd3b8981f2"
+  },
+  "consultationId": {
+    "$oid": "699fe60c54ba91dd3b898199"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "Hi",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-26T06:24:16.757Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fe71454ba91dd3b8981f6"
+  },
+  "consultationId": {
+    "$oid": "699fe60c54ba91dd3b898199"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "Hello",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-26T06:24:20.882Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fe73154ba91dd3b898203"
+  },
+  "consultationId": {
+    "$oid": "699fe60c54ba91dd3b898199"
+  },
+  "senderId": {
+    "$oid": "699e886336a4665ea0fdf970"
+  },
+  "senderRole": "patient",
+  "content": "Hii",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-02-26T06:24:49.476Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fe73954ba91dd3b89820d"
+  },
+  "consultationId": {
+    "$oid": "699fe60c54ba91dd3b898199"
+  },
+  "senderId": {
+    "$oid": "699e886336a4665ea0fdf970"
+  },
+  "senderRole": "patient",
+  "content": "/uploads/messages/msg-1772087097793.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-02-26T06:24:57.914Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a3f6336a9860dab295398e"
+  },
+  "consultationId": {
+    "$oid": "69a3dea9a9f093d3402241d6"
+  },
+  "senderId": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "senderRole": "patient",
+  "content": "Hi doctor ",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-01T08:17:55.562Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a3f6386a9860dab295399a"
+  },
+  "consultationId": {
+    "$oid": "69a3dea9a9f093d3402241d6"
+  },
+  "senderId": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "senderRole": "patient",
+  "content": "/uploads/messages/msg-1772353080683.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-03-01T08:18:00.688Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a3f65f6a9860dab29539a8"
+  },
+  "consultationId": {
+    "$oid": "69a3dea9a9f093d3402241d6"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "Fine thanks",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-01T08:18:39.228Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a408872c0fa34ea285442d"
+  },
+  "consultationId": {
+    "$oid": "69a403886a9860dab29539f1"
+  },
+  "senderId": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "senderRole": "patient",
+  "content": "Hiii",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-01T09:36:07.284Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a409082c0fa34ea2854456"
+  },
+  "consultationId": {
+    "$oid": "69a403886a9860dab29539f1"
+  },
+  "senderId": {
+    "$oid": "699aa469529bcf3b8984cb81"
+  },
+  "senderRole": "doctor",
+  "content": "Hehe",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-01T09:38:16.271Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a520ccdbccc7b071ae1ef3"
+  },
+  "consultationId": {
+    "$oid": "69a517b5dbccc7b071ae1e03"
+  },
+  "senderId": {
+    "$oid": "699546514f96b5d5b5616fe8"
+  },
+  "senderRole": "patient",
+  "content": "Hi",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-02T05:31:56.476Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a520dfdbccc7b071ae1efd"
+  },
+  "consultationId": {
+    "$oid": "69a517b5dbccc7b071ae1e03"
+  },
+  "senderId": {
+    "$oid": "699546514f96b5d5b5616fe8"
+  },
+  "senderRole": "patient",
+  "content": "/uploads/messages/msg-1772429535161.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-03-02T05:32:15.189Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a5213adbccc7b071ae1f2e"
+  },
+  "consultationId": {
+    "$oid": "69a517b5dbccc7b071ae1e03"
+  },
+  "senderId": {
+    "$oid": "69a13fab1fdc95a8a2a29b4b"
+  },
+  "senderRole": "doctor",
+  "content": "Have you been taking any medications recently or have you had any other health issues",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-02T05:33:46.102Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a521c5dbccc7b071ae1f6a"
+  },
+  "consultationId": {
+    "$oid": "69a517b5dbccc7b071ae1e03"
+  },
+  "senderId": {
+    "$oid": "699546514f96b5d5b5616fe8"
+  },
+  "senderRole": "patient",
+  "content": "No, the temperature 100°F,. I also have headache and body pain accompanied with severe cough",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-02T05:36:05.820Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a5225ddbccc7b071ae1fb2"
+  },
+  "consultationId": {
+    "$oid": "69a517b5dbccc7b071ae1e03"
+  },
+  "senderId": {
+    "$oid": "69a13fab1fdc95a8a2a29b4b"
+  },
+  "senderRole": "doctor",
+  "content": "Take dolo 500\n3× per day\nCitrizine   after meal at night",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-02T05:38:37.620Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ae523fde39ff25b5e4135f"
+  },
+  "consultationId": {
+    "$oid": "69ae4976de39ff25b5e4126d"
+  },
+  "senderId": {
+    "$oid": "69a13fab1fdc95a8a2a29b4b"
+  },
+  "senderRole": "doctor",
+  "content": "Heyy.  What is the issue you are consulting with",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-09T04:53:19.588Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ae5286de39ff25b5e41375"
+  },
+  "consultationId": {
+    "$oid": "69ae4976de39ff25b5e4126d"
+  },
+  "senderId": {
+    "$oid": "69991bd385e0685da9a2f2e5"
+  },
+  "senderRole": "patient",
+  "content": "/uploads/messages/msg-1773032070550.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-03-09T04:54:30.596Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ae6134de39ff25b5e41471"
+  },
+  "consultationId": {
+    "$oid": "69ae5a10de39ff25b5e413f5"
+  },
+  "senderId": {
+    "$oid": "69a13fab1fdc95a8a2a29b4b"
+  },
+  "senderRole": "doctor",
+  "content": "Hii",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-09T05:57:08.454Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ae6149de39ff25b5e4147e"
+  },
+  "consultationId": {
+    "$oid": "69ae5a10de39ff25b5e413f5"
+  },
+  "senderId": {
+    "$oid": "69a13fab1fdc95a8a2a29b4b"
+  },
+  "senderRole": "doctor",
+  "content": "What is your problem",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-09T05:57:29.896Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ae6195de39ff25b5e414a8"
+  },
+  "consultationId": {
+    "$oid": "69ae5a10de39ff25b5e413f5"
+  },
+  "senderId": {
+    "$oid": "69991bd385e0685da9a2f2e5"
+  },
+  "senderRole": "patient",
+  "content": "I have severe fever",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-09T05:58:45.480Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b24f672e1231289b13e3b2"
+  },
+  "consultationId": {
+    "$oid": "69b245e046ccbcf320613706"
+  },
+  "senderId": {
+    "$oid": "69991bd385e0685da9a2f2e5"
+  },
+  "senderRole": "patient",
+  "content": "Hii.. I have severe back pain for days",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-12T05:30:15.137Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b250302e1231289b13e3f5"
+  },
+  "consultationId": {
+    "$oid": "69b245e046ccbcf320613706"
+  },
+  "senderId": {
+    "$oid": "69a13fab1fdc95a8a2a29b4b"
+  },
+  "senderRole": "doctor",
+  "content": "How hard is your pain and what type of pain.. is it ",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-12T05:33:36.008Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b257d641868cfbe8fa7bda"
+  },
+  "consultationId": {
+    "$oid": "69b245e046ccbcf320613706"
+  },
+  "senderId": {
+    "$oid": "69991bd385e0685da9a2f2e5"
+  },
+  "senderRole": "patient",
+  "content": "8 have kind of a piercing type of pain when I move in my lower back",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-12T06:06:14.482Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b257e941868cfbe8fa7bf4"
+  },
+  "consultationId": {
+    "$oid": "69b245e046ccbcf320613706"
+  },
+  "senderId": {
+    "$oid": "69a13fab1fdc95a8a2a29b4b"
+  },
+  "senderRole": "doctor",
+  "content": "/uploads/messages/msg-1773295593341.m4a",
+  "messageType": "audio",
+  "createdAt": {
+    "$date": "2026-03-12T06:06:33.521Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b2584e41868cfbe8fa7c51"
+  },
+  "consultationId": {
+    "$oid": "69b245e046ccbcf320613706"
+  },
+  "senderId": {
+    "$oid": "69a13fab1fdc95a8a2a29b4b"
+  },
+  "senderRole": "doctor",
+  "content": "Perform Sit to stand and hip extension excercise upto 3 sets per day for a week and report me after this\n",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-12T06:08:14.273Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3a3d0b5c6e7d828ba8fb8"
+  },
+  "consultationId": {
+    "$oid": "69b39890ce699123182b95c3"
+  },
+  "senderId": {
+    "$oid": "69a13fab1fdc95a8a2a29b4b"
+  },
+  "senderRole": "doctor",
+  "content": "What is your issue",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-13T05:42:40.284Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3a400b5c6e7d828ba8fdb"
+  },
+  "consultationId": {
+    "$oid": "69b39890ce699123182b95c3"
+  },
+  "senderId": {
+    "$oid": "69991bd385e0685da9a2f2e5"
+  },
+  "senderRole": "patient",
+  "content": "I have severe neck pain and stiffness for almost weeks now",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-13T05:43:28.102Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3a43fb5c6e7d828ba8ffa"
+  },
+  "consultationId": {
+    "$oid": "69b39890ce699123182b95c3"
+  },
+  "senderId": {
+    "$oid": "69a13fab1fdc95a8a2a29b4b"
+  },
+  "senderRole": "doctor",
+  "content": "Ok.. if the pain can't be managed take some painkillers. Try sleeping without pillows. Also, do the neck mobility exercises",
+  "messageType": "text",
+  "createdAt": {
+    "$date": "2026-03-13T05:44:31.794Z"
+  },
+  "__v": 0
+}]

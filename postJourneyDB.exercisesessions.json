@@ -1,0 +1,314 @@
+[{
+  "_id": {
+    "$oid": "69ae36e186bea2a0099520bd"
+  },
+  "patientId": "69991bd385e0685da9a2f2e5",
+  "exerciseName": "Marching In Place",
+  "repetitionsCompleted": 20,
+  "durationSeconds": 0,
+  "date": "2026-03-09",
+  "timestamp": {
+    "$date": "2026-03-09T02:56:33.096Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ae477cde39ff25b5e41219"
+  },
+  "patientId": "69991bd385e0685da9a2f2e5",
+  "exerciseName": "Neck Mobility",
+  "repetitionsCompleted": 5,
+  "durationSeconds": 0,
+  "date": "2026-03-09",
+  "timestamp": {
+    "$date": "2026-03-09T04:07:24.894Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ae4f77de39ff25b5e412e4"
+  },
+  "patientId": "69991bd385e0685da9a2f2e5",
+  "exerciseName": "Sit to Stand",
+  "repetitionsCompleted": 5,
+  "durationSeconds": 0,
+  "date": "2026-03-09",
+  "timestamp": {
+    "$date": "2026-03-09T04:41:27.117Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ae62d6de39ff25b5e414b0"
+  },
+  "patientId": "69991bd385e0685da9a2f2e5",
+  "exerciseName": "Sit to Stand",
+  "repetitionsCompleted": 5,
+  "durationSeconds": 0,
+  "date": "2026-03-09",
+  "timestamp": {
+    "$date": "2026-03-09T06:04:06.824Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b398ebce699123182b95d3"
+  },
+  "patientId": "69991bd385e0685da9a2f2e5",
+  "exerciseName": "Sit to Stand",
+  "repetitionsCompleted": 5,
+  "durationSeconds": 0,
+  "performanceLevel": 0,
+  "date": "2026-03-13",
+  "timestamp": {
+    "$date": "2026-03-13T04:56:11.400Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b3a134b5c6e7d828ba8f87"
+  },
+  "patientId": "69991bd385e0685da9a2f2e5",
+  "exerciseName": "Sit to Stand",
+  "exerciseKey": "SIT_TO_STAND",
+  "repetitionsCompleted": 5,
+  "durationSeconds": 0,
+  "performanceLevel": 0,
+  "date": "2026-03-13",
+  "intensityLevel": 1,
+  "difficulty": "Medium",
+  "timestamp": {
+    "$date": "2026-03-13T05:31:32.907Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b4e8b9771ca1a394cae237"
+  },
+  "patientId": "69b4e21d1217352fcb120e44",
+  "exerciseName": "Sit to Stand",
+  "exerciseKey": "SIT_TO_STAND",
+  "repetitionsCompleted": 5,
+  "durationSeconds": 0,
+  "performanceLevel": 80,
+  "date": "2026-03-14",
+  "intensityLevel": 3,
+  "intensityDescription": "Full stand-up",
+  "rangeOfMotionAchieved": 80,
+  "rangeOfMotionTarget": 100,
+  "difficulty": "Hard",
+  "timestamp": {
+    "$date": "2026-03-14T04:48:57.872Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b4f34cb5e28cb0c999cfce"
+  },
+  "patientId": "69b4e21d1217352fcb120e44",
+  "exerciseName": "Sit to Stand",
+  "exerciseKey": "SIT_TO_STAND",
+  "repetitionsCompleted": 5,
+  "durationSeconds": 0,
+  "performanceLevel": 100,
+  "date": "2026-03-14",
+  "intensityLevel": 3,
+  "intensityDescription": "Full stand-up",
+  "rangeOfMotionAchieved": 100,
+  "rangeOfMotionTarget": 100,
+  "difficulty": "Hard",
+  "timestamp": {
+    "$date": "2026-03-14T05:34:04.152Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b4f3c8b5e28cb0c999cfe1"
+  },
+  "patientId": "69b4e21d1217352fcb120e44",
+  "exerciseName": "Sit to Stand",
+  "exerciseKey": "SIT_TO_STAND",
+  "repetitionsCompleted": 5,
+  "durationSeconds": 0,
+  "performanceLevel": 99,
+  "date": "2026-03-14",
+  "intensityLevel": 3,
+  "intensityDescription": "Full stand-up",
+  "rangeOfMotionAchieved": 99,
+  "rangeOfMotionTarget": 100,
+  "difficulty": "Hard",
+  "timestamp": {
+    "$date": "2026-03-14T05:36:08.577Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b51d684ff99e35d86049e6"
+  },
+  "patientId": "69b4e21d1217352fcb120e44",
+  "exerciseName": "Sit to Stand",
+  "exerciseKey": "SIT_TO_STAND",
+  "repetitionsCompleted": 5,
+  "durationSeconds": 0,
+  "performanceLevel": 100,
+  "date": "2026-03-14",
+  "intensityLevel": 3,
+  "intensityDescription": "Full stand-up",
+  "rangeOfMotionAchieved": 100,
+  "rangeOfMotionTarget": 100,
+  "difficulty": "Hard",
+  "timestamp": {
+    "$date": "2026-03-14T08:33:44.366Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b51e2e4ff99e35d86049fb"
+  },
+  "patientId": "69b4e21d1217352fcb120e44",
+  "exerciseName": "Sit to Stand",
+  "exerciseKey": "SIT_TO_STAND",
+  "repetitionsCompleted": 5,
+  "durationSeconds": 0,
+  "performanceLevel": 100,
+  "date": "2026-03-14",
+  "intensityLevel": 3,
+  "intensityDescription": "Full stand-up",
+  "rangeOfMotionAchieved": 100,
+  "rangeOfMotionTarget": 100,
+  "difficulty": "Hard",
+  "timestamp": {
+    "$date": "2026-03-14T08:37:02.404Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b793a69cc93d3fac10b866"
+  },
+  "patientId": "69b4e21d1217352fcb120e44",
+  "exerciseName": "Sit to Stand",
+  "exerciseKey": "SIT_TO_STAND",
+  "repetitionsCompleted": 5,
+  "durationSeconds": 0,
+  "performanceLevel": 100,
+  "date": "2026-03-16",
+  "intensityLevel": 3,
+  "intensityDescription": "Full stand-up",
+  "rangeOfMotionAchieved": 100,
+  "rangeOfMotionTarget": 100,
+  "difficulty": "Hard",
+  "timestamp": {
+    "$date": "2026-03-16T05:22:46.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b796299cc93d3fac10b891"
+  },
+  "patientId": "69b4e21d1217352fcb120e44",
+  "exerciseName": "Sit to Stand",
+  "exerciseKey": "SIT_TO_STAND",
+  "repetitionsCompleted": 5,
+  "durationSeconds": 0,
+  "performanceLevel": 100,
+  "date": "2026-03-16",
+  "intensityLevel": 3,
+  "intensityDescription": "Full stand-up",
+  "rangeOfMotionAchieved": 100,
+  "rangeOfMotionTarget": 100,
+  "difficulty": "Hard",
+  "timestamp": {
+    "$date": "2026-03-16T05:33:29.470Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b7964f9cc93d3fac10b899"
+  },
+  "patientId": "69b4e21d1217352fcb120e44",
+  "exerciseName": "Sit to Stand",
+  "exerciseKey": "SIT_TO_STAND",
+  "repetitionsCompleted": 5,
+  "durationSeconds": 0,
+  "performanceLevel": 100,
+  "date": "2026-03-16",
+  "intensityLevel": 3,
+  "intensityDescription": "Full stand-up",
+  "rangeOfMotionAchieved": 100,
+  "rangeOfMotionTarget": 100,
+  "difficulty": "Hard",
+  "timestamp": {
+    "$date": "2026-03-16T05:34:07.501Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69b798df9cc93d3fac10b8c2"
+  },
+  "patientId": "69b4e21d1217352fcb120e44",
+  "exerciseName": "Sit to Stand",
+  "exerciseKey": "SIT_TO_STAND",
+  "repetitionsCompleted": 5,
+  "durationSeconds": 0,
+  "performanceLevel": 63,
+  "date": "2026-03-16",
+  "intensityLevel": 2,
+  "intensityDescription": "Halfway rise",
+  "rangeOfMotionAchieved": 63,
+  "rangeOfMotionTarget": 100,
+  "difficulty": "Medium",
+  "timestamp": {
+    "$date": "2026-03-16T05:45:03.436Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c36883f0e474a8e0cbda48"
+  },
+  "patientId": "69991bd385e0685da9a2f2e5",
+  "exerciseName": "Sit to Stand",
+  "exerciseKey": "SIT_TO_STAND",
+  "repetitionsCompleted": 5,
+  "durationSeconds": 0,
+  "performanceLevel": 0,
+  "date": "2026-03-25",
+  "intensityLevel": 1,
+  "intensityDescription": "Minimal rise",
+  "rangeOfMotionAchieved": 0,
+  "rangeOfMotionTarget": 100,
+  "difficulty": "Easy",
+  "timestamp": {
+    "$date": "2026-03-25T04:45:55.053Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c952381324429842c12650"
+  },
+  "patientId": "69991bd385e0685da9a2f2e5",
+  "exerciseName": "Sit to Stand",
+  "repetitionsCompleted": 5,
+  "durationSeconds": 0,
+  "performanceLevel": 0,
+  "date": "2026-03-29",
+  "timestamp": {
+    "$date": "2026-03-29T16:24:24.021Z"
+  },
+  "__v": 0
+}]

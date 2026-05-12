@@ -1,0 +1,161 @@
+[{
+  "_id": {
+    "$oid": "69a1421d18d64a927e474f0e"
+  },
+  "patientId": {
+    "$oid": "69a1414918d64a927e474efa"
+  },
+  "fileName": "Screenshot_20260226_230322.jpg",
+  "fileUrl": "/uploads/documents/pat-doc-1772175901258.jpg",
+  "fileType": "image",
+  "documentType": "other",
+  "notes": "",
+  "uploadedAt": {
+    "$date": "2026-02-27T07:05:01.690Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-27T07:05:01.692Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-27T07:05:01.692Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699d6f090d696c7f99e8eed5"
+  },
+  "patientId": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "fileName": "IMG-20260223-WA0010.jpg",
+  "fileUrl": "/uploads/documents/pat-doc-1771925257150.jpg",
+  "fileType": "image",
+  "documentType": "other",
+  "notes": "",
+  "uploadedAt": {
+    "$date": "2026-02-24T09:27:37.222Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-24T09:27:37.225Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-24T09:27:37.225Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e8a7036a4665ea0fdf9a6"
+  },
+  "patientId": {
+    "$oid": "699e886336a4665ea0fdf970"
+  },
+  "fileName": "IMG-20260225-WA0000.jpg",
+  "fileUrl": "/uploads/documents/pat-doc-1771997808629.jpg",
+  "fileType": "image",
+  "documentType": "other",
+  "notes": "",
+  "uploadedAt": {
+    "$date": "2026-02-25T05:36:48.872Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-25T05:36:48.873Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-25T05:36:48.873Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e90a636a4665ea0fdfb8d"
+  },
+  "patientId": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "fileName": "IMG-20260225-WA0000.jpg",
+  "fileUrl": "/uploads/documents/pat-doc-1771999398052.jpg",
+  "fileType": "image",
+  "documentType": "other",
+  "notes": "",
+  "uploadedAt": {
+    "$date": "2026-02-25T06:03:18.323Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-25T06:03:18.324Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-25T06:03:18.324Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699fe5f854ba91dd3b898191"
+  },
+  "patientId": {
+    "$oid": "699e886336a4665ea0fdf970"
+  },
+  "fileName": "IMG-20260224-WA0013.jpg",
+  "fileUrl": "/uploads/documents/pat-doc-1772086776122.jpg",
+  "fileType": "image",
+  "documentType": "other",
+  "notes": "",
+  "uploadedAt": {
+    "$date": "2026-02-26T06:19:36.133Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-26T06:19:36.134Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-26T06:19:36.134Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a45f8957b0b0408abc6a15"
+  },
+  "patientId": {
+    "$oid": "699546514f96b5d5b5616fe8"
+  },
+  "fileName": "cc07365ff65faba10ffda2cb8c9c4aef.jpg",
+  "fileUrl": "/uploads/documents/pat-doc-1772380041100.jpg",
+  "fileType": "image",
+  "documentType": "other",
+  "notes": "",
+  "uploadedAt": {
+    "$date": "2026-03-01T15:47:21.219Z"
+  },
+  "createdAt": {
+    "$date": "2026-03-01T15:47:21.220Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T15:47:21.220Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69aee7e0215210e603db3537"
+  },
+  "patientId": {
+    "$oid": "69991bd385e0685da9a2f2e5"
+  },
+  "fileName": "29cc2e1e-c9c1-444a-b4cd-289b5c31af85.jpeg",
+  "fileUrl": "/uploads/documents/pat-doc-1773070304790.jpeg",
+  "fileType": "image",
+  "documentType": "lab_report",
+  "notes": "",
+  "uploadedAt": {
+    "$date": "2026-03-09T15:31:44.983Z"
+  },
+  "createdAt": {
+    "$date": "2026-03-09T15:31:44.986Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-09T15:31:44.986Z"
+  },
+  "__v": 0
+}]

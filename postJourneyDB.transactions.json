@@ -1,0 +1,6513 @@
+[{
+  "_id": {
+    "$oid": "69a143f318d64a927e474f6b"
+  },
+  "referenceId": "69a143f018d64a927e474f67",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "69a1432318d64a927e474f41"
+  },
+  "toUser": {
+    "$oid": "69a141218ce342d4713e5c55"
+  },
+  "amount": 5,
+  "paymentMethod": "card",
+  "paymentMethodDetails": {
+    "number": "",
+    "expiry": "",
+    "cvv": "",
+    "name": ""
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1772176371561_26og7ou9t",
+  "notes": "5% listing fee for Wheelchair",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "69a143f018d64a927e474f67"
+    },
+    "equipmentName": "Wheelchair",
+    "pricePerDay": 100,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-27T07:12:51.528Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-27T07:12:51.562Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a1445e18d64a927e474f95"
+  },
+  "referenceId": "69a1445e18d64a927e474f93",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69a1414918d64a927e474efa"
+  },
+  "toUser": {
+    "$oid": "69a1432318d64a927e474f41"
+  },
+  "amount": 100,
+  "paymentMethod": "cod",
+  "status": "completed",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69a143f018d64a927e474f67"
+    },
+    "days": 1,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-27T07:14:38.839Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-27T07:21:30.041Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697c98cd7f15f817b152b58d"
+  },
+  "referenceId": "697c98cd7f15f817b152b58b",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 240,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 2,
+    "pricePerDay": 120
+  },
+  "createdAt": {
+    "$date": "2026-01-30T11:41:01.376Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T11:41:01.376Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697c9f431688cd20fe6c7dc8"
+  },
+  "referenceId": "697c9f431688cd20fe6c7dc6",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 120,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1769774933298_z074tfy1v",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 1,
+    "pricePerDay": 120
+  },
+  "createdAt": {
+    "$date": "2026-01-30T12:08:35.448Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T12:08:53.316Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiApp": "google_pay"
+  }
+},
+{
+  "_id": {
+    "$oid": "697ca1371688cd20fe6c7ddf"
+  },
+  "referenceId": "697ca1371688cd20fe6c7ddd",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 120,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1769775423677_02f6oalir",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 1,
+    "pricePerDay": 120
+  },
+  "createdAt": {
+    "$date": "2026-01-30T12:16:55.323Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T12:17:03.692Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiApp": "google_pay"
+  }
+},
+{
+  "_id": {
+    "$oid": "697ca1911688cd20fe6c7df5"
+  },
+  "referenceId": "697ca1911688cd20fe6c7df3",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 120,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 1,
+    "pricePerDay": 120
+  },
+  "createdAt": {
+    "$date": "2026-01-30T12:18:25.562Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T12:18:25.562Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697ca1e11688cd20fe6c7e08"
+  },
+  "referenceId": "697ca1e11688cd20fe6c7e06",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 120,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1769775590502_v4v3877w6",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 1,
+    "pricePerDay": 120
+  },
+  "createdAt": {
+    "$date": "2026-01-30T12:19:45.146Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T12:19:50.522Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiApp": "phonepe"
+  }
+},
+{
+  "_id": {
+    "$oid": "697ca2041688cd20fe6c7e1e"
+  },
+  "referenceId": "697ca2041688cd20fe6c7e1c",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 120,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1769775626225_oq29ipsoi",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 1,
+    "pricePerDay": 120
+  },
+  "createdAt": {
+    "$date": "2026-01-30T12:20:20.925Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T12:20:26.238Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiId": "9876543210@axisbank"
+  }
+},
+{
+  "_id": {
+    "$oid": "697ca29e1688cd20fe6c7e39"
+  },
+  "referenceId": "697ca29e1688cd20fe6c7e37",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 245,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hauia",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c920a7f15f817b152b508"
+    },
+    "days": 7,
+    "pricePerDay": 35
+  },
+  "createdAt": {
+    "$date": "2026-01-30T12:22:54.346Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T12:22:54.346Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697ca8641688cd20fe6c7e4e"
+  },
+  "referenceId": "697ca8641688cd20fe6c7e4c",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 70,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1769777295953_cgk9pkjmf",
+  "notes": "Booking for 1 unit(s) of Hauia",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c920a7f15f817b152b508"
+    },
+    "days": 2,
+    "pricePerDay": 35
+  },
+  "createdAt": {
+    "$date": "2026-01-30T12:47:32.779Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T12:48:15.965Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "4242 4242 4242 4242",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  }
+},
+{
+  "_id": {
+    "$oid": "697ca8c41688cd20fe6c7e6f"
+  },
+  "referenceId": "697ca8c41688cd20fe6c7e6d",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 140,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Something",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c8d447f15f817b152b4d5"
+    },
+    "days": 7,
+    "pricePerDay": 20
+  },
+  "createdAt": {
+    "$date": "2026-01-30T12:49:08.146Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T12:49:08.146Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697ca8eb1688cd20fe6c7e91"
+  },
+  "referenceId": "697ca8eb1688cd20fe6c7e8f",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 140,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1769777393647_1ymuuf1ag",
+  "notes": "Booking for 1 unit(s) of Something",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c8d447f15f817b152b4d5"
+    },
+    "days": 7,
+    "pricePerDay": 20
+  },
+  "createdAt": {
+    "$date": "2026-01-30T12:49:47.065Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T12:49:53.666Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiId": "9876543210@paytm"
+  }
+},
+{
+  "_id": {
+    "$oid": "697caa671688cd20fe6c7ebd"
+  },
+  "referenceId": "697caa671688cd20fe6c7ebb",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1769777783016_0mi0cp0y5",
+  "notes": "Booking for 1 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 7,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T12:56:07.017Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T12:56:23.025Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "3782 822463 10005",
+    "expiry": "12/30",
+    "cvv": "1234",
+    "name": "Test User"
+  }
+},
+{
+  "_id": {
+    "$oid": "697caae61688cd20fe6c7ee1"
+  },
+  "referenceId": "697caacf1688cd20fe6c7edd",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 20,
+  "paymentMethod": "card",
+  "paymentMethodDetails": {
+    "number": "3782 822463 10005",
+    "expiry": "12/30",
+    "cvv": "1234",
+    "name": "Test User"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1769777894707_pbn5af579",
+  "notes": "5% listing fee for Wheelchair",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "equipmentName": "Wheelchair",
+    "pricePerDay": 400,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-01-30T12:58:14.705Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T12:58:14.708Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cab381688cd20fe6c7f23"
+  },
+  "referenceId": "697cab381688cd20fe6c7f21",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69634b72ac73f113f4194032"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 800,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1769777983405_71a7czh8j",
+  "notes": "Booking for 2 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 1,
+    "pricePerDay": 400
+  },
+  "createdAt": {
+    "$date": "2026-01-30T12:59:36.853Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T12:59:43.413Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiApp": "google_pay"
+  }
+},
+{
+  "_id": {
+    "$oid": "697cab381688cd20fe6c7f2f"
+  },
+  "referenceId": "697cab381688cd20fe6c7f2b",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69634b72ac73f113f4194032"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 100,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 1,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T12:59:36.906Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T12:59:36.906Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cab381688cd20fe6c7f31"
+  },
+  "referenceId": "697cab381688cd20fe6c7f2d",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69634b72ac73f113f4194032"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 120,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 1,
+    "pricePerDay": 120
+  },
+  "createdAt": {
+    "$date": "2026-01-30T12:59:36.908Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T12:59:36.908Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cab771688cd20fe6c7f64"
+  },
+  "referenceId": "697cab771688cd20fe6c7f62",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 840,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1769778042118_aye494nvb",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 7,
+    "pricePerDay": 120
+  },
+  "createdAt": {
+    "$date": "2026-01-30T13:00:39.192Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T13:00:42.127Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555 5555 5555 4444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  }
+},
+{
+  "_id": {
+    "$oid": "697caba31688cd20fe6c7f84"
+  },
+  "referenceId": "697caba31688cd20fe6c7f82",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69634b72ac73f113f4194032"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 400,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 4 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 4,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 1,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T13:01:23.739Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T13:01:23.739Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cabd31688cd20fe6c7fa5"
+  },
+  "referenceId": "697cabd31688cd20fe6c7fa3",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69634b72ac73f113f4194032"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 400,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 4 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 4,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 1,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T13:02:11.106Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T13:02:11.106Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cabee1688cd20fe6c7fb7"
+  },
+  "referenceId": "697cabee1688cd20fe6c7fb5",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69634b72ac73f113f4194032"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 400,
+  "paymentMethod": "wallet",
+  "status": "completed",
+  "transactionId": "mock_1769778162227_5bk5h8lsc",
+  "notes": "Booking for 2 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 2,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T13:02:38.324Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T13:02:42.234Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "wallet": "amazon_pay"
+  }
+},
+{
+  "_id": {
+    "$oid": "697cafea1688cd20fe6c7fd2"
+  },
+  "referenceId": "697cafea1688cd20fe6c7fd0",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69634b72ac73f113f4194032"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 7,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T13:19:38.989Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T13:19:38.989Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cb04d1688cd20fe6c7fe7"
+  },
+  "referenceId": "697cb04d1688cd20fe6c7fe5",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69634b72ac73f113f4194032"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 2800,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1769779284960_enwyo3uxg",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 7,
+    "pricePerDay": 400
+  },
+  "createdAt": {
+    "$date": "2026-01-30T13:21:17.920Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T13:21:24.967Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555 5555 5555 4444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  }
+},
+{
+  "_id": {
+    "$oid": "697cb48f1688cd20fe6c8008"
+  },
+  "referenceId": "697cb48f1688cd20fe6c8006",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 7,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T13:39:27.385Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T13:39:27.385Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cb4941688cd20fe6c8011"
+  },
+  "referenceId": "697cb4941688cd20fe6c800f",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 7,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T13:39:32.791Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T13:39:32.791Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cb5291688cd20fe6c801a"
+  },
+  "referenceId": "697cb5291688cd20fe6c8018",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 7,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T13:42:01.399Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T13:42:01.399Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cb5371688cd20fe6c8023"
+  },
+  "referenceId": "697cb5371688cd20fe6c8021",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 7,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T13:42:15.806Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T13:42:15.806Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cb5411688cd20fe6c802c"
+  },
+  "referenceId": "697cb5411688cd20fe6c802a",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 7,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T13:42:25.370Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T13:42:25.370Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cb5461688cd20fe6c8035"
+  },
+  "referenceId": "697cb5461688cd20fe6c8033",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 7,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T13:42:30.431Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T13:42:30.431Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cb60d1688cd20fe6c803e"
+  },
+  "referenceId": "697cb60d1688cd20fe6c803c",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 7,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T13:45:49.412Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T13:45:49.412Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cb61d1688cd20fe6c8049"
+  },
+  "referenceId": "697cb61d1688cd20fe6c8047",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 7,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T13:46:05.753Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T13:46:05.753Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cb6da1688cd20fe6c8062"
+  },
+  "referenceId": "697cb6da1688cd20fe6c8060",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 7,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T13:49:14.785Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T13:49:14.785Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cb977fae7f2f45b74eade"
+  },
+  "referenceId": "697cb977fae7f2f45b74eadc",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 7,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:00:23.888Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:00:23.888Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cb9a6fae7f2f45b74eb0a"
+  },
+  "referenceId": "697cb9a6fae7f2f45b74eb07",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 100,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 1,
+    "pricePerDay": 100
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:01:10.065Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:01:10.065Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cb9a6fae7f2f45b74eb0f"
+  },
+  "referenceId": "697cb9a6fae7f2f45b74eb0d",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 400,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 1,
+    "pricePerDay": 400
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:01:10.077Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:01:10.077Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cba26fae7f2f45b74eb2c"
+  },
+  "referenceId": "697cba26fae7f2f45b74eb2a",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 2800,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 7,
+    "pricePerDay": 400
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:03:18.113Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:03:18.113Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cba90fae7f2f45b74eb54"
+  },
+  "referenceId": "697cba90fae7f2f45b74eb52",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 840,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 7,
+    "pricePerDay": 120
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:05:04.377Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:05:04.377Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cbaa7fae7f2f45b74eb65"
+  },
+  "referenceId": "697cbaa7fae7f2f45b74eb63",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 840,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1769781933004_pxkhp3s77",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 7,
+    "pricePerDay": 120
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:05:27.713Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:05:33.013Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555 5555 5555 4444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  }
+},
+{
+  "_id": {
+    "$oid": "697cbacffae7f2f45b74eb7c"
+  },
+  "referenceId": "697cbacffae7f2f45b74eb7a",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 840,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1769781970625_np2bff6gm",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 7,
+    "pricePerDay": 120
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:06:07.146Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:06:10.633Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiId": "9876543210@okicici"
+  }
+},
+{
+  "_id": {
+    "$oid": "697cbdfcdf4764c41f1d7d58"
+  },
+  "referenceId": "697cbdfcdf4764c41f1d7d56",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 70,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hauia",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c920a7f15f817b152b508"
+    },
+    "days": 2,
+    "pricePerDay": 35,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:19:40.524Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:19:40.524Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cbe12df4764c41f1d7d65"
+  },
+  "referenceId": "697cbe12df4764c41f1d7d63",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 245,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hauia",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c920a7f15f817b152b508"
+    },
+    "days": 7,
+    "pricePerDay": 35,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:20:02.732Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:20:02.732Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cbe40df4764c41f1d7d91"
+  },
+  "referenceId": "697cbe40df4764c41f1d7d8f",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 1680,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 2 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 7,
+    "pricePerDay": 120,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:20:48.879Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:20:48.879Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cbe60df4764c41f1d7dac"
+  },
+  "referenceId": "697cbe60df4764c41f1d7daa",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 245,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hauia",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c920a7f15f817b152b508"
+    },
+    "days": 7,
+    "pricePerDay": 35,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:21:20.942Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:21:20.942Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cbe76df4764c41f1d7dbd"
+  },
+  "referenceId": "697cbe76df4764c41f1d7dbb",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 245,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hauia",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c920a7f15f817b152b508"
+    },
+    "days": 7,
+    "pricePerDay": 35,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:21:42.899Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:21:42.899Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cbe88df4764c41f1d7dd1"
+  },
+  "referenceId": "697cbe88df4764c41f1d7dcf",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 840,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 7,
+    "pricePerDay": 120,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:22:00.717Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:22:00.717Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cbe9adf4764c41f1d7de2"
+  },
+  "referenceId": "697cbe9adf4764c41f1d7de0",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 840,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1769782945040_hz1jcl855",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 7,
+    "pricePerDay": 120,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:22:18.924Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:22:25.048Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555 5555 5555 4444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  }
+},
+{
+  "_id": {
+    "$oid": "697cbeb7df4764c41f1d7dfa"
+  },
+  "referenceId": "697cbeb7df4764c41f1d7df8",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 490,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1769782971429_91wiyki2c",
+  "notes": "Booking for 2 unit(s) of Hauia",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "697c920a7f15f817b152b508"
+    },
+    "days": 7,
+    "pricePerDay": 35,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:22:47.174Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:22:51.433Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiApp": ""
+  }
+},
+{
+  "_id": {
+    "$oid": "697cc0aadf4764c41f1d7e15"
+  },
+  "referenceId": "697cc0aadf4764c41f1d7e13",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 245,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1769783522945_d569bu91v",
+  "notes": "Booking for 1 unit(s) of Hauia",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c920a7f15f817b152b508"
+    },
+    "days": 7,
+    "pricePerDay": 35,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:31:06.935Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:32:02.948Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555555555554444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  }
+},
+{
+  "_id": {
+    "$oid": "697cc134df4764c41f1d7e5e"
+  },
+  "referenceId": "697cc134df4764c41f1d7e5c",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 245,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hauia",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c920a7f15f817b152b508"
+    },
+    "days": 7,
+    "pricePerDay": 35,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:33:24.933Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:33:24.933Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697cc1a1df4764c41f1d7e7d"
+  },
+  "referenceId": "697cc18bdf4764c41f1d7e79",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 5,
+  "paymentMethod": "card",
+  "paymentMethodDetails": {
+    "number": "5555555555554444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1769783713414_mn0wv4hza",
+  "notes": "5% listing fee for Hehe",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "equipmentName": "Hehe",
+    "pricePerDay": 100,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-01-30T14:35:13.412Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T14:35:13.415Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69842189ad9b40d2a4aa7923"
+  },
+  "referenceId": "69842189ad9b40d2a4aa791f",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 200,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770267033505_7fghusie5",
+  "notes": "Booking for 2 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 1,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T04:50:17.920Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T04:50:33.517Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiId": "9876543210@ybl"
+  }
+},
+{
+  "_id": {
+    "$oid": "69842189ad9b40d2a4aa7924"
+  },
+  "referenceId": "69842189ad9b40d2a4aa7921",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 120,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 1,
+    "pricePerDay": 120,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T04:50:17.921Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T04:50:17.921Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698421e9ad9b40d2a4aa7944"
+  },
+  "referenceId": "698421e9ad9b40d2a4aa7942",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 245,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hauia",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c920a7f15f817b152b508"
+    },
+    "days": 7,
+    "pricePerDay": 35,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T04:51:53.010Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T04:51:53.010Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69842233ad9b40d2a4aa7959"
+  },
+  "referenceId": "69842233ad9b40d2a4aa7957",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 840,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1770267217817_mv33n0fct",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 7,
+    "pricePerDay": 120,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T04:53:07.754Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T04:53:37.823Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555555555554444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  }
+},
+{
+  "_id": {
+    "$oid": "69842279ad9b40d2a4aa798e"
+  },
+  "referenceId": "69842279ad9b40d2a4aa798c",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 245,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hauia",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c920a7f15f817b152b508"
+    },
+    "days": 7,
+    "pricePerDay": 35,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T04:54:17.030Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T04:54:17.030Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69842279ad9b40d2a4aa7996"
+  },
+  "referenceId": "69842279ad9b40d2a4aa7994",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770267273556_bn8odbmgt",
+  "notes": "Booking for 1 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 7,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T04:54:17.070Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T04:54:33.563Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiId": "9876543210@okicici"
+  }
+},
+{
+  "_id": {
+    "$oid": "698422baad9b40d2a4aa79d8"
+  },
+  "referenceId": "698422baad9b40d2a4aa79d5",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "netbanking",
+  "status": "completed",
+  "transactionId": "mock_1770267328677_lft11wa0d",
+  "notes": "Booking for 1 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 7,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T04:55:22.816Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T04:55:28.683Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "bank": "icici"
+  }
+},
+{
+  "_id": {
+    "$oid": "698422baad9b40d2a4aa79dd"
+  },
+  "referenceId": "698422baad9b40d2a4aa79db",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 245,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hauia",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c920a7f15f817b152b508"
+    },
+    "days": 7,
+    "pricePerDay": 35,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T04:55:22.833Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T04:55:22.833Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69842418ad9b40d2a4aa7a22"
+  },
+  "referenceId": "69842418ad9b40d2a4aa7a1f",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 100,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770267678061_0ypvibv78",
+  "notes": "Booking for 1 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 1,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:01:12.599Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:01:18.069Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiApp": "phonepe"
+  }
+},
+{
+  "_id": {
+    "$oid": "69842418ad9b40d2a4aa7a29"
+  },
+  "referenceId": "69842418ad9b40d2a4aa7a27",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 70,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 2 unit(s) of Hauia",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "697c920a7f15f817b152b508"
+    },
+    "days": 1,
+    "pricePerDay": 35,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:01:12.624Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:01:12.624Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698424bcad9b40d2a4aa7a70"
+  },
+  "referenceId": "698424bcad9b40d2a4aa7a6c",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 120,
+  "paymentMethod": "netbanking",
+  "status": "completed",
+  "transactionId": "mock_1770267845009_uithtxfzg",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 1,
+    "pricePerDay": 120,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:03:56.711Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:04:05.014Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "bank": "icici"
+  }
+},
+{
+  "_id": {
+    "$oid": "698424bcad9b40d2a4aa7a72"
+  },
+  "referenceId": "698424bcad9b40d2a4aa7a6e",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 100,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 1,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:03:56.713Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:03:56.713Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698424e9ad9b40d2a4aa7aa3"
+  },
+  "referenceId": "698424e9ad9b40d2a4aa7aa1",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 840,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 7,
+    "pricePerDay": 120,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:04:41.740Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:04:41.740Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69842530ad9b40d2a4aa7acc"
+  },
+  "referenceId": "69842530ad9b40d2a4aa7ac9",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 200,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 2 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 1,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:05:52.671Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:05:52.671Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69842530ad9b40d2a4aa7ad1"
+  },
+  "referenceId": "69842530ad9b40d2a4aa7acf",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 35,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hauia",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c920a7f15f817b152b508"
+    },
+    "days": 1,
+    "pricePerDay": 35,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:05:52.687Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:05:52.687Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69842553ad9b40d2a4aa7ae8"
+  },
+  "referenceId": "69842553ad9b40d2a4aa7ae6",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 120,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1770267993114_o6y2dl5du",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 1,
+    "pricePerDay": 120,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:06:27.590Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:06:33.119Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555555555554444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  }
+},
+{
+  "_id": {
+    "$oid": "6984256bad9b40d2a4aa7b03"
+  },
+  "referenceId": "6984256bad9b40d2a4aa7b01",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 100,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 1,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:06:51.100Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:06:51.100Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69842a51ad9b40d2a4aa7b35"
+  },
+  "referenceId": "69842a51ad9b40d2a4aa7b33",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 100,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 1,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:27:45.890Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:27:45.890Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69842dda8df4f21412617eaa"
+  },
+  "referenceId": "69842dda8df4f21412617ea8",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 100,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 1,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:42:50.725Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:42:50.725Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69842e6c319065387c634e7d"
+  },
+  "referenceId": "69842e6c319065387c634e7b",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 120,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770270318698_yo2u854j7",
+  "notes": "Booking for 1 unit(s) of Wheel chair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c93947f15f817b152b51f"
+    },
+    "days": 1,
+    "pricePerDay": 120,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:45:16.150Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:45:18.710Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiId": "9876543210@ybl"
+  }
+},
+{
+  "_id": {
+    "$oid": "69842fdf319065387c634ec8"
+  },
+  "referenceId": "69842fdf319065387c634ec5",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 200,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1770270693381_c4pm2blfh",
+  "notes": "Booking for 2 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 1,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:51:27.570Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:51:33.388Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555555555554444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  }
+},
+{
+  "_id": {
+    "$oid": "69842fdf319065387c634ecf"
+  },
+  "referenceId": "69842fdf319065387c634ecd",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 400,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 1,
+    "pricePerDay": 400,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:51:27.600Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:51:27.600Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69843010319065387c634f04"
+  },
+  "referenceId": "69843010319065387c634f01",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 400,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 1,
+    "pricePerDay": 400,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:52:16.197Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:52:16.197Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69843010319065387c634f0b"
+  },
+  "referenceId": "69843010319065387c634f09",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 100,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 1,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:52:16.230Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:52:16.230Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69843027319065387c634f1f"
+  },
+  "referenceId": "69843027319065387c634f1d",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 100,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 1,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T05:52:39.473Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T05:52:39.473Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6984386f319065387c634f63"
+  },
+  "referenceId": "6984386f319065387c634f60",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 100,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770272883539_z7eqwsi3s",
+  "notes": "Booking for 1 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 1,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:27:59.921Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:28:03.543Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiId": "9876543210@axisbank"
+  }
+},
+{
+  "_id": {
+    "$oid": "6984386f319065387c634f6a"
+  },
+  "referenceId": "6984386f319065387c634f68",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 400,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 1,
+    "pricePerDay": 400,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:27:59.940Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:27:59.940Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69843937319065387c634f96"
+  },
+  "referenceId": "69843929319065387c634f92",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 12.5,
+  "paymentMethod": "upi",
+  "paymentMethodDetails": {
+    "upiApp": "google_pay"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1770273079268_bk6in02gp",
+  "notes": "5% listing fee for Oxy",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "equipmentName": "Oxy",
+    "pricePerDay": 250,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:31:19.266Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:31:19.269Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69843997319065387c634fd9"
+  },
+  "referenceId": "69843997319065387c634fd6",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 250,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770273178761_c1mz88a2x",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 1,
+    "pricePerDay": 250,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:32:55.578Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:32:58.765Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiId": "9876543210@axisbank"
+  }
+},
+{
+  "_id": {
+    "$oid": "69843997319065387c634fdf"
+  },
+  "referenceId": "69843997319065387c634fdd",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 400,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 1,
+    "pricePerDay": 400,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:32:55.592Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:32:55.592Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69843a05319065387c634ff4"
+  },
+  "referenceId": "69843a05319065387c634ff2",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69843738319065387c634f36"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 1750,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770273289943_9rkpcy311",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 7,
+    "pricePerDay": 250,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:34:45.707Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:34:49.949Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiApp": "google_pay"
+  }
+},
+{
+  "_id": {
+    "$oid": "69843a27319065387c63502a"
+  },
+  "referenceId": "69843a27319065387c635028",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 250,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770273322183_kuepzx92t",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 1,
+    "pricePerDay": 250,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:35:19.563Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:35:22.188Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiId": "9876543210@ybl"
+  }
+},
+{
+  "_id": {
+    "$oid": "69843a27319065387c635032"
+  },
+  "referenceId": "69843a27319065387c635030",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 400,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 1,
+    "pricePerDay": 400,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:35:19.582Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:35:19.582Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69843b25319065387c635063"
+  },
+  "referenceId": "69843b25319065387c635060",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 250,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1770273577417_dsezysed8",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 1,
+    "pricePerDay": 250,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:39:33.498Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:39:37.421Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555555555554444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  }
+},
+{
+  "_id": {
+    "$oid": "69843b25319065387c63506a"
+  },
+  "referenceId": "69843b25319065387c635068",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 100,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 1,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:39:33.518Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:39:33.518Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69843bc1319065387c63509c"
+  },
+  "referenceId": "69843bc1319065387c635099",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 1750,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770273731859_2fkg6j9ex",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 7,
+    "pricePerDay": 250,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:42:09.217Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:42:11.863Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiId": "9876543210@axisbank"
+  }
+},
+{
+  "_id": {
+    "$oid": "69843bc1319065387c6350a2"
+  },
+  "referenceId": "69843bc1319065387c6350a0",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 2800,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 7,
+    "pricePerDay": 400,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:42:09.235Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:42:09.235Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69843d40e96d09d2284cdb4e"
+  },
+  "referenceId": "69843d40e96d09d2284cdb4b",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 400,
+  "paymentMethod": "pending",
+  "status": "completed",
+  "transactionId": "mock_1770274116020_1pzwegrj1_69843d40e96d09d2284cdb4b",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 1,
+    "pricePerDay": 400,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:48:32.640Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:48:36.037Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69843d40e96d09d2284cdb4d"
+  },
+  "referenceId": "69843d40e96d09d2284cdb49",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 250,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770274116020_1pzwegrj1",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 1,
+    "pricePerDay": 250,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:48:32.640Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:48:36.046Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiId": "9876543210@axisbank"
+  }
+},
+{
+  "_id": {
+    "$oid": "69843d57e96d09d2284cdb73"
+  },
+  "referenceId": "69843d57e96d09d2284cdb71",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 250,
+  "paymentMethod": "pending",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 1,
+    "pricePerDay": 250,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:48:55.290Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:48:55.290Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69843d70e96d09d2284cdb86"
+  },
+  "referenceId": "69843d70e96d09d2284cdb84",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 1750,
+  "paymentMethod": "pending",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 7,
+    "pricePerDay": 250,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:49:20.822Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:49:20.822Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69843d8ce96d09d2284cdb99"
+  },
+  "referenceId": "69843d8ce96d09d2284cdb97",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 250,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1770274192174_04ju6n1v5",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 1,
+    "pricePerDay": 250,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-05T06:49:48.728Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T06:49:52.184Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555555555554444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  }
+},
+{
+  "_id": {
+    "$oid": "698440f0e96d09d2284cdbc7"
+  },
+  "referenceId": "698440f0e96d09d2284cdbc5",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 1750,
+  "paymentMethod": "pending",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 7,
+    "pricePerDay": 250,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-05T07:04:16.063Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T07:04:16.063Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698440f8e96d09d2284cdbce"
+  },
+  "referenceId": "698440f8e96d09d2284cdbcc",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 1750,
+  "paymentMethod": "netbanking",
+  "status": "completed",
+  "transactionId": "mock_1770275068293_np2b9yj0q",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 7,
+    "pricePerDay": 250,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-05T07:04:24.546Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T07:04:28.301Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "bank": "icici"
+  }
+},
+{
+  "_id": {
+    "$oid": "69844117e96d09d2284cdbea"
+  },
+  "referenceId": "69844117e96d09d2284cdbe8",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 1750,
+  "paymentMethod": "netbanking",
+  "status": "completed",
+  "transactionId": "mock_1770275100806_rewh9l2hn",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 7,
+    "pricePerDay": 250,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-05T07:04:55.108Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T07:05:00.813Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "bank": "icici"
+  }
+},
+{
+  "_id": {
+    "$oid": "698441c820d8dafb775f0d3e"
+  },
+  "referenceId": "698441c820d8dafb775f0d3b",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 400,
+  "paymentMethod": "pending",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 1,
+    "pricePerDay": 400,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-05T07:07:52.502Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T07:07:52.502Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698441c820d8dafb775f0d3d"
+  },
+  "referenceId": "698441c820d8dafb775f0d39",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 500,
+  "paymentMethod": "pending",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 2 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 1,
+    "pricePerDay": 250,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-05T07:07:52.502Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-05T07:07:52.502Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698573926dbf1fdac39069a1"
+  },
+  "referenceId": "698573926dbf1fdac390699d",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 500,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770353751915_lgdyvz0zt",
+  "notes": "Booking for 2 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 1,
+    "pricePerDay": 250,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-06T04:52:34.583Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-06T04:55:51.962Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiId": "9876543210@axisbank"
+  }
+},
+{
+  "_id": {
+    "$oid": "698573926dbf1fdac39069a2"
+  },
+  "referenceId": "698573926dbf1fdac390699f",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 400,
+  "paymentMethod": "pending",
+  "status": "completed",
+  "transactionId": "mock_1770353751915_lgdyvz0zt_698573926dbf1fdac390699f",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 1,
+    "pricePerDay": 400,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-06T04:52:34.583Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-06T04:55:51.948Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6985756c6dbf1fdac39069f2"
+  },
+  "referenceId": "6985756c6dbf1fdac39069ef",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 1000,
+  "paymentMethod": "pending",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 2 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 2,
+    "pricePerDay": 250,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-06T05:00:28.670Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-06T05:00:28.670Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6985756c6dbf1fdac39069f7"
+  },
+  "referenceId": "6985756c6dbf1fdac39069f5",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 800,
+  "paymentMethod": "pending",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 2,
+    "pricePerDay": 400,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-06T05:00:28.688Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-06T05:00:28.688Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6985764d6dbf1fdac3906a35"
+  },
+  "referenceId": "6985764d6dbf1fdac3906a33",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 750,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1770354336465_wzokpfwjn",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 3,
+    "pricePerDay": 250,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-06T05:04:13.932Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-06T05:05:36.482Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "3782822310001124",
+    "expiry": "12/30",
+    "cvv": "1234",
+    "name": "Test User"
+  }
+},
+{
+  "_id": {
+    "$oid": "698576c56dbf1fdac3906a51"
+  },
+  "referenceId": "698576c56dbf1fdac3906a4f",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "pending",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 7,
+    "pricePerDay": 100,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-06T05:06:13.968Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-06T05:06:13.968Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69858714945073d8234ad196"
+  },
+  "referenceId": "69858714945073d8234ad194",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 250,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 1,
+    "pricePerDay": 250,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-06T06:15:48.460Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-06T06:15:51.013Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6985873a945073d8234ad1c4"
+  },
+  "referenceId": "6985873a945073d8234ad1c1",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 1000,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1770358589737_dy6heqilu",
+  "notes": "Booking for 2 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 2,
+    "pricePerDay": 250,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-06T06:16:26.246Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-06T06:16:29.767Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555555555554444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  }
+},
+{
+  "_id": {
+    "$oid": "6985873a945073d8234ad1c9"
+  },
+  "referenceId": "6985873a945073d8234ad1c7",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 200,
+  "paymentMethod": "pending",
+  "status": "completed",
+  "transactionId": "mock_1770358589737_dy6heqilu_6985873a945073d8234ad1c7",
+  "notes": "Booking for 1 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 2,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-06T06:16:26.263Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-06T06:16:29.757Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69858ada360f3f4afc978819"
+  },
+  "referenceId": "69858ada360f3f4afc978815",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 1750,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770359541033_bt70lvaov",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 7,
+    "pricePerDay": 250,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-06T06:31:54.717Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-06T06:32:21.080Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiId": "9876543210@ybl"
+  }
+},
+{
+  "_id": {
+    "$oid": "69858ada360f3f4afc97881a"
+  },
+  "referenceId": "69858ada360f3f4afc978817",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 1400,
+  "paymentMethod": "pending",
+  "status": "completed",
+  "transactionId": "mock_1770359541033_bt70lvaov_69858ada360f3f4afc978817",
+  "notes": "Booking for 2 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 7,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-06T06:31:54.717Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-06T06:32:21.064Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986b6dcef7056413e626751"
+  },
+  "referenceId": "6986b6dcef7056413e62674f",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 1750,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 7,
+    "pricePerDay": 250,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-07T03:51:56.456Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T03:51:58.235Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986b7bfef7056413e626788"
+  },
+  "referenceId": "6986b7bfef7056413e626786",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 1200,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 3,
+    "pricePerDay": 400,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-07T03:55:43.585Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T03:55:44.954Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986b948cb9fdb28a3b8c603"
+  },
+  "referenceId": "6986b948cb9fdb28a3b8c601",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6984387d319065387c634f7a"
+  },
+  "amount": 500,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770436941247_0ia5duwr0",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69843929319065387c634f92"
+    },
+    "days": 2,
+    "pricePerDay": 250,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-07T04:02:16.457Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T04:02:21.271Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiId": "9876543210@axisbank"
+  }
+},
+{
+  "_id": {
+    "$oid": "6986b979cb9fdb28a3b8c620"
+  },
+  "referenceId": "6986b979cb9fdb28a3b8c61e",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 2000,
+  "paymentMethod": "cod",
+  "status": "completed",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 5,
+    "pricePerDay": 400,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-07T04:03:05.264Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T04:38:50.672Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986c175a917e97bf4b0b5d5"
+  },
+  "referenceId": "6986c175a917e97bf4b0b5d3",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "cod",
+  "status": "completed",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 7,
+    "pricePerDay": 100,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-07T04:37:09.432Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T04:38:00.758Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986c6c18b5234861038c226"
+  },
+  "referenceId": "6986c6c18b5234861038c224",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69634b72ac73f113f4194032"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 700,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1770440388655_tzckhuk1v",
+  "notes": "Booking for 1 unit(s) of Hehe",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697cc18bdf4764c41f1d7e79"
+    },
+    "days": 7,
+    "pricePerDay": 100,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-07T04:59:45.569Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T04:59:48.665Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555555555554444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  }
+},
+{
+  "_id": {
+    "$oid": "6986c6fb8b5234861038c279"
+  },
+  "referenceId": "6986c6fb8b5234861038c276",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69634b72ac73f113f4194032"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 200,
+  "paymentMethod": "netbanking",
+  "status": "completed",
+  "transactionId": "mock_1770440447036_1aw7ijbb7",
+  "notes": "Booking for 2 unit(s) of Bipap",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "697c90ff7f15f817b152b4fc"
+    },
+    "days": 1,
+    "pricePerDay": 100,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-07T05:00:43.864Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T05:00:47.056Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "bank": "icici"
+  }
+},
+{
+  "_id": {
+    "$oid": "6986c6fb8b5234861038c280"
+  },
+  "referenceId": "6986c6fb8b5234861038c27e",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69634b72ac73f113f4194032"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 400,
+  "paymentMethod": "pending",
+  "status": "completed",
+  "transactionId": "mock_1770440447036_1aw7ijbb7_6986c6fb8b5234861038c27e",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "697caacf1688cd20fe6c7edd"
+    },
+    "days": 1,
+    "pricePerDay": 400,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-07T05:00:43.873Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T05:00:47.050Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986c882786efaa8a217ddf9"
+  },
+  "referenceId": "6986c872786efaa8a217ddf4",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 5,
+  "paymentMethod": "card",
+  "paymentMethodDetails": {
+    "number": "3782822463100052",
+    "expiry": "12/30",
+    "cvv": "1234",
+    "name": "Test User"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1770440834524_6xq3078gk",
+  "notes": "5% listing fee for Oxy",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "6986c872786efaa8a217ddf4"
+    },
+    "equipmentName": "Oxy",
+    "pricePerDay": 100,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-07T05:07:14.522Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T05:07:14.525Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986c8ac786efaa8a217de0b"
+  },
+  "referenceId": "6986c8a6786efaa8a217de07",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 7.5,
+  "paymentMethod": "upi",
+  "paymentMethodDetails": {
+    "upiApp": "phonepe"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1770440876741_5dlxjcp6b",
+  "notes": "5% listing fee for Concentrate",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "6986c8a6786efaa8a217de07"
+    },
+    "equipmentName": "Concentrate",
+    "pricePerDay": 150,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-07T05:07:56.740Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T05:07:56.742Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986c96b786efaa8a217de2f"
+  },
+  "referenceId": "6986c96b786efaa8a217de2d",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "amount": 700,
+  "paymentMethod": "wallet",
+  "status": "completed",
+  "transactionId": "mock_1770441069641_fhenki78e",
+  "notes": "Booking for 1 unit(s) of Oxy",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "6986c872786efaa8a217ddf4"
+    },
+    "days": 7,
+    "pricePerDay": 100,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-07T05:11:07.233Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T05:11:09.649Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "wallet": "amazon_pay"
+  }
+},
+{
+  "_id": {
+    "$oid": "6986ca1898782107f8bda1f4"
+  },
+  "referenceId": "6986ca1598782107f8bda1ef",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 607.7,
+  "paymentMethod": "netbanking",
+  "paymentMethodDetails": {
+    "bank": "icici"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1770441240178_c96f91nro",
+  "notes": "5% listing fee for Bwjdk",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "6986ca1598782107f8bda1ef"
+    },
+    "equipmentName": "Bwjdk",
+    "pricePerDay": 12154,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-07T05:14:00.176Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T05:14:00.179Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986d5cd98782107f8bda3e7"
+  },
+  "referenceId": "6986d5cd98782107f8bda3e5",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "amount": 12154,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1770444269190_x4al0jnm7",
+  "notes": "Booking for 1 unit(s) of Bwjdk",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "6986ca1598782107f8bda1ef"
+    },
+    "days": 1,
+    "pricePerDay": 12154,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-07T06:03:57.780Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T06:04:29.199Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555555555554444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  }
+},
+{
+  "_id": {
+    "$oid": "6986e0fd20cf3b2ea7a25a68"
+  },
+  "referenceId": "6986e0f520cf3b2ea7a25a63",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 12.5,
+  "paymentMethod": "upi",
+  "paymentMethodDetails": {
+    "upiApp": "google_pay"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1770447101949_u2dvbe3dz",
+  "notes": "5% listing fee for Hospital Bed (Manual)",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "6986e0f520cf3b2ea7a25a63"
+    },
+    "equipmentName": "Hospital Bed (Manual)",
+    "pricePerDay": 250,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-07T06:51:41.947Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T06:51:41.949Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986e13420cf3b2ea7a25a75"
+  },
+  "referenceId": "6986e12a20cf3b2ea7a25a71",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 30,
+  "paymentMethod": "upi",
+  "paymentMethodDetails": {
+    "upiId": "9876543210@paytm"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1770447156812_y1lkq7st3",
+  "notes": "5% listing fee for Hospital Bed (Electric)",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "6986e12a20cf3b2ea7a25a71"
+    },
+    "equipmentName": "Hospital Bed (Electric)",
+    "pricePerDay": 600,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-07T06:52:36.811Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T06:52:36.813Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986e1bd20cf3b2ea7a25a84"
+  },
+  "referenceId": "6986e1b620cf3b2ea7a25a80",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 9,
+  "paymentMethod": "card",
+  "paymentMethodDetails": {
+    "number": "4242424242424242",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1770447293038_fwn78iuv8",
+  "notes": "5% listing fee for Oxygen Cylinder (10L)",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "6986e1b620cf3b2ea7a25a80"
+    },
+    "equipmentName": "Oxygen Cylinder (10L)",
+    "pricePerDay": 180,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-07T06:54:53.037Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T06:54:53.039Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986e27820cf3b2ea7a25a91"
+  },
+  "referenceId": "6986e26420cf3b2ea7a25a8d",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 25,
+  "paymentMethod": "card",
+  "paymentMethodDetails": {
+    "number": "378282246310005",
+    "expiry": "12/30",
+    "cvv": "1234",
+    "name": "Test User"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1770447480573_fq8pufvbk",
+  "notes": "5% listing fee for Oxygen Concentrator",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "6986e26420cf3b2ea7a25a8d"
+    },
+    "equipmentName": "Oxygen Concentrator",
+    "pricePerDay": 500,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-07T06:58:00.571Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T06:58:00.573Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986e31220cf3b2ea7a25aaa"
+  },
+  "referenceId": "6986e30b20cf3b2ea7a25aa6",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 6,
+  "paymentMethod": "netbanking",
+  "paymentMethodDetails": {
+    "bank": "hdfc"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1770447634697_1q1l2kugs",
+  "notes": "5% listing fee for Wheelchair (Standard)",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "6986e30b20cf3b2ea7a25aa6"
+    },
+    "equipmentName": "Wheelchair (Standard)",
+    "pricePerDay": 120,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-07T07:00:34.695Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T07:00:34.697Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986e33c20cf3b2ea7a25ab7"
+  },
+  "referenceId": "6986e33520cf3b2ea7a25ab3",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 7.5,
+  "paymentMethod": "card",
+  "paymentMethodDetails": {
+    "number": "5555555555554444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Test User"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1770447676999_clpfu3lad",
+  "notes": "5% listing fee for Wheelchair (Foldable)",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "6986e33520cf3b2ea7a25ab3"
+    },
+    "equipmentName": "Wheelchair (Foldable)",
+    "pricePerDay": 150,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-07T07:01:16.997Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T07:01:16.999Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986e38d20cf3b2ea7a25ac9"
+  },
+  "referenceId": "6986e38220cf3b2ea7a25ac5",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 4,
+  "paymentMethod": "upi",
+  "paymentMethodDetails": {
+    "upiApp": "phonepe"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1770447757938_ovxdv70v7",
+  "notes": "5% listing fee for Walker (Adjustable)",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "6986e38220cf3b2ea7a25ac5"
+    },
+    "equipmentName": "Walker (Adjustable)",
+    "pricePerDay": 80,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-07T07:02:37.937Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T07:02:37.939Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986e3b120cf3b2ea7a25ad6"
+  },
+  "referenceId": "6986e3ac20cf3b2ea7a25ad2",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 5.5,
+  "paymentMethod": "upi",
+  "paymentMethodDetails": {
+    "upiApp": "paytm"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1770447793820_tzke7y4tl",
+  "notes": "5% listing fee for Nebulizer Machine",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "6986e3ac20cf3b2ea7a25ad2"
+    },
+    "equipmentName": "Nebulizer Machine",
+    "pricePerDay": 110,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-07T07:03:13.819Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T07:03:13.821Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986e3dc20cf3b2ea7a25ae3"
+  },
+  "referenceId": "6986e3d820cf3b2ea7a25adf",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 10,
+  "paymentMethod": "upi",
+  "paymentMethodDetails": {
+    "upiApp": "paytm"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1770447836574_bzobbq6l1",
+  "notes": "5% listing fee for Suction Machine",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "6986e3d820cf3b2ea7a25adf"
+    },
+    "equipmentName": "Suction Machine",
+    "pricePerDay": 200,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-07T07:03:56.573Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T07:03:56.574Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986e40c20cf3b2ea7a25af0"
+  },
+  "referenceId": "6986e40220cf3b2ea7a25aec",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 3,
+  "paymentMethod": "netbanking",
+  "paymentMethodDetails": {
+    "bank": "icici"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1770447884675_g7a90ccum",
+  "notes": "5% listing fee for BP Monitor (Digital)",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "6986e40220cf3b2ea7a25aec"
+    },
+    "equipmentName": "BP Monitor (Digital)",
+    "pricePerDay": 60,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-07T07:04:44.673Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T07:04:44.675Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986e43420cf3b2ea7a25afd"
+  },
+  "referenceId": "6986e42f20cf3b2ea7a25af9",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 2,
+  "paymentMethod": "netbanking",
+  "paymentMethodDetails": {
+    "bank": "sbi"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1770447924277_guci4t3b2",
+  "notes": "5% listing fee for Pulse Oximeter",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "6986e42f20cf3b2ea7a25af9"
+    },
+    "equipmentName": "Pulse Oximeter",
+    "pricePerDay": 40,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-07T07:05:24.275Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T07:05:24.277Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6986e46920cf3b2ea7a25b0a"
+  },
+  "referenceId": "6986e46320cf3b2ea7a25b06",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 3.5,
+  "paymentMethod": "upi",
+  "paymentMethodDetails": {
+    "upiId": "9876543210@axisbank"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1770447977344_nyt2s5v6e",
+  "notes": "5% listing fee for Crutches (Pair)",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "6986e46320cf3b2ea7a25b06"
+    },
+    "equipmentName": "Crutches (Pair)",
+    "pricePerDay": 70,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-07T07:06:17.342Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-07T07:06:17.345Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6989784117d7610653df0eaa"
+  },
+  "referenceId": "6989784117d7610653df0ea8",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "amount": 140,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770616903871_zd3ydqlt7",
+  "notes": "Booking for 1 unit(s) of Crutches (Pair)",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "6986e46320cf3b2ea7a25b06"
+    },
+    "days": 2,
+    "pricePerDay": 70,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-09T06:01:37.702Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-09T06:01:43.886Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiApp": "google_pay"
+  }
+},
+{
+  "_id": {
+    "$oid": "6989795d17d7610653df0edc"
+  },
+  "referenceId": "6989795d17d7610653df0eda",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "amount": 80,
+  "paymentMethod": "cod",
+  "status": "completed",
+  "transactionId": "",
+  "notes": "Booking for 2 unit(s) of Pulse Oximeter",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "6986e42f20cf3b2ea7a25af9"
+    },
+    "days": 1,
+    "pricePerDay": 40,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-09T06:06:21.538Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-09T06:56:14.214Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69897a1617d7610653df0fae"
+  },
+  "referenceId": "69897a1617d7610653df0fab",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 300,
+  "paymentMethod": "pending",
+  "status": "completed",
+  "transactionId": "mock_1770617417139_4ycig9sl1_69897a1617d7610653df0fab",
+  "notes": "Booking for 2 unit(s) of Wheelchair (Foldable)",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "6986e33520cf3b2ea7a25ab3"
+    },
+    "days": 1,
+    "pricePerDay": 150,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-09T06:09:26.731Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-09T06:10:17.164Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69897a1617d7610653df0fb2"
+  },
+  "referenceId": "69897a1617d7610653df0fb0",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "amount": 60,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1770617417139_4ycig9sl1",
+  "notes": "Booking for 1 unit(s) of BP Monitor (Digital)",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "6986e40220cf3b2ea7a25aec"
+    },
+    "days": 1,
+    "pricePerDay": 60,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-09T06:09:26.743Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-09T06:10:17.174Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "3782822410001112",
+    "expiry": "12/30",
+    "cvv": "1234",
+    "name": "User"
+  }
+},
+{
+  "_id": {
+    "$oid": "69897b5117d7610653df0ffe"
+  },
+  "referenceId": "69897b5117d7610653df0ffc",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69634b72ac73f113f4194032"
+  },
+  "toUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "amount": 320,
+  "paymentMethod": "cod",
+  "status": "completed",
+  "transactionId": "",
+  "notes": "Booking for 2 unit(s) of Walker (Adjustable)",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "6986e38220cf3b2ea7a25ac5"
+    },
+    "days": 2,
+    "pricePerDay": 80,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-09T06:14:41.134Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-09T06:56:10.404Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69897bbd17d7610653df102d"
+  },
+  "referenceId": "69897bbd17d7610653df1029",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69634b72ac73f113f4194032"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 600,
+  "paymentMethod": "netbanking",
+  "status": "completed",
+  "transactionId": "mock_1770617798784_7t1t7fogm",
+  "notes": "Booking for 1 unit(s) of Hospital Bed (Electric)",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "6986e12a20cf3b2ea7a25a71"
+    },
+    "days": 1,
+    "pricePerDay": 600,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-09T06:16:29.963Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-09T06:16:38.808Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "bank": "icici"
+  }
+},
+{
+  "_id": {
+    "$oid": "69897bbd17d7610653df1032"
+  },
+  "referenceId": "69897bbd17d7610653df1030",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69634b72ac73f113f4194032"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 300,
+  "paymentMethod": "pending",
+  "status": "completed",
+  "transactionId": "mock_1770617798784_7t1t7fogm_69897bbd17d7610653df1030",
+  "notes": "Booking for 2 unit(s) of Wheelchair (Foldable)",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "6986e33520cf3b2ea7a25ab3"
+    },
+    "days": 1,
+    "pricePerDay": 150,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-09T06:16:29.978Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-09T06:16:38.801Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69897c2517d7610653df1069"
+  },
+  "referenceId": "69897c2517d7610653df1066",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69634b72ac73f113f4194032"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 300,
+  "paymentMethod": "cod",
+  "status": "completed",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair (Foldable)",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "6986e33520cf3b2ea7a25ab3"
+    },
+    "days": 2,
+    "pricePerDay": 150,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-09T06:18:13.470Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-09T06:54:28.525Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69897c2517d7610653df106d"
+  },
+  "referenceId": "69897c2517d7610653df106b",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69634b72ac73f113f4194032"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 720,
+  "paymentMethod": "pending",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 2 unit(s) of Oxygen Cylinder (10L)",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "6986e1b620cf3b2ea7a25a80"
+    },
+    "days": 2,
+    "pricePerDay": 180,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-09T06:18:13.482Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-09T06:18:13.482Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69897f7b17d7610653df10e5"
+  },
+  "referenceId": "69897f7b17d7610653df10e1",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "amount": 110,
+  "paymentMethod": "cod",
+  "status": "completed",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Nebulizer Machine",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "6986e3ac20cf3b2ea7a25ad2"
+    },
+    "days": 1,
+    "pricePerDay": 110,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-09T06:32:27.411Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-10T10:20:37.644Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69897f7b17d7610653df10e7"
+  },
+  "referenceId": "69897f7b17d7610653df10e3",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 240,
+  "paymentMethod": "cod",
+  "status": "completed",
+  "transactionId": "",
+  "notes": "Booking for 2 unit(s) of Wheelchair (Standard)",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "6986e30b20cf3b2ea7a25aa6"
+    },
+    "days": 1,
+    "pricePerDay": 120,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-09T06:32:27.414Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-09T09:23:48.494Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6989856317d7610653df1266"
+  },
+  "referenceId": "6989856317d7610653df1264",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 4200,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1770620263727_rsk2i8mjx",
+  "notes": "Booking for 7 unit(s) of Hospital Bed (Electric)",
+  "metadata": {
+    "quantity": 7,
+    "equipmentId": {
+      "$oid": "6986e12a20cf3b2ea7a25a71"
+    },
+    "days": 1,
+    "pricePerDay": 600,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-09T06:57:39.620Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-09T06:57:43.739Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "",
+    "expiry": "",
+    "cvv": "",
+    "name": ""
+  }
+},
+{
+  "_id": {
+    "$oid": "6989a4ca669b1dff8ca926b5"
+  },
+  "referenceId": "6989a4ca669b1dff8ca926b3",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 6000,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1770628321404_s1ex5mbp2",
+  "notes": "Booking for 12 unit(s) of Oxygen Concentrator",
+  "metadata": {
+    "quantity": 12,
+    "equipmentId": {
+      "$oid": "6986e26420cf3b2ea7a25a8d"
+    },
+    "days": 1,
+    "pricePerDay": 500,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-09T09:11:38.493Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-09T09:12:01.435Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555555555554444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "Agnus Jose"
+  }
+},
+{
+  "_id": {
+    "$oid": "6989a57d669b1dff8ca92713"
+  },
+  "referenceId": "6989a57d669b1dff8ca92711",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 3750,
+  "paymentMethod": "cod",
+  "status": "completed",
+  "transactionId": "",
+  "notes": "Booking for 15 unit(s) of Hospital Bed (Manual)",
+  "metadata": {
+    "quantity": 15,
+    "equipmentId": {
+      "$oid": "6986e0f520cf3b2ea7a25a63"
+    },
+    "days": 1,
+    "pricePerDay": 250,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-09T09:14:37.197Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-13T05:39:57.657Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698b0776b0be604f2d9fe189"
+  },
+  "referenceId": "698b0776b0be604f2d9fe187",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "amount": 1200,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770719143012_uqkodog47",
+  "notes": "Booking for 2 unit(s) of Suction Machine",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "6986e3d820cf3b2ea7a25adf"
+    },
+    "days": 3,
+    "pricePerDay": 200,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-10T10:24:54.368Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-10T10:25:43.021Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiApp": "google_pay"
+  }
+},
+{
+  "_id": {
+    "$oid": "698eb7ba64b4dfc24ba5a372"
+  },
+  "referenceId": "698eb7ba64b4dfc24ba5a370",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "amount": 40,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770960840937_453lc95va",
+  "notes": "Booking for 1 unit(s) of Pulse Oximeter",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "6986e42f20cf3b2ea7a25af9"
+    },
+    "days": 1,
+    "pricePerDay": 40,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-13T05:33:46.901Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-13T05:34:00.970Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiApp": "phonepe"
+  }
+},
+{
+  "_id": {
+    "$oid": "698f458377c4294532f9c8b4"
+  },
+  "referenceId": "698f458377c4294532f9c8b2",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "6965326c3628bc99c63c6ff4"
+  },
+  "amount": 150,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1770997129095_bslbc51yq",
+  "notes": "Booking for 1 unit(s) of Wheelchair (Foldable)",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "6986e33520cf3b2ea7a25ab3"
+    },
+    "days": 1,
+    "pricePerDay": 150,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-13T15:38:43.658Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-13T15:38:49.122Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiApp": "phonepe"
+  }
+},
+{
+  "_id": {
+    "$oid": "69917bb1a9d7573a2c2046bb"
+  },
+  "referenceId": "69917bb1a9d7573a2c2046b9",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "amount": 140,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1771142069609_9bs0wvedh",
+  "notes": "Booking for 1 unit(s) of Crutches (Pair)",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "6986e46320cf3b2ea7a25b06"
+    },
+    "days": 2,
+    "pricePerDay": 70,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-15T07:54:25.621Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-15T07:54:29.636Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555555555554444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "User"
+  }
+},
+{
+  "_id": {
+    "$oid": "6992ba7249a4b38ca02161cd"
+  },
+  "referenceId": "6992ba7249a4b38ca02161cb",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "6963cdf249f809f574e81c7f"
+  },
+  "toUser": {
+    "$oid": "697067dd55b05a5766fdb3c6"
+  },
+  "amount": 120,
+  "paymentMethod": "cod",
+  "status": "completed",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of BP Monitor (Digital)",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "6986e40220cf3b2ea7a25aec"
+    },
+    "days": 2,
+    "pricePerDay": 60,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-16T06:34:26.996Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-16T06:35:13.768Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699a8e04d71c3cc445fab23c"
+  },
+  "referenceId": "699a8ddcd71c3cc445fab235",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "6999e8540a4cd322118bfe9e"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 12.5,
+  "paymentMethod": "upi",
+  "paymentMethodDetails": {
+    "upiId": "9876543210@ybl"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1771736580695_2uyfdahzc",
+  "notes": "5% listing fee for Hospital Bed (Manual)",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "699a8ddcd71c3cc445fab235"
+    },
+    "equipmentName": "Hospital Bed (Manual)",
+    "pricePerDay": 250,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-22T05:03:00.692Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-22T05:03:00.696Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699a8e3ad71c3cc445fab249"
+  },
+  "referenceId": "699a8e36d71c3cc445fab245",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "6999e8540a4cd322118bfe9e"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 30,
+  "paymentMethod": "upi",
+  "paymentMethodDetails": {
+    "upiApp": "phonepe"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1771736634570_55f4ryosk",
+  "notes": "5% listing fee for Hospital Bed (Electric)",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "699a8e36d71c3cc445fab245"
+    },
+    "equipmentName": "Hospital Bed (Electric)",
+    "pricePerDay": 600,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-22T05:03:54.568Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-22T05:03:54.571Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699a8e73d71c3cc445fab256"
+  },
+  "referenceId": "699a8e6ed71c3cc445fab252",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "6999e8540a4cd322118bfe9e"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 9,
+  "paymentMethod": "card",
+  "paymentMethodDetails": {
+    "number": "5555555555554444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "User"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1771736691811_e12pg9ycg",
+  "notes": "5% listing fee for Oxygen Cylinder (10L)",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "699a8e6ed71c3cc445fab252"
+    },
+    "equipmentName": "Oxygen Cylinder (10L)",
+    "pricePerDay": 180,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-22T05:04:51.810Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-22T05:04:51.812Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699a8ea0d71c3cc445fab263"
+  },
+  "referenceId": "699a8e9cd71c3cc445fab25f",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "6999e8540a4cd322118bfe9e"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 25,
+  "paymentMethod": "card",
+  "paymentMethodDetails": {
+    "number": "",
+    "expiry": "",
+    "cvv": "",
+    "name": ""
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1771736736164_iiwplnihj",
+  "notes": "5% listing fee for Oxygen Concentrator",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "699a8e9cd71c3cc445fab25f"
+    },
+    "equipmentName": "Oxygen Concentrator",
+    "pricePerDay": 500,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-22T05:05:36.163Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-22T05:05:36.164Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699a8ed5d71c3cc445fab270"
+  },
+  "referenceId": "699a8eced71c3cc445fab26c",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "6999e8540a4cd322118bfe9e"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 6,
+  "paymentMethod": "netbanking",
+  "paymentMethodDetails": {
+    "bank": "hdfc"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1771736789319_qv5koj4qq",
+  "notes": "5% listing fee for Wheelchair (Standard)",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "699a8eced71c3cc445fab26c"
+    },
+    "equipmentName": "Wheelchair (Standard)",
+    "pricePerDay": 120,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-22T05:06:29.317Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-22T05:06:29.320Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699a8f06d71c3cc445fab27d"
+  },
+  "referenceId": "699a8f03d71c3cc445fab279",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "6999e8540a4cd322118bfe9e"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 7.5,
+  "paymentMethod": "netbanking",
+  "paymentMethodDetails": {
+    "bank": "icici"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1771736838689_q2m1f3a4k",
+  "notes": "5% listing fee for Wheelchair (Foldable)",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "699a8f03d71c3cc445fab279"
+    },
+    "equipmentName": "Wheelchair (Foldable)",
+    "pricePerDay": 150,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-22T05:07:18.687Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-22T05:07:18.689Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699ab6fa7e6fd7d0b56c490a"
+  },
+  "referenceId": "699ab6f67e6fd7d0b56c4905",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "699aadff9302e69a9a85ea46"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 2.5,
+  "paymentMethod": "card",
+  "paymentMethodDetails": {
+    "number": "4242424242424242",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "User"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1771747066808_9buwsgow7",
+  "notes": "5% listing fee for Wheelchair",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "699ab6f67e6fd7d0b56c4905"
+    },
+    "equipmentName": "Wheelchair",
+    "pricePerDay": 50,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-22T07:57:46.806Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-22T07:57:46.810Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699ab9637e6fd7d0b56c4948"
+  },
+  "referenceId": "699ab9637e6fd7d0b56c4946",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "toUser": {
+    "$oid": "699aadff9302e69a9a85ea46"
+  },
+  "amount": 100,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1771747686629_9n3bn7t6g",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "699ab6f67e6fd7d0b56c4905"
+    },
+    "days": 2,
+    "pricePerDay": 50,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-22T08:08:03.976Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-22T08:08:06.638Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiApp": "phonepe"
+  }
+},
+{
+  "_id": {
+    "$oid": "699aba157e6fd7d0b56c4998"
+  },
+  "referenceId": "699aba157e6fd7d0b56c4996",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "toUser": {
+    "$oid": "699aadff9302e69a9a85ea46"
+  },
+  "amount": 350,
+  "paymentMethod": "cod",
+  "status": "completed",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "699ab6f67e6fd7d0b56c4905"
+    },
+    "days": 7,
+    "pricePerDay": 50,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-02-22T08:11:01.860Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-22T12:44:19.447Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e94fe36a4665ea0fdfc90"
+  },
+  "referenceId": "699e94fb36a4665ea0fdfc8b",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "699ca50cd1055ea7e99a1c4c"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 5.4,
+  "paymentMethod": "upi",
+  "paymentMethodDetails": {
+    "upiApp": "phonepe"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1772000510059_jeib7vww3",
+  "notes": "5% listing fee for Wheelchair",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "699e94fb36a4665ea0fdfc8b"
+    },
+    "equipmentName": "Wheelchair",
+    "pricePerDay": 108,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-02-25T06:21:50.055Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-25T06:21:50.059Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e96a836a4665ea0fdfd1e"
+  },
+  "referenceId": "699e96a836a4665ea0fdfd1c",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "toUser": {
+    "$oid": "699ca50cd1055ea7e99a1c4c"
+  },
+  "amount": 432,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1772000939002_9t5pxnz57",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "699e94fb36a4665ea0fdfc8b"
+    },
+    "days": 4,
+    "pricePerDay": 108,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-02-25T06:28:56.461Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-25T06:28:59.018Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555555555554444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "User"
+  }
+},
+{
+  "_id": {
+    "$oid": "69a43cf603e2cc59abcc06f3"
+  },
+  "referenceId": "69a43cf103e2cc59abcc06ee",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "69a3f2ec6a9860dab2953955"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 7.5,
+  "paymentMethod": "card",
+  "paymentMethodDetails": {
+    "number": "",
+    "expiry": "",
+    "cvv": "",
+    "name": ""
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1772371190753_ydl9aocso",
+  "notes": "5% listing fee for Wheelchair",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "69a43cf103e2cc59abcc06ee"
+    },
+    "equipmentName": "Wheelchair",
+    "pricePerDay": 150,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-03-01T13:19:50.750Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T13:19:50.755Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a43dbb03e2cc59abcc0711"
+  },
+  "referenceId": "69a43dbb03e2cc59abcc070f",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "toUser": {
+    "$oid": "69a3f2ec6a9860dab2953955"
+  },
+  "amount": 150,
+  "paymentMethod": "cod",
+  "status": "completed",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69a43cf103e2cc59abcc06ee"
+    },
+    "days": 1,
+    "pricePerDay": 150,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-03-01T13:23:07.835Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T13:24:35.026Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a43e8c03e2cc59abcc077a"
+  },
+  "referenceId": "69a43e8c03e2cc59abcc0778",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "toUser": {
+    "$oid": "69a3f2ec6a9860dab2953955"
+  },
+  "amount": 300,
+  "paymentMethod": "pending",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69a43cf103e2cc59abcc06ee"
+    },
+    "days": 2,
+    "pricePerDay": 150,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-03-01T13:26:36.866Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T13:26:36.866Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a43e9203e2cc59abcc0785"
+  },
+  "referenceId": "69a43e9203e2cc59abcc0783",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "toUser": {
+    "$oid": "69a3f2ec6a9860dab2953955"
+  },
+  "amount": 300,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1772371606026_seeb68qpu",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69a43cf103e2cc59abcc06ee"
+    },
+    "days": 2,
+    "pricePerDay": 150,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-03-01T13:26:42.501Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T13:26:46.044Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "5555555555554444",
+    "expiry": "12/30",
+    "cvv": "123",
+    "name": "User"
+  }
+},
+{
+  "_id": {
+    "$oid": "69a43ef503e2cc59abcc07c1"
+  },
+  "referenceId": "69a43ef503e2cc59abcc07bf",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "toUser": {
+    "$oid": "69a3f2ec6a9860dab2953955"
+  },
+  "amount": 300,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1772371704395_ptxumm13f",
+  "notes": "Booking for 2 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "69a43cf103e2cc59abcc06ee"
+    },
+    "days": 1,
+    "pricePerDay": 150,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-03-01T13:28:21.253Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T13:28:24.411Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiApp": "phonepe"
+  }
+},
+{
+  "_id": {
+    "$oid": "69a4434403e2cc59abcc08fd"
+  },
+  "referenceId": "69a4434403e2cc59abcc08fb",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "toUser": {
+    "$oid": "69a3f2ec6a9860dab2953955"
+  },
+  "amount": 450,
+  "paymentMethod": "pending",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69a43cf103e2cc59abcc06ee"
+    },
+    "days": 3,
+    "pricePerDay": 150,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-03-01T13:46:44.730Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T13:46:44.730Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a4434a03e2cc59abcc0908"
+  },
+  "referenceId": "69a4434a03e2cc59abcc0906",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "toUser": {
+    "$oid": "69a3f2ec6a9860dab2953955"
+  },
+  "amount": 450,
+  "paymentMethod": "netbanking",
+  "status": "completed",
+  "transactionId": "mock_1772372833926_afzp1dffi",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69a43cf103e2cc59abcc06ee"
+    },
+    "days": 3,
+    "pricePerDay": 150,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-03-01T13:46:50.964Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T13:47:13.935Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "bank": "icici"
+  }
+},
+{
+  "_id": {
+    "$oid": "69a443d303e2cc59abcc093f"
+  },
+  "referenceId": "69a443d303e2cc59abcc093d",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "toUser": {
+    "$oid": "69a3f2ec6a9860dab2953955"
+  },
+  "amount": 600,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 2 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "69a43cf103e2cc59abcc06ee"
+    },
+    "days": 2,
+    "pricePerDay": 150,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-03-01T13:49:07.124Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T13:49:09.567Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a443f703e2cc59abcc0963"
+  },
+  "referenceId": "69a443f703e2cc59abcc0961",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "toUser": {
+    "$oid": "69a3f2ec6a9860dab2953955"
+  },
+  "amount": 600,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1772372985947_mrbeov7i0",
+  "notes": "Booking for 1 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69a43cf103e2cc59abcc06ee"
+    },
+    "days": 4,
+    "pricePerDay": 150,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-03-01T13:49:43.638Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T13:49:45.958Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "",
+    "expiry": "",
+    "cvv": "",
+    "name": ""
+  }
+},
+{
+  "_id": {
+    "$oid": "69a4476e82f739c1a5969b6d"
+  },
+  "referenceId": "69a4476e82f739c1a5969b6b",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "toUser": {
+    "$oid": "69a3f2ec6a9860dab2953955"
+  },
+  "amount": 600,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1772373874098_4g3yj8aoa",
+  "notes": "Booking for 2 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "69a43cf103e2cc59abcc06ee"
+    },
+    "days": 2,
+    "pricePerDay": 150,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-03-01T14:04:30.968Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T14:04:34.132Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiApp": "paytm"
+  }
+},
+{
+  "_id": {
+    "$oid": "69a4478f82f739c1a5969b9c"
+  },
+  "referenceId": "69a4478f82f739c1a5969b9a",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "699aacd49302e69a9a85ea16"
+  },
+  "toUser": {
+    "$oid": "69a3f2ec6a9860dab2953955"
+  },
+  "amount": 300,
+  "paymentMethod": "cod",
+  "status": "pending",
+  "transactionId": "",
+  "notes": "Booking for 2 unit(s) of Wheelchair",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "69a43cf103e2cc59abcc06ee"
+    },
+    "days": 1,
+    "pricePerDay": 150,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-03-01T14:05:03.154Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T14:05:05.543Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a4612157b0b0408abc6a4e"
+  },
+  "referenceId": "69a4611557b0b0408abc6a49",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 12.5,
+  "paymentMethod": "upi",
+  "paymentMethodDetails": {
+    "upiApp": "phonepe"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1772380449664_qomx5m5l4",
+  "notes": "5% listing fee for Hospital Bed (Manual)",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "69a4611557b0b0408abc6a49"
+    },
+    "equipmentName": "Hospital Bed (Manual)",
+    "pricePerDay": 250,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-03-01T15:54:09.662Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T15:54:09.664Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a4616557b0b0408abc6a5b"
+  },
+  "referenceId": "69a4616157b0b0408abc6a57",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 30,
+  "paymentMethod": "netbanking",
+  "paymentMethodDetails": {
+    "bank": "icici"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1772380517211_ae96r6sfn",
+  "notes": "5% listing fee for Hospital Bed(Electric)",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "69a4616157b0b0408abc6a57"
+    },
+    "equipmentName": "Hospital Bed(Electric)",
+    "pricePerDay": 600,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-03-01T15:55:17.209Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T15:55:17.211Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a4619b57b0b0408abc6a68"
+  },
+  "referenceId": "69a4619757b0b0408abc6a64",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "toUser": {
+    "$oid": "696087c51d3088cfdb5c6374"
+  },
+  "amount": 9,
+  "paymentMethod": "card",
+  "paymentMethodDetails": {
+    "number": "",
+    "expiry": "",
+    "cvv": "",
+    "name": ""
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1772380571167_gibidyw92",
+  "notes": "5% listing fee for Oxygen Cylinder",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "69a4619757b0b0408abc6a64"
+    },
+    "equipmentName": "Oxygen Cylinder",
+    "pricePerDay": 180,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-03-01T15:56:11.164Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T15:56:11.167Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a4621a57b0b0408abc6aa0"
+  },
+  "referenceId": "69a4621a57b0b0408abc6a9e",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "699546514f96b5d5b5616fe8"
+  },
+  "toUser": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "amount": 600,
+  "paymentMethod": "cod",
+  "status": "completed",
+  "transactionId": "",
+  "notes": "Booking for 1 unit(s) of Hospital Bed(Electric)",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69a4616157b0b0408abc6a57"
+    },
+    "days": 1,
+    "pricePerDay": 600,
+    "stockReduced": true
+  },
+  "createdAt": {
+    "$date": "2026-03-01T15:58:18.944Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T16:00:13.020Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a4625657b0b0408abc6ad5"
+  },
+  "referenceId": "69a4625657b0b0408abc6ad3",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "699546514f96b5d5b5616fe8"
+  },
+  "toUser": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "amount": 720,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1772380761522_9mzlgk51n",
+  "notes": "Booking for 2 unit(s) of Oxygen Cylinder",
+  "metadata": {
+    "quantity": 2,
+    "equipmentId": {
+      "$oid": "69a4619757b0b0408abc6a64"
+    },
+    "days": 2,
+    "pricePerDay": 180,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-03-01T15:59:18.150Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T15:59:21.531Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiApp": "phonepe"
+  }
+},
+{
+  "_id": {
+    "$oid": "69ae4a5bde39ff25b5e4129c"
+  },
+  "referenceId": "69ae4a5bde39ff25b5e4129a",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69991bd385e0685da9a2f2e5"
+  },
+  "toUser": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "amount": 1260,
+  "paymentMethod": "card",
+  "status": "completed",
+  "transactionId": "mock_1773029986033_7pnwhzho4",
+  "notes": "Booking for 1 unit(s) of Oxygen Cylinder",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69a4619757b0b0408abc6a64"
+    },
+    "days": 7,
+    "pricePerDay": 180,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-03-09T04:19:39.156Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-09T04:19:46.052Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "number": "",
+    "expiry": "",
+    "cvv": "",
+    "name": ""
+  }
+},
+{
+  "_id": {
+    "$oid": "69ae50f3de39ff25b5e4130a"
+  },
+  "referenceId": "69ae50f3de39ff25b5e41308",
+  "referenceType": "booking",
+  "fromUser": {
+    "$oid": "69991bd385e0685da9a2f2e5"
+  },
+  "toUser": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "amount": 1260,
+  "paymentMethod": "upi",
+  "status": "completed",
+  "transactionId": "mock_1773031672527_1brpzhuk9",
+  "notes": "Booking for 1 unit(s) of Oxygen Cylinder",
+  "metadata": {
+    "quantity": 1,
+    "equipmentId": {
+      "$oid": "69a4619757b0b0408abc6a64"
+    },
+    "days": 7,
+    "pricePerDay": 180,
+    "stockReduced": false
+  },
+  "createdAt": {
+    "$date": "2026-03-09T04:47:47.931Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-09T04:47:52.537Z"
+  },
+  "__v": 0,
+  "paymentMethodDetails": {
+    "upiApp": "google_pay"
+  }
+},
+{
+  "_id": {
+    "$oid": "69ae5792de39ff25b5e413e9"
+  },
+  "referenceId": "69ae578dde39ff25b5e413e5",
+  "referenceType": "listing_fee",
+  "fromUser": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "toUser": {
+    "$oid": "69a141218ce342d4713e5c55"
+  },
+  "amount": 7.5,
+  "paymentMethod": "upi",
+  "paymentMethodDetails": {
+    "upiApp": "google_pay"
+  },
+  "status": "completed",
+  "transactionId": "mock_listing_1773033362745_671e457ma",
+  "notes": "5% listing fee for Nebulizer",
+  "metadata": {
+    "equipmentId": {
+      "$oid": "69ae578dde39ff25b5e413e5"
+    },
+    "equipmentName": "Nebulizer",
+    "pricePerDay": 150,
+    "feePercentage": 5
+  },
+  "createdAt": {
+    "$date": "2026-03-09T05:16:02.744Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-09T05:16:02.746Z"
+  },
+  "__v": 0
+}]

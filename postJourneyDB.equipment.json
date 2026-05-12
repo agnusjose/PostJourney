@@ -1,0 +1,150 @@
+[{
+  "_id": {
+    "$oid": "69a4611557b0b0408abc6a49"
+  },
+  "equipmentName": "Hospital Bed (Manual)",
+  "description": "Adjustable manual hospital bed suitable for home patient care and recovery.",
+  "pricePerDay": 250,
+  "stock": 15,
+  "imageUrl": "/uploads/equipment/image-1772426542080-769872136.jpg",
+  "providerId": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "providerName": "MedBook",
+  "category": "beds",
+  "isAvailable": true,
+  "averageRating": 0,
+  "totalReviews": 0,
+  "listingFeePaid": true,
+  "listingFeeAmount": 12.5,
+  "isListed": true,
+  "adminApproved": true,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2026-03-01T15:53:57.082Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-02T04:42:22.088Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a4616157b0b0408abc6a57"
+  },
+  "equipmentName": "Hospital Bed(Electric)",
+  "description": "Fully electric bed with remote control for height and position adjustment.",
+  "pricePerDay": 600,
+  "stock": 7,
+  "imageUrl": "/uploads/equipment/image-1772426533428-885471219.jpg",
+  "providerId": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "providerName": "MedBook",
+  "category": "beds",
+  "isAvailable": true,
+  "averageRating": 1,
+  "totalReviews": 1,
+  "listingFeePaid": true,
+  "listingFeeAmount": 30,
+  "isListed": true,
+  "adminApproved": true,
+  "reviews": [
+    {
+      "userId": {
+        "$oid": "699546514f96b5d5b5616fe8"
+      },
+      "userName": "Alene Elsa",
+      "rating": 1,
+      "comment": "Poor",
+      "date": {
+        "$date": "2026-03-01T16:01:12.310Z"
+      },
+      "_id": {
+        "$oid": "69a462c857b0b0408abc6b29"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-03-01T15:55:13.247Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-02T04:42:13.457Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "69a4619757b0b0408abc6a64"
+  },
+  "equipmentName": "Oxygen Cylinder",
+  "description": "Portable oxygen cylinder used for patients with breathing difficulties.",
+  "pricePerDay": 180,
+  "stock": 22,
+  "imageUrl": "/uploads/equipment/image-1772426515294-658848462.jpg",
+  "providerId": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "providerName": "MedBook",
+  "category": "respiratory",
+  "isAvailable": true,
+  "averageRating": 5,
+  "totalReviews": 1,
+  "listingFeePaid": true,
+  "listingFeeAmount": 9,
+  "isListed": true,
+  "adminApproved": true,
+  "reviews": [
+    {
+      "userId": {
+        "$oid": "699546514f96b5d5b5616fe8"
+      },
+      "userName": "Alene Elsa",
+      "rating": 5,
+      "comment": "Excellent",
+      "date": {
+        "$date": "2026-03-01T16:01:03.712Z"
+      },
+      "_id": {
+        "$oid": "69a462bf57b0b0408abc6b1e"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-03-01T15:56:07.419Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-09T04:49:57.266Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "69ae578dde39ff25b5e413e5"
+  },
+  "equipmentName": "Nebulizer",
+  "description": "Medicine mist inhalation device",
+  "pricePerDay": 150,
+  "stock": 1,
+  "imageUrl": "/uploads/equipment/image-1773033357113-320880226.jpg",
+  "providerId": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "providerName": "MedBook",
+  "category": "therapeutic",
+  "isAvailable": true,
+  "averageRating": 0,
+  "totalReviews": 0,
+  "listingFeePaid": true,
+  "listingFeeAmount": 7.5,
+  "isListed": true,
+  "adminApproved": true,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2026-03-09T05:15:57.146Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-09T05:16:02.748Z"
+  },
+  "__v": 0
+}]

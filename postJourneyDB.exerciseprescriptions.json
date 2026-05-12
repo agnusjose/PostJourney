@@ -1,0 +1,78 @@
+[{
+  "_id": {
+    "$oid": "69b258f717f7652615a48d50"
+  },
+  "consultationId": {
+    "$oid": "69b245e046ccbcf320613706"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-03-12T06:11:03.412Z"
+  },
+  "doctorId": {
+    "$oid": "69a13fab1fdc95a8a2a29b4b"
+  },
+  "exercises": [
+    {
+      "exerciseKey": "SIT_TO_STAND",
+      "exerciseName": "Sit to Stand",
+      "targetReps": 3,
+      "frequency": "daily",
+      "_id": {
+        "$oid": "69b258f741868cfbe8fa7cdc"
+      }
+    },
+    {
+      "exerciseKey": "HIP_EXTENSION",
+      "exerciseName": "Hip Extension",
+      "targetReps": 1,
+      "frequency": "daily",
+      "_id": {
+        "$oid": "69b258f741868cfbe8fa7cdd"
+      }
+    }
+  ],
+  "isActive": true,
+  "patientId": {
+    "$oid": "69991bd385e0685da9a2f2e5"
+  },
+  "updatedAt": {
+    "$date": "2026-03-12T06:11:03.412Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69b3a47917f7652615a48d51"
+  },
+  "consultationId": {
+    "$oid": "69b39890ce699123182b95c3"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-03-13T05:45:29.031Z"
+  },
+  "doctorId": {
+    "$oid": "69a13fab1fdc95a8a2a29b4b"
+  },
+  "exercises": [
+    {
+      "exerciseKey": "NECK_MOBILITY",
+      "exerciseName": "Neck Mobility",
+      "targetReps": 2,
+      "frequency": "daily",
+      "startingIntensityLevel": 1,
+      "maxIntensityLevel": 3,
+      "_id": {
+        "$oid": "69b3a479b5c6e7d828ba9027"
+      },
+      "intensityLevels": []
+    }
+  ],
+  "isActive": true,
+  "patientId": {
+    "$oid": "69991bd385e0685da9a2f2e5"
+  },
+  "updatedAt": {
+    "$date": "2026-03-13T05:45:29.031Z"
+  }
+}]

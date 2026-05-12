@@ -1,0 +1,242 @@
+[{
+  "_id": {
+    "$oid": "69a1445e18d64a927e474f93"
+  },
+  "patientId": {
+    "$oid": "69a1414918d64a927e474efa"
+  },
+  "patientName": "Agnus Jose",
+  "equipmentId": {
+    "$oid": "69a143f018d64a927e474f67"
+  },
+  "equipmentName": "Wheelchair",
+  "providerId": {
+    "$oid": "69a1432318d64a927e474f41"
+  },
+  "providerName": "Medicare",
+  "startDate": {
+    "$date": "2026-02-27T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2026-02-28T00:00:00.000Z"
+  },
+  "totalDays": 1,
+  "pricePerDay": 100,
+  "quantity": 1,
+  "totalAmount": 100,
+  "status": "completed",
+  "paymentStatus": "paid",
+  "paymentMethod": "cod",
+  "deliveryAddress": "Address",
+  "contactPhone": "9646434649",
+  "notes": "Nots.",
+  "cancelledBy": "",
+  "cancellationReason": "",
+  "hasReview": true,
+  "review": {
+    "rating": 4,
+    "comment": "Very good.",
+    "reviewDate": {
+      "$date": "2026-02-27T07:22:06.285Z"
+    }
+  },
+  "createdAt": {
+    "$date": "2026-02-27T07:14:38.835Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-27T07:22:06.286Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a4621a57b0b0408abc6a9e"
+  },
+  "patientId": {
+    "$oid": "699546514f96b5d5b5616fe8"
+  },
+  "patientName": "Alene Elsa",
+  "equipmentId": {
+    "$oid": "69a4616157b0b0408abc6a57"
+  },
+  "equipmentName": "Hospital Bed(Electric)",
+  "providerId": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "providerName": "MedBook",
+  "startDate": {
+    "$date": "2026-03-01T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2026-03-02T00:00:00.000Z"
+  },
+  "totalDays": 1,
+  "pricePerDay": 600,
+  "quantity": 1,
+  "totalAmount": 600,
+  "status": "completed",
+  "paymentStatus": "paid",
+  "paymentMethod": "cod",
+  "deliveryAddress": "Alene Jose\nHousename\nPostaoffice PO\nPlace",
+  "contactPhone": "9646356885",
+  "notes": "Nil",
+  "cancelledBy": "",
+  "cancellationReason": "",
+  "hasReview": true,
+  "review": {
+    "rating": 1,
+    "comment": "Poor",
+    "reviewDate": {
+      "$date": "2026-03-01T16:01:12.305Z"
+    }
+  },
+  "createdAt": {
+    "$date": "2026-03-01T15:58:18.940Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T16:01:12.306Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69a4625657b0b0408abc6ad3"
+  },
+  "patientId": {
+    "$oid": "699546514f96b5d5b5616fe8"
+  },
+  "patientName": "Alene Elsa",
+  "equipmentId": {
+    "$oid": "69a4619757b0b0408abc6a64"
+  },
+  "equipmentName": "Oxygen Cylinder",
+  "providerId": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "providerName": "MedBook",
+  "startDate": {
+    "$date": "2026-03-01T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2026-03-03T00:00:00.000Z"
+  },
+  "totalDays": 2,
+  "pricePerDay": 180,
+  "quantity": 2,
+  "totalAmount": 720,
+  "status": "completed",
+  "paymentStatus": "paid",
+  "paymentMethod": "upi",
+  "deliveryAddress": "Alene Jose\nHousename\nPostoffice PO\nPlace",
+  "contactPhone": "9494665655",
+  "notes": "",
+  "cancelledBy": "",
+  "cancellationReason": "",
+  "hasReview": true,
+  "review": {
+    "rating": 5,
+    "comment": "Excellent",
+    "reviewDate": {
+      "$date": "2026-03-01T16:01:03.707Z"
+    }
+  },
+  "createdAt": {
+    "$date": "2026-03-01T15:59:18.148Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-01T16:01:03.708Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ae4a5bde39ff25b5e4129a"
+  },
+  "patientId": {
+    "$oid": "69991bd385e0685da9a2f2e5"
+  },
+  "patientName": "Shona",
+  "equipmentId": {
+    "$oid": "69a4619757b0b0408abc6a64"
+  },
+  "equipmentName": "Oxygen Cylinder",
+  "providerId": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "providerName": "MedBook",
+  "startDate": {
+    "$date": "2026-03-09T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2026-03-16T00:00:00.000Z"
+  },
+  "totalDays": 7,
+  "pricePerDay": 180,
+  "quantity": 1,
+  "totalAmount": 1260,
+  "status": "confirmed",
+  "paymentStatus": "paid",
+  "paymentMethod": "card",
+  "deliveryAddress": "Pallithara house \nVaikom p o",
+  "contactPhone": "9858374528",
+  "notes": "",
+  "cancelledBy": "",
+  "cancellationReason": "",
+  "hasReview": false,
+  "review": {
+    "comment": ""
+  },
+  "createdAt": {
+    "$date": "2026-03-09T04:19:39.147Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-09T04:19:46.036Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69ae50f3de39ff25b5e41308"
+  },
+  "patientId": {
+    "$oid": "69991bd385e0685da9a2f2e5"
+  },
+  "patientName": "Shona",
+  "equipmentId": {
+    "$oid": "69a4619757b0b0408abc6a64"
+  },
+  "equipmentName": "Oxygen Cylinder",
+  "providerId": {
+    "$oid": "69a45cb857b0b0408abc69cb"
+  },
+  "providerName": "MedBook",
+  "startDate": {
+    "$date": "2026-03-09T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2026-03-16T00:00:00.000Z"
+  },
+  "totalDays": 7,
+  "pricePerDay": 180,
+  "quantity": 1,
+  "totalAmount": 1260,
+  "status": "in-progress",
+  "paymentStatus": "paid",
+  "paymentMethod": "upi",
+  "deliveryAddress": "Pallithara \n\n",
+  "contactPhone": "9870142580",
+  "notes": "",
+  "cancelledBy": "",
+  "cancellationReason": "",
+  "hasReview": false,
+  "review": {
+    "comment": ""
+  },
+  "createdAt": {
+    "$date": "2026-03-09T04:47:47.928Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-09T04:51:10.376Z"
+  },
+  "__v": 0
+}]
