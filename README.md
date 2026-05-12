@@ -101,20 +101,26 @@ uvicorn webrtc.webrtc_server:app --host 0.0.0.0 --port 8001
 
 ## 📱 Screenshots
 
-> Add screenshots of the application here.
+<p align="center">
+  <img src="screenshots/1RegisterScreen.jpeg" width="220"/>
+  <img src="screenshots/2SigninPage.jpeg" width="220"/>
+  <img src="screenshots/3PatientDashboard.jpeg" width="220"/>
+  <img src="screenshots/4ExercisesDashboard.jpeg" width="220"/>
+</p>
 
-![Register Screen](screenshots/1Registerscreen.jpeg)
-![Sign-in Page](screenshots/2SigninPage.jpeg)
-![Patient Dashboard](screenshots/3PatientDashboard.jpeg)
-![Exercices Dashboard](screenshots/4ExercicesDashboard.jpeg)
-![Exercise Monitoring](screenshots/5ExerciseMonitoring.jpeg)
-![Equipment Dashboard](screenshots/6EquipmentDashboard.jpeg)
-![Caregiver Dashboard](screenshots/7CaregiverDashboard.jpeg)
-![Medical Videos](screenshots/8MedicalVideos.jpeg)
-![Chat Consultation](screenshots/9ChatConsultation.jpeg)
-![Doctor Dashboard](screenshots/10DoctorDashboard.jpeg)
-![Admin Dashboard](screenshots/11AdminDashboard.jpeg)
-![Equipment Listing](screenshots/12EquipmentListing.jpeg)
+<p align="center">
+  <img src="screenshots/5ExerciseMonitoring.jpeg" width="220"/>
+  <img src="screenshots/6EquipmentDashboard.jpeg" width="220"/>
+  <img src="screenshots/7CaregiverDashboard.jpeg" width="220"/>
+  <img src="screenshots/8MedicalVideos.jpeg" width="220"/>
+</p>
+
+<p align="center">
+  <img src="screenshots/9ChatConsultation.jpeg" width="220"/>
+  <img src="screenshots/10DoctorDashboard.jpeg" width="220"/>
+  <img src="screenshots/11AdminDashboard.jpeg" width="220"/>
+  <img src="screenshots/12EquipmentListing.jpeg" width="220"/>
+</p>
 
 
 ---
