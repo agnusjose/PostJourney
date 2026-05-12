@@ -106,9 +106,18 @@ uvicorn webrtc.webrtc_server:app --host 0.0.0.0 --port 8001
 Example:
 
 ```markdown
-![Home Screen](screenshots/home.png)
-![Dashboard](screenshots/dashboard.png)
-![AI Physiotherapy](screenshots/physio.png)
+![Register Screen](screenshots/1Registerscreen.jpeg)
+![Sign-in Page](screenshots/2SigninPage.jpeg)
+![Patient Dashboard](screenshots/3PatientDashboard.jpeg)
+![Exercices Dashboard](screenshots/4ExercicesDashboard.jpeg)
+![Exercise Monitoring](screenshots/5ExerciseMonitoring.jpeg)
+![Equipment Dashboard](screenshots/6EquipmentDashboard.jpeg)
+![Caregiver Dashboard](screenshots/7CaregiverDashboard.jpeg)
+![Medical Videos](screenshots/8MedicalVideos.jpeg)
+![Chat Consultation](screenshots/9ChatConsultation.jpeg)
+![Doctor Dashboard](screenshots/10DoctorDashboard.jpeg)
+![Admin Dashboard](screenshots/11AdminDashboard.jpeg)
+![Equipment Listing](screenshots/12EquipmentListing.jpeg)
 ```
 
 ---
@@ -131,7 +140,7 @@ PostJourney provides an integrated digital healthcare ecosystem where patients a
 - Access recovery tutorials and physiotherapy guidance
 - Monitor health vitals using IoT wearables
 - Book verified healthcare support services
-- Communicate with caregivers through real-time chat
+- Communicate with doctors through real-time chat
 - Manage recovery from a single mobile platform
 
 ---
@@ -154,7 +163,6 @@ This project was developed as a collaborative team project.
 
 - Video consultation with doctors
 - Emergency SOS system
-- AI-based recovery recommendations
 - Cloud-based health analytics
 - Multi-language support
 - Smart notifications and reminders
